@@ -481,85 +481,86 @@ function isabel_add_hypno_customizer($wp_customize) {
 }
 
 
-/**
- * AJOUT À VOTRE FICHIER inc/customizer.php
- * Ajoutez ce code dans la section SERVICES, après le service 3
- */
+function isabel_add_service4_customizer($wp_customize){
 
-// Dans votre fonction isabel_customize_register, ajoutez ceci après le service 3 :
+    /**
+     * AJOUT À VOTRE FICHIER inc/customizer.php
+     * Ajoutez ce code dans la section SERVICES, après le service 3
+     */
 
-// ===== SERVICE 4 (NOUVEAU) =====
-// Service 4 - Icône
-$wp_customize->add_setting('isabel_service4_icon', array(
-    'default' => '💡',
-    'sanitize_callback' => 'sanitize_text_field',
-));
-$wp_customize->add_control('isabel_service4_icon', array(
-    'label' => 'Service 4 - Icône',
-    'section' => 'isabel_services_section',
-    'type' => 'text',
-));
+    // Dans votre fonction isabel_customize_register, ajoutez ceci après le service 3 :
 
-// Service 4 - Titre
-$wp_customize->add_setting('isabel_service4_title', array(
-    'default' => 'Consultation Découverte',
-    'sanitize_callback' => 'sanitize_text_field',
-));
-$wp_customize->add_control('isabel_service4_title', array(
-    'label' => 'Service 4 - Titre',
-    'section' => 'isabel_services_section',
-    'type' => 'text',
-));
+    // ===== SERVICE 4 (NOUVEAU) =====
+    // Service 4 - Icône
+    $wp_customize->add_setting('isabel_service4_icon', array(
+        'default' => '💡',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_service4_icon', array(
+        'label' => 'Service 4 - Icône',
+        'section' => 'isabel_services_section',
+        'type' => 'text',
+    ));
 
-// Service 4 - Description
-$wp_customize->add_setting('isabel_service4_desc', array(
-    'default' => 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.',
-    'sanitize_callback' => 'sanitize_textarea_field',
-));
-$wp_customize->add_control('isabel_service4_desc', array(
-    'label' => 'Service 4 - Description',
-    'section' => 'isabel_services_section',
-    'type' => 'textarea',
-));
+    // Service 4 - Titre
+    $wp_customize->add_setting('isabel_service4_title', array(
+        'default' => 'Consultation Découverte',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_service4_title', array(
+        'label' => 'Service 4 - Titre',
+        'section' => 'isabel_services_section',
+        'type' => 'text',
+    ));
 
-// ===== PAGE CONSULTATION DÉCOUVERTE =====
-// Ajoutez aussi cette nouvelle section après les autres pages de services :
+    // Service 4 - Description
+    $wp_customize->add_setting('isabel_service4_desc', array(
+        'default' => 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('isabel_service4_desc', array(
+        'label' => 'Service 4 - Description',
+        'section' => 'isabel_services_section',
+        'type' => 'textarea',
+    ));
 
-$wp_customize->add_section('isabel_consultation_section', array(
-    'title' => '💡 Page Consultation Découverte',
-    'priority' => 43,
-));
+    // ===== PAGE CONSULTATION DÉCOUVERTE =====
+    // Ajoutez aussi cette nouvelle section après les autres pages de services :
 
-$consultation_settings = array(
-    'isabel_consultation_title' => array('default' => 'Consultation Découverte', 'type' => 'text', 'label' => 'Titre de la page'),
-    'isabel_consultation_subtitle' => array('default' => 'Première rencontre gratuite pour définir ensemble votre parcours', 'type' => 'text', 'label' => 'Sous-titre'),
-    'isabel_consultation_intro' => array('default' => 'La consultation découverte est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.', 'type' => 'textarea', 'label' => 'Introduction'),
-    'isabel_consultation_description' => array('default' => 'Durant cette première rencontre gratuite de 30 minutes, nous prenons le temps d\'échanger sur votre situation, vos objectifs et vos attentes.', 'type' => 'textarea', 'label' => 'Description détaillée'),
-    'isabel_consultation_duration' => array('default' => 'Cette consultation dure environ 30 minutes et se déroule par téléphone ou en visioconférence, selon votre préférence.', 'type' => 'textarea', 'label' => 'Durée et modalités'),
-    'isabel_consultation_benefits' => array('default' => 'Cette rencontre vous permet de poser toutes vos questions et de découvrir comment mes services peuvent vous aider à atteindre vos objectifs.', 'type' => 'textarea', 'label' => 'Bénéfices'),
-    'isabel_consultation_cta_title' => array('default' => 'Prêt(e) à faire le premier pas ?', 'type' => 'text', 'label' => 'Titre du CTA'),
-    'isabel_consultation_cta_text' => array('default' => 'Réservez dès maintenant votre consultation découverte gratuite et commençons ensemble votre parcours de transformation.', 'type' => 'textarea', 'label' => 'Texte du CTA'),
-);
+    $wp_customize->add_section('isabel_consultation_section', array(
+        'title' => '💡 Page Consultation Découverte',
+        'priority' => 43,
+    ));
 
-isabel_add_bulk_settings($wp_customize, $consultation_settings, 'isabel_consultation_section');
+    $consultation_settings = array(
+        'isabel_consultation_title' => array('default' => 'Consultation Découverte', 'type' => 'text', 'label' => 'Titre de la page'),
+        'isabel_consultation_subtitle' => array('default' => 'Première rencontre gratuite pour définir ensemble votre parcours', 'type' => 'text', 'label' => 'Sous-titre'),
+        'isabel_consultation_intro' => array('default' => 'La consultation découverte est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.', 'type' => 'textarea', 'label' => 'Introduction'),
+        'isabel_consultation_description' => array('default' => 'Durant cette première rencontre gratuite de 30 minutes, nous prenons le temps d\'échanger sur votre situation, vos objectifs et vos attentes.', 'type' => 'textarea', 'label' => 'Description détaillée'),
+        'isabel_consultation_duration' => array('default' => 'Cette consultation dure environ 30 minutes et se déroule par téléphone ou en visioconférence, selon votre préférence.', 'type' => 'textarea', 'label' => 'Durée et modalités'),
+        'isabel_consultation_benefits' => array('default' => 'Cette rencontre vous permet de poser toutes vos questions et de découvrir comment mes services peuvent vous aider à atteindre vos objectifs.', 'type' => 'textarea', 'label' => 'Bénéfices'),
+        'isabel_consultation_cta_title' => array('default' => 'Prêt(e) à faire le premier pas ?', 'type' => 'text', 'label' => 'Titre du CTA'),
+        'isabel_consultation_cta_text' => array('default' => 'Réservez dès maintenant votre consultation découverte gratuite et commençons ensemble votre parcours de transformation.', 'type' => 'textarea', 'label' => 'Texte du CTA'),
+    );
 
-$consultation_benefits = array(
-    1 => 'Échange personnalisé pour comprendre votre situation et vos objectifs de vie ou professionnels.',
-    2 => 'Présentation des différentes approches de coaching adaptées à votre profil et vos besoins.',
-    3 => 'Conseils immédiats et premiers outils pour commencer votre réflexion personnelle.',
-    4 => 'Définition ensemble du parcours d\'accompagnement le plus adapté à votre situation.'
-);
+    isabel_add_bulk_settings($wp_customize, $consultation_settings, 'isabel_consultation_section');
 
-$consultation_steps = array(
-    1 => 'Accueil et présentation mutuelle pour créer un climat de confiance et d\'écoute bienveillante.',
-    2 => 'Écoute active de votre situation, vos défis actuels et vos aspirations pour l\'avenir.',
-    3 => 'Exploration des différentes possibilités d\'accompagnement et explication de mes méthodes.',
-    4 => 'Proposition d\'un plan d\'accompagnement personnalisé adapté à vos besoins et votre rythme.'
-);
+    $consultation_benefits = array(
+        1 => 'Échange personnalisé pour comprendre votre situation et vos objectifs de vie ou professionnels.',
+        2 => 'Présentation des différentes approches de coaching adaptées à votre profil et vos besoins.',
+        3 => 'Conseils immédiats et premiers outils pour commencer votre réflexion personnelle.',
+        4 => 'Définition ensemble du parcours d\'accompagnement le plus adapté à votre situation.'
+    );
 
-isabel_add_benefits_and_steps($wp_customize, 'consultation', $consultation_benefits, $consultation_steps, 'isabel_consultation_section');
+    $consultation_steps = array(
+        1 => 'Accueil et présentation mutuelle pour créer un climat de confiance et d\'écoute bienveillante.',
+        2 => 'Écoute active de votre situation, vos défis actuels et vos aspirations pour l\'avenir.',
+        3 => 'Exploration des différentes possibilités d\'accompagnement et explication de mes méthodes.',
+        4 => 'Proposition d\'un plan d\'accompagnement personnalisé adapté à vos besoins et votre rythme.'
+    );
 
-
+    isabel_add_benefits_and_steps($wp_customize, 'consultation', $consultation_benefits, $consultation_steps, 'isabel_consultation_section');
+}
 
 // ===== FONCTIONS UTILITAIRES =====
 
