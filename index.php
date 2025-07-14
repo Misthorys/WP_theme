@@ -27,33 +27,11 @@
   </div>
 </header>
 
-<!-- Hero Section avec toutes les images intégrées -->
+<!-- Hero Section avec image de fond uniforme -->
 <section class="hero-floating" id="accueil">
-  
-  <!-- Image de fond pour desktop (en arrière-plan) -->
-  <?php 
-  $hero_bg_image = isabel_get_option('isabel_hero_background_image', '');
-  if (!empty($hero_bg_image)) {
-    echo '<div class="hero-background-desktop">';
-    echo '<img src="' . esc_url($hero_bg_image) . '" alt="Image de fond" class="hero-background-image-desktop" />';
-    echo '</div>';
-  }
-  ?>
-
-  <!-- Contenu principal de la section hero -->
+  <!-- Le contenu principal de la section hero -->
   <div class="hero-content-wrapper">
     
-    <!-- Image de fond mobile (visible seulement sur mobile) -->
-    <div class="hero-background-mobile">
-      <?php 
-      if (!empty($hero_bg_image)) {
-        echo '<div class="hero-bg-container">';
-        echo '<img src="' . esc_url($hero_bg_image) . '" alt="Image de fond" class="hero-background-image" />';
-        echo '</div>';
-      }
-      ?>
-    </div>
-
     <!-- Image de profil mobile (visible seulement sur mobile) -->
     <div class="mobile-profile-section">
       <?php 
@@ -123,12 +101,32 @@
   </div>
 </section>
 
-<!-- Services Section avec liens -->
+<!-- Script pour gérer l'image de fond dynamiquement -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Récupérer l'image de fond depuis WordPress
+    const heroSection = document.querySelector('.hero-floating');
+    const bgImage = '<?php echo esc_js(isabel_get_option('isabel_hero_background_image', '')); ?>';
+    
+    if (bgImage && heroSection) {
+        // Définir l'image de fond via CSS custom property
+        document.documentElement.style.setProperty('--hero-bg-image', `url(${bgImage})`);
+        heroSection.classList.add('has-bg-image');
+        console.log('🖼️ Image de fond hero définie:', bgImage);
+    } else {
+        // Pas d'image de fond, utiliser le dégradé par défaut
+        heroSection.classList.add('no-bg-image');
+        console.log('🎨 Dégradé par défaut utilisé pour le hero');
+    }
+});
+</script>
+
+<!-- Services Section avec liens - 4 SERVICES -->
 <section class="services-section" id="services">
   <div class="section-container">
     <h2 class="section-title"><?php echo esc_html(isabel_get_option('isabel_services_title', 'Mes Accompagnements')); ?></h2>
     <p class="section-subtitle">
-      Trois approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.
+      Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.
     </p>
 
     <div class="services-grid">
@@ -150,6 +148,13 @@
         <div class="service-icon">03</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?></h3>
         <p><?php echo esc_html(isabel_get_option('isabel_service3_desc', 'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching pour une transformation durable.')); ?></p>
+        <div class="service-arrow">→</div>
+      </a>
+
+      <a href="<?php echo esc_url(home_url('/consultation-decouverte')); ?>" class="service-card service-link">
+        <div class="service-icon">04</div>
+        <h3><?php echo esc_html(isabel_get_option('isabel_service4_title', 'Consultation Découverte')); ?></h3>
+        <p><?php echo esc_html(isabel_get_option('isabel_service4_desc', 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
     </div>
@@ -510,15 +515,16 @@ function showMessage(message, type) {
 </script>
 
 <?php
+// DÉPLACER LA FONCTION ICI - AVANT get_footer()
 function isabel_default_menu() {
-  echo '<ul>';
-  echo '<li><a href="' . home_url('/') . '">Accueil</a></li>';
-  echo '<li><a href="' . home_url('/coaching-personnel') . '">Coaching Personnel</a></li>';
-  echo '<li><a href="' . home_url('/accompagnement-vae') . '">Accompagnement VAE</a></li>';
-  echo '<li><a href="' . home_url('/hypnocoaching') . '">Hypnocoaching</a></li>';
-  echo '<li><a href="#temoignages">Témoignages</a></li>';
-  echo '<li><a href="#contact">Contact</a></li>';
-  echo '</ul>';
+    echo '<ul>';
+    echo '<li><a href="' . home_url('/') . '">Accueil</a></li>';
+    echo '<li><a href="' . home_url('/coaching-personnel') . '">Coaching Personnel</a></li>';
+    echo '<li><a href="' . home_url('/accompagnement-vae') . '">Accompagnement VAE</a></li>';
+    echo '<li><a href="' . home_url('/hypnocoaching') . '">Hypnocoaching</a></li>';
+    echo '<li><a href="#temoignages">Témoignages</a></li>';
+    echo '<li><a href="#contact">Contact</a></li>';
+    echo '</ul>';
 }
 ?>
 

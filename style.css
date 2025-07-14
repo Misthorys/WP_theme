@@ -228,7 +228,7 @@ body {
 }
 
 /* ====================================
-   HERO SECTION AVEC NOUVELLES IMAGES
+   HERO SECTION UNIFORME - IMAGE BIEN VISIBLE
    ==================================== */
 
 /* SECTION HERO GLOBALE */
@@ -236,6 +236,36 @@ body {
   position: relative;
   min-height: 90vh;
   overflow: hidden;
+  /* L'image de fond sera maintenant la même partout */
+}
+
+/* IMAGE DE FOND UNIVERSELLE - TRÈS VISIBLE */
+.hero-floating::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--hero-bg-image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.9; /* Très visible - augmenté de 0.6 à 0.9 */
+  z-index: 0;
+}
+
+/* OVERLAY RÉDUIT pour laisser passer l'image */
+.hero-floating::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(230, 215, 255, 0.2)); /* Très réduit */
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* WRAPPER POUR LE CONTENU */
@@ -248,54 +278,22 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 90vh;
+  justify-content: center;
 }
 
-/* IMAGE DE FOND DESKTOP (arrière-plan) */
-.hero-background-desktop {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  overflow: hidden;
-  display: none; /* Masqué par défaut (mobile first) */
-}
-
-.hero-background-image-desktop {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.6;
-}
-
-/* IMAGE DE FOND MOBILE */
+/* SUPPRIMER LES ANCIENS CONTENEURS D'IMAGES */
+.hero-background-desktop,
 .hero-background-mobile {
-  display: block;
-  width: 100%;
-  margin-bottom: 2rem;
+  display: none !important;
 }
 
-.hero-bg-container {
-  width: 100%;
-  height: 200px;
-  overflow: hidden;
-  border-radius: 0 0 20px 20px;
-}
-
-.hero-background-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-/* IMAGE DE PROFIL MOBILE */
+/* IMAGE DE PROFIL MOBILE - Repositionnée */
 .mobile-profile-section {
   display: block;
   text-align: center;
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 3;
 }
 
 .mobile-profile-container {
@@ -308,18 +306,18 @@ body {
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid white;
-  box-shadow: 0 4px 20px rgba(196, 125, 217, 0.3);
+  border: 4px solid white;
+  box-shadow: 0 8px 30px rgba(196, 125, 217, 0.4);
 }
 
 /* Effet de bordure animée pour mobile */
 .mobile-profile-container::before {
   content: '';
   position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
   background: linear-gradient(45deg, var(--rose-500), var(--rose-700), var(--pastel-violet), var(--rose-500));
   border-radius: 50%;
   z-index: -1;
@@ -332,7 +330,7 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* CONTENU TEXTE */
+/* CONTENU TEXTE - CONTRASTE RENFORCÉ */
 .intro-card {
   flex: 1;
   display: flex;
@@ -340,20 +338,23 @@ body {
   justify-content: center;
   position: relative;
   z-index: 3;
+  text-align: center;
 }
 
 .hero-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--rose-300);
+  background: rgba(248, 215, 255, 0.95); /* Plus opaque */
   color: var(--rose-700);
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
+  font-weight: 700; /* Plus gras */
+  margin: 0 auto 2rem;
   width: fit-content;
+  box-shadow: 0 4px 15px rgba(196, 125, 217, 0.4);
+  border: 1px solid rgba(196, 125, 217, 0.3); /* Bordure pour plus de définition */
 }
 
 .profile-info h1 {
@@ -362,28 +363,35 @@ body {
   color: var(--text-dark);
   line-height: 1.2;
   margin-bottom: 1.5rem;
+  text-shadow: 0 3px 6px rgba(255, 255, 255, 0.9); /* Ombre plus forte */
 }
 
 .profile-subtitle {
   font-size: 1.2rem;
-  color: var(--text-light);
+  color: var(--text-dark); /* Plus sombre pour le contraste */
   margin-bottom: 2rem;
-  font-weight: 400;
+  font-weight: 500; /* Plus gras */
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .intro-text {
   font-size: 1rem;
-  color: var(--text-light);
+  color: var(--text-dark); /* Plus sombre pour le contraste */
   margin-bottom: 3rem;
   max-width: 500px;
   line-height: 1.7;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+  font-weight: 500; /* Plus gras pour la lisibilité */
 }
 
-/* BOUTONS HERO */
+/* BOUTONS HERO - CONTRASTE RENFORCÉ */
 .hero-cta {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  align-items: center;
 }
 
 .cta-main {
@@ -396,7 +404,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: var(--shadow-medium);
+  box-shadow: 0 8px 30px rgba(196, 125, 217, 0.6); /* Ombre plus forte */
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -406,13 +414,13 @@ body {
 
 .cta-main:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(196, 125, 217, 0.3);
+  box-shadow: 0 12px 40px rgba(196, 125, 217, 0.7);
 }
 
 .btn-secondary {
-  background: none;
+  background: rgba(255, 255, 255, 0.95); /* Plus opaque */
   color: var(--text-dark);
-  border: 2px solid var(--rose-300);
+  border: 2px solid var(--rose-500); /* Bordure plus marquée */
   padding: 0.9rem 2rem;
   border-radius: 50px;
   font-size: 1rem;
@@ -421,18 +429,19 @@ body {
   transition: all 0.3s ease;
   display: inline-block;
   text-decoration: none;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5); /* Ombre plus forte */
 }
 
 .btn-secondary:hover {
   background: var(--rose-300);
   color: var(--rose-700);
+  transform: translateY(-2px);
 }
 
-/* IMAGE DE PROFIL DESKTOP */
+/* IMAGE DE PROFIL DESKTOP - Masquée sur mobile */
 .hero-right {
-  display: none; /* Masqué sur mobile */
-  position: relative;
-  z-index: 3;
+  display: none;
 }
 
 .hero-profile-container {
@@ -441,7 +450,7 @@ body {
   border-radius: 50%;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 8px 30px rgba(196, 125, 217, 0.3);
+  box-shadow: 0 12px 40px rgba(196, 125, 217, 0.4);
   border: 5px solid white;
 }
 
@@ -482,22 +491,18 @@ body {
   opacity: 0.8;
 }
 
-/* OVERLAY POUR LISIBILITÉ SUR DESKTOP */
-.hero-floating::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85), rgba(230, 215, 255, 0.75));
-  z-index: 1;
-  pointer-events: none;
-  display: none; /* Masqué sur mobile */
+/* GESTION DYNAMIQUE DE L'IMAGE DE FOND */
+.hero-floating.has-bg-image::before {
+  opacity: 0.9; /* Plus visible */
+}
+
+.hero-floating.no-bg-image::before {
+  background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-pink));
+  opacity: 0.4; /* Légèrement plus visible aussi */
 }
 
 /* ====================================
-   SERVICES EN BLOCS CLIQUABLES
+   SERVICES EN BLOCS CLIQUABLES - 4 SERVICES
    ==================================== */
 
 .services-section {
@@ -526,6 +531,7 @@ body {
   text-align: center;
 }
 
+/* GRILLE SERVICES - ADAPTÉE POUR 4 SERVICES */
 .services-grid {
   display: grid;
   gap: 2rem;
@@ -533,6 +539,7 @@ body {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+  grid-template-columns: 1fr; /* 1 colonne sur mobile par défaut */
 }
 
 .service-card {
@@ -1218,7 +1225,7 @@ body {
 }
 
 /* ====================================
-   RESPONSIVE DESIGN - VERSION CORRIGÉE COMPLÈTE
+   RESPONSIVE DESIGN - GRILLE 4 SERVICES
    ==================================== */
 
 /* Mobile First (défaut - jusqu'à 767px) */
@@ -1261,94 +1268,71 @@ body {
     padding: 1rem 2rem;
   }
 
-  /* HERO MOBILE */
+  /* HERO MOBILE - OVERLAY ENCORE PLUS LÉGER */
   .hero-floating {
-    min-height: auto;
+    min-height: 80vh;
   }
   
   .hero-content-wrapper {
-    min-height: auto;
-    padding: 1rem 1.5rem;
-    flex-direction: column;
+    min-height: 80vh;
+    padding: 2rem 1.5rem;
   }
   
-  /* Afficher les éléments mobiles */
-  .hero-background-mobile {
-    display: block;
-    order: 1;
+  /* Overlay encore plus léger sur mobile */
+  .hero-floating::after {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(230, 215, 255, 0.15));
   }
   
   .mobile-profile-section {
     display: block;
-    order: 2;
+    order: 1;
   }
   
   .intro-card {
-    order: 3;
+    order: 2;
   }
   
-  /* Masquer les éléments desktop */
-  .hero-background-desktop,
   .hero-right {
-    display: none !important;
-  }
-  
-  .hero-floating::before {
     display: none;
   }
   
-  /* Ajustements texte mobile */
-  .hero-badge {
-    margin-bottom: 1.5rem;
-  }
-  
+  /* Texte encore plus contrasté sur mobile */
   .profile-info h1 {
     font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
+    text-shadow: 0 2px 8px rgba(255, 255, 255, 0.95);
+    color: var(--text-dark);
+    font-weight: 900; /* Encore plus gras sur mobile */
   }
-
+  
+  .profile-subtitle,
+  .intro-text {
+    text-shadow: 0 2px 6px rgba(255, 255, 255, 0.9);
+    color: var(--text-dark);
+    font-weight: 600;
+  }
+  
   .profile-subtitle {
-    text-align: center;
     font-size: 1rem;
   }
-
+  
   .intro-text {
-    margin-bottom: 2rem;
-    text-align: center;
-    max-width: 100%;
+    font-size: 0.95rem;
   }
-
+  
   .hero-cta {
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
   }
-
-  .cta-main {
-    width: 100%;
-    max-width: 280px;
-  }
-
+  
+  .cta-main,
   .btn-secondary {
     width: 100%;
     max-width: 280px;
-    text-align: center;
   }
 
-  /* ALERT MOBILE */
-  .alert-content {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .alert-text {
-    text-align: center;
-  }
-
-  /* GRILLES MOBILE */
+  /* GRILLES MOBILE - 4 SERVICES */
   .services-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* 1 colonne sur mobile */
     gap: 1.5rem;
   }
 
@@ -1488,27 +1472,19 @@ body {
 
   /* HERO TABLETTE */
   .hero-floating {
-    min-height: 70vh;
-    background: transparent;
+    min-height: 75vh;
   }
   
   .hero-content-wrapper {
-    min-height: 70vh;
+    min-height: 75vh;
     flex-direction: row;
     align-items: center;
     gap: 3rem;
     padding: 3rem 2rem;
   }
   
-  /* Masquer les éléments mobiles */
-  .hero-background-mobile,
   .mobile-profile-section {
     display: none;
-  }
-  
-  /* Afficher les éléments desktop */
-  .hero-background-desktop {
-    display: block;
   }
   
   .hero-right {
@@ -1518,24 +1494,28 @@ body {
     flex: 1;
   }
   
-  .hero-floating::before {
-    display: block;
-  }
-  
-  /* Ajustements pour tablette */
   .intro-card {
     flex: 1;
-    min-height: auto;
+    text-align: left;
+  }
+
+  .hero-badge {
+    margin: 0 0 2rem 0;
+  }
+  
+  .intro-text {
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .hero-cta {
     flex-direction: row;
+    justify-content: flex-start;
     gap: 1rem;
   }
   
   .profile-info h1 {
     font-size: 3rem;
-    margin-bottom: 1.5rem;
   }
   
   .hero-profile-container {
@@ -1543,9 +1523,9 @@ body {
     height: 300px;
   }
 
-  /* GRILLES TABLETTE */
+  /* GRILLES TABLETTE - 4 SERVICES */
   .services-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
     gap: 2rem;
   }
 
@@ -1576,27 +1556,19 @@ body {
 
   /* HERO DESKTOP */
   .hero-floating {
-    min-height: 80vh;
-    background: transparent;
+    min-height: 85vh;
   }
   
   .hero-content-wrapper {
-    min-height: 80vh;
+    min-height: 85vh;
     flex-direction: row;
     align-items: center;
     gap: 4rem;
     padding: 4rem 2rem;
   }
   
-  /* Masquer les éléments mobiles */
-  .hero-background-mobile,
   .mobile-profile-section {
     display: none;
-  }
-  
-  /* Afficher les éléments desktop */
-  .hero-background-desktop {
-    display: block;
   }
   
   .hero-right {
@@ -1606,42 +1578,48 @@ body {
     flex: 1;
   }
   
-  .hero-floating::before {
-    display: block;
-  }
-  
-  /* Ajustements pour desktop */
   .intro-card {
     flex: 1;
-    min-height: auto;
+    text-align: left;
+  }
+
+  .hero-badge {
+    margin: 0 0 2rem 0;
+  }
+  
+  .intro-text {
+    margin-left: 0;
+    margin-right: 0;
   }
 
   .hero-cta {
     flex-direction: row;
+    justify-content: flex-start;
     gap: 1rem;
   }
   
   .profile-info h1 {
     font-size: 4rem;
-    margin-bottom: 1.5rem;
+  }
+  
+  .profile-subtitle {
+    font-size: 1.3rem;
+  }
+  
+  .intro-text {
+    font-size: 1.1rem;
   }
   
   .hero-profile-container {
     width: 400px;
     height: 400px;
   }
-  
-  /* Améliorer le contraste du texte */
-  .intro-card h1,
-  .intro-card .profile-subtitle,
-  .intro-card .intro-text {
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
-  }
 
-  /* GRILLES DESKTOP */
+  /* GRILLES DESKTOP - 4 SERVICES */
   .services-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2x2 sur desktop standard */
     gap: 2.5rem;
+    max-width: 1000px; /* Plus étroit pour de belles proportions */
   }
 
   .testimonials-grid {
@@ -1671,14 +1649,22 @@ body {
   }
 }
 
+/* Très large écran (1400px et plus) - Option pour 4 colonnes */
+@media (min-width: 1400px) {
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur très large écran */
+    max-width: 1400px;
+    gap: 2rem;
+  }
+}
+
 /* ====================================
    ANIMATIONS ET EFFETS
    ==================================== */
 
 /* Animation d'apparition */
-.hero-background-image,
 .mobile-profile-image,
-.hero-background-image-desktop {
+.hero-profile-image {
   animation: fadeInImage 0.8s ease-out forwards;
 }
 
@@ -1735,9 +1721,8 @@ body {
 
 /* Optimisation pour les écrans haute résolution */
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .hero-background-image,
-  .mobile-profile-image,
-  .hero-background-image-desktop {
+  .hero-profile-image,
+  .mobile-profile-image {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
   }
