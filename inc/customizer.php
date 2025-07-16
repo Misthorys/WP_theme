@@ -5,8 +5,9 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Customizer complet pour le thème Isabel
- * Toutes les options de personnalisation sont ici
+ * Customizer COMPLET pour le thème Isabel
+ * TOUS les textes sont maintenant modifiables
+ * VERSION COMPLÈTE
  */
 
 function isabel_customize_register($wp_customize) {
@@ -176,11 +177,23 @@ function isabel_customize_register($wp_customize) {
         'type' => 'text',
     ));
     
-    // Services (boucle pour éviter la répétition)
+    // Sous-titre des services
+    $wp_customize->add_setting('isabel_services_subtitle', array(
+        'default' => 'Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('isabel_services_subtitle', array(
+        'label' => 'Sous-titre de la section services',
+        'section' => 'isabel_services_section',
+        'type' => 'textarea',
+    ));
+    
+    // Services 1, 2, 3, 4 - TOUS LES SERVICES
     $services = array(
         1 => array('icon' => '🎯', 'title' => 'Coaching Personnel', 'desc' => 'Révélez votre potentiel, clarifiez vos objectifs et transformez votre vie avec un accompagnement personnalisé et des outils concrets.'),
         2 => array('icon' => '🎓', 'title' => 'Accompagnement VAE', 'desc' => 'Valorisez votre expérience et obtenez une reconnaissance officielle de vos compétences grâce à un accompagnement expert VAE.'),
-        3 => array('icon' => '🧘', 'title' => 'Hypnocoaching', 'desc' => 'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching de vie.')
+        3 => array('icon' => '🧘', 'title' => 'Hypnocoaching', 'desc' => 'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching de vie.'),
+        4 => array('icon' => '💡', 'title' => 'Consultation Découverte', 'desc' => 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.')
     );
     
     foreach ($services as $num => $service) {
@@ -233,6 +246,16 @@ function isabel_customize_register($wp_customize) {
         'section' => 'isabel_testimonials_section',
         'type' => 'text',
     ));
+    
+    $wp_customize->add_setting('isabel_testimonials_subtitle', array(
+        'default' => 'Découvrez les témoignages de personnes qui ont transformé leur vie grâce à un accompagnement personnalisé.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('isabel_testimonials_subtitle', array(
+        'label' => 'Sous-titre de la section témoignages',
+        'section' => 'isabel_testimonials_section',
+        'type' => 'textarea',
+    ));
 
     // ===== SECTION CTA FINAL =====
     $wp_customize->add_section('isabel_cta_section', array(
@@ -282,6 +305,16 @@ function isabel_customize_register($wp_customize) {
     ));
     $wp_customize->add_control('isabel_form_title', array(
         'label' => 'Titre du formulaire',
+        'section' => 'isabel_form_section',
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting('isabel_form_subtitle', array(
+        'default' => 'Première consultation personnalisée',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_form_subtitle', array(
+        'label' => 'Sous-titre du formulaire',
         'section' => 'isabel_form_section',
         'type' => 'text',
     ));
@@ -363,9 +396,10 @@ function isabel_customize_register($wp_customize) {
     isabel_add_coaching_customizer($wp_customize);
     isabel_add_vae_customizer($wp_customize);
     isabel_add_hypno_customizer($wp_customize);
+    isabel_add_consultation_customizer($wp_customize);
 }
 
-// ===== COACHING PERSONNEL =====
+// ===== COACHING PERSONNEL - VERSION COMPLÈTE =====
 function isabel_add_coaching_customizer($wp_customize) {
     $wp_customize->add_section('isabel_coaching_section', array(
         'title' => '🎯 Page Coaching Personnel',
@@ -375,12 +409,18 @@ function isabel_add_coaching_customizer($wp_customize) {
     $coaching_settings = array(
         'isabel_coaching_title' => array('default' => 'Coaching Personnel', 'type' => 'text', 'label' => 'Titre de la page'),
         'isabel_coaching_subtitle' => array('default' => 'Révélez votre potentiel et transformez votre vie personnelle et professionnelle', 'type' => 'text', 'label' => 'Sous-titre'),
+        'isabel_coaching_section1_title' => array('default' => 'Qu\'est-ce que le coaching personnel ?', 'type' => 'text', 'label' => 'Titre section 1'),
         'isabel_coaching_intro' => array('default' => 'Le coaching personnel est un accompagnement sur mesure qui vous aide à clarifier vos objectifs, développer votre potentiel et créer la vie que vous désirez vraiment.', 'type' => 'textarea', 'label' => 'Introduction'),
         'isabel_coaching_description' => array('default' => 'Que vous souhaitiez améliorer votre confiance en vous, changer de carrière, améliorer vos relations ou simplement mieux vous connaître, le coaching personnel vous offre l\'espace et les ressources nécessaires.', 'type' => 'textarea', 'label' => 'Description détaillée'),
+        'isabel_coaching_benefits_title' => array('default' => 'Mon processus d\'accompagnement', 'type' => 'text', 'label' => 'Titre grille bénéfices'),
+        'isabel_coaching_process_title' => array('default' => 'Mon processus d\'accompagnement', 'type' => 'text', 'label' => 'Titre processus étapes'),
+        'isabel_coaching_section2_title' => array('default' => 'Pour qui ?', 'type' => 'text', 'label' => 'Titre section 2'),
         'isabel_coaching_who' => array('default' => 'Le coaching personnel s\'adresse à toute personne qui souhaite évoluer, qu\'elle soit en questionnement professionnel, en transition de vie, ou simplement désireuse d\'améliorer sa qualité de vie.', 'type' => 'textarea', 'label' => 'Pour qui ?'),
+        'isabel_coaching_section3_title' => array('default' => 'Mes domaines d\'expertise', 'type' => 'text', 'label' => 'Titre section 3'),
         'isabel_coaching_expertise' => array('default' => 'Fort de mon expérience et de ma certification professionnelle, je vous accompagne sur diverses thématiques : développement de la confiance en soi, gestion du stress et des émotions...', 'type' => 'textarea', 'label' => 'Mon expertise'),
         'isabel_coaching_cta_title' => array('default' => 'Prêt(e) à commencer votre transformation ?', 'type' => 'text', 'label' => 'Titre du CTA'),
         'isabel_coaching_cta_text' => array('default' => 'Contactez-moi pour discuter de vos objectifs et découvrir comment le coaching personnel peut vous aider.', 'type' => 'textarea', 'label' => 'Texte du CTA'),
+        'isabel_coaching_cta_button' => array('default' => 'Prendre rendez-vous', 'type' => 'text', 'label' => 'Bouton du CTA'),
     );
     
     isabel_add_bulk_settings($wp_customize, $coaching_settings, 'isabel_coaching_section');
@@ -403,7 +443,7 @@ function isabel_add_coaching_customizer($wp_customize) {
     isabel_add_benefits_and_steps($wp_customize, 'coaching', $coaching_benefits, $coaching_steps, 'isabel_coaching_section');
 }
 
-// ===== VAE =====
+// ===== VAE - VERSION COMPLÈTE =====
 function isabel_add_vae_customizer($wp_customize) {
     $wp_customize->add_section('isabel_vae_section', array(
         'title' => '🎓 Page Accompagnement VAE',
@@ -413,13 +453,20 @@ function isabel_add_vae_customizer($wp_customize) {
     $vae_settings = array(
         'isabel_vae_title' => array('default' => 'Accompagnement VAE', 'type' => 'text', 'label' => 'Titre de la page'),
         'isabel_vae_subtitle' => array('default' => 'Valorisez votre expérience et obtenez une reconnaissance officielle de vos compétences', 'type' => 'text', 'label' => 'Sous-titre'),
+        'isabel_vae_section1_title' => array('default' => 'Qu\'est-ce que la VAE ?', 'type' => 'text', 'label' => 'Titre section 1'),
         'isabel_vae_intro' => array('default' => 'La Validation des Acquis de l\'Expérience (VAE) est un dispositif qui permet de faire reconnaître officiellement vos compétences acquises par l\'expérience professionnelle.', 'type' => 'textarea', 'label' => 'Introduction'),
         'isabel_vae_description' => array('default' => 'Avec au moins 3 ans d\'expérience dans le domaine visé, vous pouvez prétendre à une VAE. C\'est une opportunité unique de valoriser votre parcours.', 'type' => 'textarea', 'label' => 'Description'),
+        'isabel_vae_benefits_title' => array('default' => 'Les étapes de votre VAE', 'type' => 'text', 'label' => 'Titre grille bénéfices'),
+        'isabel_vae_process_title' => array('default' => 'Les étapes de votre VAE', 'type' => 'text', 'label' => 'Titre processus étapes'),
+        'isabel_vae_section2_title' => array('default' => 'Qui peut bénéficier de la VAE ?', 'type' => 'text', 'label' => 'Titre section 2'),
         'isabel_vae_who' => array('default' => 'Toute personne justifiant d\'au moins 3 ans d\'expérience professionnelle, bénévole ou de formation en rapport avec le diplôme visé.', 'type' => 'textarea', 'label' => 'Qui peut bénéficier ?'),
+        'isabel_vae_section3_title' => array('default' => 'Mon expertise VAE', 'type' => 'text', 'label' => 'Titre section 3'),
         'isabel_vae_expertise' => array('default' => 'Forte de mon expérience en accompagnement VAE, je vous guide dans toutes les étapes de votre démarche.', 'type' => 'textarea', 'label' => 'Mon expertise'),
+        'isabel_vae_section4_title' => array('default' => 'Diplômes et certifications concernés', 'type' => 'text', 'label' => 'Titre section 4'),
         'isabel_vae_diplomas' => array('default' => 'La VAE permet d\'obtenir des diplômes de tous niveaux : CAP, Bac professionnel, BTS, DUT, Licence, Master, titres professionnels, certificats de qualification professionnelle (CQP).', 'type' => 'textarea', 'label' => 'Diplômes concernés'),
         'isabel_vae_cta_title' => array('default' => 'Prêt(e) à valoriser votre expérience ?', 'type' => 'text', 'label' => 'Titre du CTA'),
         'isabel_vae_cta_text' => array('default' => 'Contactez-moi pour une première évaluation de votre projet VAE et découvrons ensemble les possibilités qui s\'offrent à vous.', 'type' => 'textarea', 'label' => 'Texte du CTA'),
+        'isabel_vae_cta_button' => array('default' => 'Évaluer mon projet VAE', 'type' => 'text', 'label' => 'Bouton du CTA'),
     );
     
     isabel_add_bulk_settings($wp_customize, $vae_settings, 'isabel_vae_section');
@@ -441,7 +488,7 @@ function isabel_add_vae_customizer($wp_customize) {
     isabel_add_benefits_and_steps($wp_customize, 'vae', $vae_benefits, $vae_steps, 'isabel_vae_section');
 }
 
-// ===== HYPNOCOACHING =====
+// ===== HYPNOCOACHING - VERSION COMPLÈTE =====
 function isabel_add_hypno_customizer($wp_customize) {
     $wp_customize->add_section('isabel_hypno_section', array(
         'title' => '🧘 Page Hypnocoaching',
@@ -451,14 +498,22 @@ function isabel_add_hypno_customizer($wp_customize) {
     $hypno_settings = array(
         'isabel_hypno_title' => array('default' => 'Hypnocoaching', 'type' => 'text', 'label' => 'Titre de la page'),
         'isabel_hypno_subtitle' => array('default' => 'Libérez-vous de vos blocages en profondeur grâce à l\'alliance du coaching et de l\'hypnose', 'type' => 'text', 'label' => 'Sous-titre'),
+        'isabel_hypno_section1_title' => array('default' => 'Qu\'est-ce que l\'hypnocoaching ?', 'type' => 'text', 'label' => 'Titre section 1'),
         'isabel_hypno_intro' => array('default' => 'L\'hypnocoaching est une approche innovante qui combine les bienfaits du coaching traditionnel avec la puissance de l\'hypnose thérapeutique.', 'type' => 'textarea', 'label' => 'Introduction'),
         'isabel_hypno_description' => array('default' => 'En état d\'hypnose, votre esprit devient plus réceptif aux changements positifs. Cette approche douce et respectueuse vous permet de transformer en profondeur vos croyances limitantes.', 'type' => 'textarea', 'label' => 'Description'),
+        'isabel_hypno_benefits_title' => array('default' => 'Déroulement d\'une séance d\'hypnocoaching', 'type' => 'text', 'label' => 'Titre grille bénéfices'),
+        'isabel_hypno_process_title' => array('default' => 'Déroulement d\'une séance d\'hypnocoaching', 'type' => 'text', 'label' => 'Titre processus étapes'),
+        'isabel_hypno_section2_title' => array('default' => 'Domaines d\'application', 'type' => 'text', 'label' => 'Titre section 2'),
         'isabel_hypno_applications' => array('default' => 'L\'hypnocoaching est particulièrement efficace pour : gérer le stress et l\'anxiété, surmonter les phobies et les peurs, améliorer la confiance en soi, arrêter de fumer ou perdre du poids.', 'type' => 'textarea', 'label' => 'Domaines d\'application'),
+        'isabel_hypno_section3_title' => array('default' => 'Mythes et réalités sur l\'hypnose', 'type' => 'text', 'label' => 'Titre section 3'),
         'isabel_hypno_myths' => array('default' => 'Contrairement aux idées reçues, l\'hypnose thérapeutique n\'a rien à voir avec l\'hypnose de spectacle. Vous restez conscient(e) et maître(sse) de vos choix à tout moment.', 'type' => 'textarea', 'label' => 'Mythes et réalités'),
+        'isabel_hypno_section4_title' => array('default' => 'Ma formation et mon approche', 'type' => 'text', 'label' => 'Titre section 4'),
         'isabel_hypno_formation' => array('default' => 'Certifiée en hypnose thérapeutique, je pratique une approche éthique et bienveillante. Chaque séance est adaptée à votre personnalité et à vos objectifs.', 'type' => 'textarea', 'label' => 'Ma formation'),
+        'isabel_hypno_section5_title' => array('default' => 'Contre-indications', 'type' => 'text', 'label' => 'Titre section 5'),
         'isabel_hypno_contraindications' => array('default' => 'L\'hypnose est contre-indiquée en cas de troubles psychiatriques sévères, de psychose, de troubles dissociatifs ou de dépendances lourdes.', 'type' => 'textarea', 'label' => 'Contre-indications'),
         'isabel_hypno_cta_title' => array('default' => 'Prêt(e) à libérer votre potentiel ?', 'type' => 'text', 'label' => 'Titre du CTA'),
         'isabel_hypno_cta_text' => array('default' => 'Découvrez la puissance de l\'hypnocoaching lors d\'une consultation. Ensemble, nous explorerons comment cette approche peut vous aider.', 'type' => 'textarea', 'label' => 'Texte du CTA'),
+        'isabel_hypno_cta_button' => array('default' => 'Découvrir l\'hypnocoaching', 'type' => 'text', 'label' => 'Bouton du CTA'),
     );
     
     isabel_add_bulk_settings($wp_customize, $hypno_settings, 'isabel_hypno_section');
@@ -480,85 +535,48 @@ function isabel_add_hypno_customizer($wp_customize) {
     isabel_add_benefits_and_steps($wp_customize, 'hypno', $hypno_benefits, $hypno_steps, 'isabel_hypno_section');
 }
 
-
-function isabel_add_service4_customizer($wp_customize){
-
-    /**
-     * AJOUT À VOTRE FICHIER inc/customizer.php
-     * Ajoutez ce code dans la section SERVICES, après le service 3
-     */
-
-    // Dans votre fonction isabel_customize_register, ajoutez ceci après le service 3 :
-
-    // ===== SERVICE 4 (NOUVEAU) =====
-    // Service 4 - Icône
-    $wp_customize->add_setting('isabel_service4_icon', array(
-        'default' => '💡',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('isabel_service4_icon', array(
-        'label' => 'Service 4 - Icône',
-        'section' => 'isabel_services_section',
-        'type' => 'text',
-    ));
-
-    // Service 4 - Titre
-    $wp_customize->add_setting('isabel_service4_title', array(
-        'default' => 'Consultation Découverte',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('isabel_service4_title', array(
-        'label' => 'Service 4 - Titre',
-        'section' => 'isabel_services_section',
-        'type' => 'text',
-    ));
-
-    // Service 4 - Description
-    $wp_customize->add_setting('isabel_service4_desc', array(
-        'default' => 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.',
-        'sanitize_callback' => 'sanitize_textarea_field',
-    ));
-    $wp_customize->add_control('isabel_service4_desc', array(
-        'label' => 'Service 4 - Description',
-        'section' => 'isabel_services_section',
-        'type' => 'textarea',
-    ));
-
-    // ===== PAGE CONSULTATION DÉCOUVERTE =====
-    // Ajoutez aussi cette nouvelle section après les autres pages de services :
-
+// ===== CONSULTATION DÉCOUVERTE - VERSION COMPLÈTE =====
+function isabel_add_consultation_customizer($wp_customize) {
     $wp_customize->add_section('isabel_consultation_section', array(
         'title' => '💡 Page Consultation Découverte',
         'priority' => 43,
     ));
-
+    
     $consultation_settings = array(
         'isabel_consultation_title' => array('default' => 'Consultation Découverte', 'type' => 'text', 'label' => 'Titre de la page'),
         'isabel_consultation_subtitle' => array('default' => 'Première rencontre gratuite pour définir ensemble votre parcours', 'type' => 'text', 'label' => 'Sous-titre'),
+        'isabel_consultation_section1_title' => array('default' => 'Qu\'est-ce que la consultation découverte ?', 'type' => 'text', 'label' => 'Titre section 1'),
         'isabel_consultation_intro' => array('default' => 'La consultation découverte est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.', 'type' => 'textarea', 'label' => 'Introduction'),
         'isabel_consultation_description' => array('default' => 'Durant cette première rencontre gratuite de 30 minutes, nous prenons le temps d\'échanger sur votre situation, vos objectifs et vos attentes.', 'type' => 'textarea', 'label' => 'Description détaillée'),
+        'isabel_consultation_benefits_title' => array('default' => 'Déroulement de la consultation', 'type' => 'text', 'label' => 'Titre grille bénéfices'),
+        'isabel_consultation_process_title' => array('default' => 'Déroulement de la consultation', 'type' => 'text', 'label' => 'Titre processus étapes'),
+        'isabel_consultation_section2_title' => array('default' => 'Modalités pratiques', 'type' => 'text', 'label' => 'Titre section 2'),
         'isabel_consultation_duration' => array('default' => 'Cette consultation dure environ 30 minutes et se déroule par téléphone ou en visioconférence, selon votre préférence.', 'type' => 'textarea', 'label' => 'Durée et modalités'),
-        'isabel_consultation_benefits' => array('default' => 'Cette rencontre vous permet de poser toutes vos questions et de découvrir comment mes services peuvent vous aider à atteindre vos objectifs.', 'type' => 'textarea', 'label' => 'Bénéfices'),
+        'isabel_consultation_section3_title' => array('default' => 'Ce que vous en retirerez', 'type' => 'text', 'label' => 'Titre section 3'),
+        'isabel_consultation_benefits_text' => array('default' => 'Cette rencontre vous permet de poser toutes vos questions et de découvrir comment mes services peuvent vous aider à atteindre vos objectifs.', 'type' => 'textarea', 'label' => 'Bénéfices généraux'),
+        'isabel_consultation_highlight_title' => array('default' => '🎁 Consultation 100% gratuite', 'type' => 'text', 'label' => 'Titre encadré mise en avant'),
+        'isabel_consultation_highlight_text' => array('default' => 'Cette première rencontre est entièrement offerte et sans aucun engagement. C\'est mon cadeau pour vous permettre de découvrir mes services en toute sérénité.', 'type' => 'textarea', 'label' => 'Texte encadré mise en avant'),
         'isabel_consultation_cta_title' => array('default' => 'Prêt(e) à faire le premier pas ?', 'type' => 'text', 'label' => 'Titre du CTA'),
         'isabel_consultation_cta_text' => array('default' => 'Réservez dès maintenant votre consultation découverte gratuite et commençons ensemble votre parcours de transformation.', 'type' => 'textarea', 'label' => 'Texte du CTA'),
+        'isabel_consultation_cta_button' => array('default' => 'Réserver ma consultation gratuite', 'type' => 'text', 'label' => 'Bouton du CTA'),
     );
-
+    
     isabel_add_bulk_settings($wp_customize, $consultation_settings, 'isabel_consultation_section');
-
+    
     $consultation_benefits = array(
         1 => 'Échange personnalisé pour comprendre votre situation et vos objectifs de vie ou professionnels.',
         2 => 'Présentation des différentes approches de coaching adaptées à votre profil et vos besoins.',
         3 => 'Conseils immédiats et premiers outils pour commencer votre réflexion personnelle.',
         4 => 'Définition ensemble du parcours d\'accompagnement le plus adapté à votre situation.'
     );
-
+    
     $consultation_steps = array(
         1 => 'Accueil et présentation mutuelle pour créer un climat de confiance et d\'écoute bienveillante.',
         2 => 'Écoute active de votre situation, vos défis actuels et vos aspirations pour l\'avenir.',
         3 => 'Exploration des différentes possibilités d\'accompagnement et explication de mes méthodes.',
         4 => 'Proposition d\'un plan d\'accompagnement personnalisé adapté à vos besoins et votre rythme.'
     );
-
+    
     isabel_add_benefits_and_steps($wp_customize, 'consultation', $consultation_benefits, $consultation_steps, 'isabel_consultation_section');
 }
 
@@ -585,18 +603,157 @@ function isabel_add_bulk_settings($wp_customize, $settings, $section) {
  * Ajouter les bénéfices et étapes pour un service
  */
 function isabel_add_benefits_and_steps($wp_customize, $service_name, $benefits, $steps, $section) {
+    
+    // === BOXES SECTION (2 texte + 2 images) ===
+    
+    // Box 1 - Texte
+    $wp_customize->add_setting("isabel_{$service_name}_box1_icon", array(
+        'default' => '💬',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box1_icon", array(
+        'label' => "Box 1 - Icône",
+        'section' => $section,
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box1_title", array(
+        'default' => 'Échange personnalisé',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box1_title", array(
+        'label' => "Box 1 - Titre",
+        'section' => $section,
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box1_text", array(
+        'default' => $benefits[1],
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box1_text", array(
+        'label' => "Box 1 - Texte",
+        'section' => $section,
+        'type' => 'textarea',
+    ));
+    
+    // Box 2 - Image
+    $wp_customize->add_setting("isabel_{$service_name}_box2_icon", array(
+        'default' => '🎯',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box2_icon", array(
+        'label' => "Box 2 - Icône",
+        'section' => $section,
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box2_title", array(
+        'default' => 'Approche adaptée',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box2_title", array(
+        'label' => "Box 2 - Titre",
+        'section' => $section,
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box2_text", array(
+        'default' => $benefits[2],
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box2_text", array(
+        'label' => "Box 2 - Texte",
+        'section' => $section,
+        'type' => 'textarea',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box2_image", array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "isabel_{$service_name}_box2_image", array(
+        'label' => "Box 2 - Image",
+        'description' => 'Image pour la box 2 (recommandé: 400x300px)',
+        'section' => $section,
+        'settings' => "isabel_{$service_name}_box2_image",
+    )));
+    
+    // Box 3 - Texte
+    $wp_customize->add_setting("isabel_{$service_name}_box3_icon", array(
+        'default' => '🧰',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box3_icon", array(
+        'label' => "Box 3 - Icône",
+        'section' => $section,
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box3_title", array(
+        'default' => 'Premiers outils',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box3_title", array(
+        'label' => "Box 3 - Titre",
+        'section' => $section,
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box3_text", array(
+        'default' => $benefits[3],
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box3_text", array(
+        'label' => "Box 3 - Texte",
+        'section' => $section,
+        'type' => 'textarea',
+    ));
+    
+    // Box 4 - Image
+    $wp_customize->add_setting("isabel_{$service_name}_box4_icon", array(
+        'default' => '🗺️',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box4_icon", array(
+        'label' => "Box 4 - Icône",
+        'section' => $section,
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box4_title", array(
+        'default' => 'Plan personnalisé',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box4_title", array(
+        'label' => "Box 4 - Titre",
+        'section' => $section,
+        'type' => 'text',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box4_text", array(
+        'default' => $benefits[4],
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control("isabel_{$service_name}_box4_text", array(
+        'label' => "Box 4 - Texte",
+        'section' => $section,
+        'type' => 'textarea',
+    ));
+    
+    $wp_customize->add_setting("isabel_{$service_name}_box4_image", array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, "isabel_{$service_name}_box4_image", array(
+        'label' => "Box 4 - Image",
+        'description' => 'Image pour la box 4 (recommandé: 400x300px)',
+        'section' => $section,
+        'settings' => "isabel_{$service_name}_box4_image",
+    )));
+    
+    // === ÉTAPES (inchangées) ===
     for ($i = 1; $i <= 4; $i++) {
-        // Bénéfices
-        $wp_customize->add_setting("isabel_{$service_name}_benefit$i", array(
-            'default' => $benefits[$i],
-            'sanitize_callback' => 'sanitize_textarea_field',
-        ));
-        $wp_customize->add_control("isabel_{$service_name}_benefit$i", array(
-            'label' => "Bénéfice $i",
-            'section' => $section,
-            'type' => 'textarea',
-        ));
-        
         // Étapes
         $wp_customize->add_setting("isabel_{$service_name}_step$i", array(
             'default' => $steps[$i],

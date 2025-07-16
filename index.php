@@ -101,6 +101,23 @@
   </div>
 </section>
 
+<!-- Section Certification Qualiopi -->
+<section class="qualiopi-home-section">
+  <div class="section-container">
+    <div class="qualiopi-home-certification">
+      <div class="qualiopi-home-content">
+        <div class="qualiopi-home-logo">
+          <img src="<?php echo esc_url(isabel_get_option('isabel_qualiopi_logo', get_template_directory_uri() . '/assets/images/qualiopi-logo.png')); ?>" alt="Certification Qualiopi" />
+        </div>
+        <div class="qualiopi-home-text">
+          <h3>Organisme de formation certifié Qualiopi</h3>
+          <p>La certification qualité a été délivrée au titre de la catégorie d'actions suivante : actions de formation</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Script pour gérer l'image de fond dynamiquement -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -126,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="section-container">
     <h2 class="section-title"><?php echo esc_html(isabel_get_option('isabel_services_title', 'Mes Accompagnements')); ?></h2>
     <p class="section-subtitle">
-      Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.
+      <?php echo esc_html(isabel_get_option('isabel_services_subtitle', 'Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.')); ?>
     </p>
 
     <div class="services-grid">
@@ -166,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="section-container">
     <h2 class="section-title"><?php echo esc_html(isabel_get_option('isabel_testimonials_title', 'Ce que disent mes clients')); ?></h2>
     <p class="section-subtitle">
-      Découvrez les témoignages de personnes qui ont transformé leur vie grâce à un accompagnement personnalisé.
+      <?php echo esc_html(isabel_get_option('isabel_testimonials_subtitle', 'Découvrez les témoignages de personnes qui ont transformé leur vie grâce à un accompagnement personnalisé.')); ?>
     </p>
 
     <div class="testimonials-grid">
@@ -261,6 +278,125 @@ document.addEventListener('DOMContentLoaded', function() {
   </div>
 </section>
 
+<!-- CSS pour la section Qualiopi sur la page d'accueil -->
+<style>
+/* Section Qualiopi spécifique à la page d'accueil */
+.qualiopi-home-section {
+  padding: 3rem 0;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.qualiopi-home-certification {
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  border: 2px solid #cbd5e1;
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.qualiopi-home-certification::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
+}
+
+.qualiopi-home-content {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.qualiopi-home-logo {
+  flex-shrink: 0;
+}
+
+.qualiopi-home-logo img {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.qualiopi-home-text h3 {
+  color: #1e40af;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  margin-top: 0;
+  line-height: 1.3;
+}
+
+.qualiopi-home-text p {
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Responsive pour la section Qualiopi */
+@media (max-width: 768px) {
+  .qualiopi-home-section {
+    padding: 2rem 0;
+  }
+  
+  .qualiopi-home-certification {
+    padding: 2rem;
+    border-radius: 16px;
+  }
+  
+  .qualiopi-home-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 2rem;
+  }
+  
+  .qualiopi-home-logo img {
+    height: 70px;
+  }
+  
+  .qualiopi-home-text h3 {
+    font-size: 1.2rem;
+  }
+  
+  .qualiopi-home-text p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .qualiopi-home-certification {
+    padding: 1.5rem;
+    margin: 0 1rem;
+  }
+  
+  .qualiopi-home-logo img {
+    height: 60px;
+  }
+  
+  .qualiopi-home-text h3 {
+    font-size: 1.1rem;
+  }
+  
+  .qualiopi-home-text p {
+    font-size: 0.9rem;
+  }
+}
+</style>
+
 <!-- Libellule animée -->
 <div class="dragonfly">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 60" width="100%" height="100%">
@@ -281,7 +417,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <button class="modal-close" onclick="closePopup()">×</button>
     
     <h2 class="modal-title"><?php echo esc_html(isabel_get_option('isabel_form_title', 'Réservez votre rendez-vous')); ?></h2>
-    <p class="modal-subtitle">Première consultation personnalisée</p>
+    <p class="modal-subtitle"><?php echo esc_html(isabel_get_option('isabel_form_subtitle', 'Première consultation personnalisée')); ?></p>
 
     <form class="modal-form" id="contact-form">
       <div class="form-group">
@@ -306,7 +442,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <option value="<?php echo esc_attr(isabel_get_option('isabel_service1_title', 'Coaching Personnel')); ?>"><?php echo esc_html(isabel_get_option('isabel_service1_title', 'Coaching Personnel')); ?></option>
           <option value="<?php echo esc_attr(isabel_get_option('isabel_service2_title', 'Accompagnement VAE')); ?>"><?php echo esc_html(isabel_get_option('isabel_service2_title', 'Accompagnement VAE')); ?></option>
           <option value="<?php echo esc_attr(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?>"><?php echo esc_html(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?></option>
-          <option value="Première consultation">Première consultation</option>
+          <option value="<?php echo esc_attr(isabel_get_option('isabel_service4_title', 'Consultation Découverte')); ?>"><?php echo esc_html(isabel_get_option('isabel_service4_title', 'Consultation Découverte')); ?></option>
         </select>
       </div>
 
@@ -522,6 +658,7 @@ function isabel_default_menu() {
     echo '<li><a href="' . home_url('/coaching-personnel') . '">Coaching Personnel</a></li>';
     echo '<li><a href="' . home_url('/accompagnement-vae') . '">Accompagnement VAE</a></li>';
     echo '<li><a href="' . home_url('/hypnocoaching') . '">Hypnocoaching</a></li>';
+    echo '<li><a href="' . home_url('/consultation-decouverte') . '">Consultation Découverte</a></li>';
     echo '<li><a href="#temoignages">Témoignages</a></li>';
     echo '<li><a href="#contact">Contact</a></li>';
     echo '</ul>';
