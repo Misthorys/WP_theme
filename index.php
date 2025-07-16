@@ -101,22 +101,8 @@
   </div>
 </section>
 
-<!-- Section Certification Qualiopi -->
-<section class="qualiopi-home-section">
-  <div class="section-container">
-    <div class="qualiopi-home-certification">
-      <div class="qualiopi-home-content">
-        <div class="qualiopi-home-logo">
-          <img src="<?php echo esc_url(isabel_get_option('isabel_qualiopi_logo', get_template_directory_uri() . '/assets/images/qualiopi-logo.png')); ?>" alt="Certification Qualiopi" />
-        </div>
-        <div class="qualiopi-home-text">
-          <h3>Organisme de formation certifié Qualiopi</h3>
-          <p>La certification qualité a été délivrée au titre de la catégorie d'actions suivante : actions de formation</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Section Certification Qualiopi - MODIFIABLE DEPUIS LE CUSTOMIZER -->
+<?php isabel_display_qualiopi_section('home'); ?>
 
 <!-- Script pour gérer l'image de fond dynamiquement -->
 <script>
@@ -277,125 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
   </div>
 </section>
-
-<!-- CSS pour la section Qualiopi sur la page d'accueil -->
-<style>
-/* Section Qualiopi spécifique à la page d'accueil */
-.qualiopi-home-section {
-  padding: 3rem 0;
-  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
-  border-top: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.qualiopi-home-certification {
-  background: linear-gradient(135deg, #ffffff, #f8fafc);
-  border: 2px solid #cbd5e1;
-  border-radius: 20px;
-  padding: 2.5rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-  position: relative;
-  overflow: hidden;
-  max-width: 700px;
-  margin: 0 auto;
-}
-
-.qualiopi-home-certification::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
-}
-
-.qualiopi-home-content {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-  position: relative;
-  z-index: 1;
-}
-
-.qualiopi-home-logo {
-  flex-shrink: 0;
-}
-
-.qualiopi-home-logo img {
-  height: 90px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
-}
-
-.qualiopi-home-text h3 {
-  color: #1e40af;
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-  margin-top: 0;
-  line-height: 1.3;
-}
-
-.qualiopi-home-text p {
-  color: #475569;
-  font-size: 1rem;
-  line-height: 1.6;
-  margin: 0;
-  font-style: italic;
-  font-weight: 500;
-}
-
-/* Responsive pour la section Qualiopi */
-@media (max-width: 768px) {
-  .qualiopi-home-section {
-    padding: 2rem 0;
-  }
-  
-  .qualiopi-home-certification {
-    padding: 2rem;
-    border-radius: 16px;
-  }
-  
-  .qualiopi-home-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 2rem;
-  }
-  
-  .qualiopi-home-logo img {
-    height: 70px;
-  }
-  
-  .qualiopi-home-text h3 {
-    font-size: 1.2rem;
-  }
-  
-  .qualiopi-home-text p {
-    font-size: 0.95rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .qualiopi-home-certification {
-    padding: 1.5rem;
-    margin: 0 1rem;
-  }
-  
-  .qualiopi-home-logo img {
-    height: 60px;
-  }
-  
-  .qualiopi-home-text h3 {
-    font-size: 1.1rem;
-  }
-  
-  .qualiopi-home-text p {
-    font-size: 0.9rem;
-  }
-}
-</style>
 
 <!-- Libellule animée -->
 <div class="dragonfly">

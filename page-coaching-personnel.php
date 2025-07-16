@@ -18,18 +18,8 @@
 
 <!-- Page Content -->
 <div class="page-content">
-  <!-- Section Certification Qualiopi -->
-  <div class="qualiopi-certification">
-    <div class="qualiopi-content">
-      <div class="qualiopi-logo">
-        <img src="<?php echo esc_url(isabel_get_option('isabel_qualiopi_logo', get_template_directory_uri() . '/assets/images/qualiopi-logo.png')); ?>" alt="Certification Qualiopi" />
-      </div>
-      <div class="qualiopi-text">
-        <h3>Organisme de formation certifié Qualiopi</h3>
-        <p>La certification qualité a été délivrée au titre de la catégorie d'actions suivante : actions de formation</p>
-      </div>
-    </div>
-  </div>
+  <!-- Section Certification Qualiopi - MODIFIABLE DEPUIS LE CUSTOMIZER -->
+  <?php isabel_display_qualiopi_section('page'); ?>
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_coaching_section1_title', 'Qu\'est-ce que le coaching personnel ?')); ?></h2>
@@ -152,7 +142,7 @@
   </div>
 </div>
 
-<!-- CSS CORRIGÉ pour les nouvelles boxes + bouton retour + Qualiopi -->
+<!-- CSS pour le bouton retour et les boxes -->
 <style>
 /* Bouton retour */
 .back-to-home {
@@ -188,50 +178,6 @@
 
 .back-btn:hover .back-arrow {
   transform: translateX(-2px);
-}
-
-/* Certification Qualiopi */
-.qualiopi-certification {
-  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-  border: 2px solid #cbd5e1;
-  border-radius: 16px;
-  padding: 2rem;
-  margin: 2rem 0 3rem 0;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-}
-
-.qualiopi-content {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.qualiopi-logo {
-  flex-shrink: 0;
-}
-
-.qualiopi-logo img {
-  height: 80px;
-  width: auto;
-  object-fit: contain;
-}
-
-.qualiopi-text h3 {
-  color: #1e40af;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  margin-top: 0;
-}
-
-.qualiopi-text p {
-  color: #475569;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  margin: 0;
-  font-style: italic;
 }
 
 /* Grille avec tailles réduites */
@@ -343,20 +289,6 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .qualiopi-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 1.5rem;
-  }
-  
-  .qualiopi-logo img {
-    height: 60px;
-  }
-  
-  .qualiopi-text h3 {
-    font-size: 1.1rem;
-  }
-  
   .benefits-grid-fixed {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -392,10 +324,6 @@
   
   .text-card-fixed {
     padding: 1rem;
-  }
-  
-  .qualiopi-certification {
-    padding: 1.5rem;
   }
 }
 </style>

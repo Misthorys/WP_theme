@@ -295,4 +295,317 @@ add_action('wp_ajax_nopriv_isabel_contact', function() {
     }
 }, 1);
 
+// AJOUTER CETTE FONCTION DANS functions.php
+
+/**
+ * Affiche la section certification Qualiopi
+ * @param string $context - 'home' pour la page d'accueil, 'page' pour les autres pages
+ */
+function isabel_display_qualiopi_section($context = 'page') {
+    
+    // Vérifier si la section est activée
+    if (!isabel_get_option('isabel_qualiopi_enable', true)) {
+        return;
+    }
+    
+    // Récupérer les options
+    $logo = isabel_get_option('isabel_qualiopi_logo', '');
+    $title = isabel_get_option('isabel_qualiopi_title', 'Organisme de formation certifié Qualiopi');
+    $description = isabel_get_option('isabel_qualiopi_description', 'La certification qualité a été délivrée au titre de la catégorie d\'actions suivante : actions de formation');
+    $number = isabel_get_option('isabel_qualiopi_number', '');
+    $date = isabel_get_option('isabel_qualiopi_date', '');
+    $style = isabel_get_option('isabel_qualiopi_style', 'standard');
+    
+    // Définir les classes CSS selon le contexte et le style
+    $section_class = $context === 'home' ? 'qualiopi-home-section' : '';
+    $container_class = $context === 'home' ? 'qualiopi-home-certification' : 'qualiopi-certification';
+    $content_class = $context === 'home' ? 'qualiopi-home-content' : 'qualiopi-content';
+    $logo_class = $context === 'home' ? 'qualiopi-home-logo' : 'qualiopi-logo';
+    $text_class = $context === 'home' ? 'qualiopi-home-text' : 'qualiopi-text';
+    
+    // Ajouter des classes pour les styles
+    $style_classes = '';
+    switch ($style) {
+        case 'compact':
+            $style_classes = ' qualiopi-compact';
+            break;
+        case 'premium':
+            $style_classes = ' qualiopi-premium';
+            break;
+        default:
+            $style_classes = ' qualiopi-standard';
+    }
+    
+    // Conteneur selon le contexte
+    if ($context === 'home') {
+        echo '<section class="' . esc_attr($section_class . $style_classes) . '">';
+        echo '<div class="section-container">';
+    }
+    
+    ?>
+    <div class="<?php echo esc_attr($container_class . $style_classes); ?>">
+        <div class="<?php echo esc_attr($content_class); ?>">
+            <?php if (!empty($logo)) : ?>
+                <div class="<?php echo esc_attr($logo_class); ?>">
+                    <img src="<?php echo esc_url($logo); ?>" alt="Certification Qualiopi" />
+                </div>
+            <?php endif; ?>
+            
+            <div class="<?php echo esc_attr($text_class); ?>">
+                <h3><?php echo esc_html($title); ?></h3>
+                <p><?php echo esc_html($description); ?></p>
+                
+                <?php if (!empty($number)) : ?>
+                    <p class="qualiopi-number">
+                        <strong>N° de certification :</strong> <?php echo esc_html($number); ?>
+                    </p>
+                <?php endif; ?>
+                
+                <?php if (!empty($date)) : ?>
+                    <p class="qualiopi-date">
+                        <?php echo esc_html($date); ?>
+                    </p>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+    <?php
+    
+    // Fermer le conteneur pour la page d'accueil
+    if ($context === 'home') {
+        echo '</div>';
+        echo '</section>';
+    }
+}
+
+/**
+ * CSS pour les différents styles Qualiopi
+ */
+function isabel_qualiopi_styles() {
+    ?>
+    <style>
+    /* Styles de base Qualiopi */
+    .qualiopi-certification,
+    .qualiopi-home-certification {
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        border: 2px solid #cbd5e1;
+        border-radius: 16px;
+        padding: 2rem;
+        margin: 2rem 0 3rem 0;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+    }
+    
+    .qualiopi-content,
+    .qualiopi-home-content {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .qualiopi-logo,
+    .qualiopi-home-logo {
+        flex-shrink: 0;
+    }
+    
+    .qualiopi-logo img,
+    .qualiopi-home-logo img {
+        height: 80px;
+        width: auto;
+        object-fit: contain;
+    }
+    
+    .qualiopi-text h3,
+    .qualiopi-home-text h3 {
+        color: #1e40af;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+    }
+    
+    .qualiopi-text p,
+    .qualiopi-home-text p {
+        color: #475569;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        margin: 0.5rem 0;
+        font-style: italic;
+    }
+    
+    .qualiopi-number {
+        font-style: normal !important;
+        font-size: 0.9rem !important;
+        color: #1e40af !important;
+    }
+    
+    .qualiopi-date {
+        font-style: normal !important;
+        font-size: 0.85rem !important;
+        color: #64748b !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Style Premium */
+    .qualiopi-premium {
+        background: linear-gradient(135deg, #ffffff, #f8fafc) !important;
+        border: 2px solid #3b82f6 !important;
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.15) !important;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .qualiopi-premium::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
+    }
+    
+    /* Style Compact */
+    .qualiopi-compact {
+        padding: 1.5rem !important;
+        margin: 1.5rem 0 2rem 0 !important;
+    }
+    
+    .qualiopi-compact .qualiopi-logo img,
+    .qualiopi-compact .qualiopi-home-logo img {
+        height: 60px !important;
+    }
+    
+    .qualiopi-compact h3 {
+        font-size: 1.1rem !important;
+    }
+    
+    .qualiopi-compact p {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Page d'accueil spécifique */
+    .qualiopi-home-section {
+        padding: 3rem 0;
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        border-top: 1px solid #e2e8f0;
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    .qualiopi-home-certification {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .qualiopi-home-logo img {
+        height: 90px;
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+    }
+    
+    .qualiopi-home-text h3 {
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+    
+    .qualiopi-home-text p {
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+    
+    .qualiopi-home-certification::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1e40af, #3b82f6, #60a5fa);
+    }
+    
+    .qualiopi-home-content {
+        gap: 2.5rem;
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .qualiopi-content,
+        .qualiopi-home-content {
+            flex-direction: column;
+            text-align: center;
+            gap: 1.5rem;
+        }
+        
+        .qualiopi-logo img,
+        .qualiopi-home-logo img {
+            height: 60px;
+        }
+        
+        .qualiopi-home-logo img {
+            height: 70px;
+        }
+        
+        .qualiopi-text h3,
+        .qualiopi-home-text h3 {
+            font-size: 1.1rem;
+        }
+        
+        .qualiopi-home-text h3 {
+            font-size: 1.2rem;
+        }
+        
+        .qualiopi-home-text p {
+            font-size: 0.95rem;
+        }
+        
+        .qualiopi-compact .qualiopi-logo img {
+            height: 50px !important;
+        }
+        
+        .qualiopi-home-section {
+            padding: 2rem 0;
+        }
+        
+        .qualiopi-home-certification {
+            padding: 2rem;
+            border-radius: 16px;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .qualiopi-certification,
+        .qualiopi-home-certification {
+            padding: 1.5rem;
+            margin: 1rem 0 2rem 0;
+        }
+        
+        .qualiopi-compact {
+            padding: 1rem !important;
+        }
+        
+        .qualiopi-home-certification {
+            margin: 0 1rem;
+        }
+        
+        .qualiopi-home-logo img {
+            height: 60px;
+        }
+        
+        .qualiopi-home-text h3 {
+            font-size: 1.1rem;
+        }
+        
+        .qualiopi-home-text p {
+            font-size: 0.9rem;
+        }
+    }
+    </style>
+    <?php
+}
+add_action('wp_head', 'isabel_qualiopi_styles');
+
 ?>
