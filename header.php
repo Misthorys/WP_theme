@@ -140,6 +140,233 @@
             display: none !important;
         }
 
+        /* NOUVEAU HEADER AVEC LOGO ET BOUTONS */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--rose-300);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        /* Logo Section */
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .logo-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--rose-300);
+            transition: all 0.3s ease;
+        }
+
+        .logo-image:hover {
+            transform: scale(1.05);
+            border-color: var(--rose-500);
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rose-500), var(--rose-700));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid var(--rose-300);
+            transition: all 0.3s ease;
+        }
+
+        .logo-placeholder:hover {
+            transform: scale(1.05);
+            border-color: var(--rose-500);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .logo-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--rose-700);
+            line-height: 1.1;
+        }
+
+        .logo-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-weight: 500;
+            line-height: 1.1;
+        }
+
+        /* Navigation avec boutons */
+        .nav-menu {
+            display: none;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            margin: 0;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 0.75rem 1.5rem;
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(228, 167, 245, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-menu a:hover::before {
+            left: 100%;
+        }
+
+        .nav-menu a:hover {
+            background: var(--rose-300);
+            color: var(--rose-700);
+            border-color: var(--rose-500);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(196, 125, 217, 0.3);
+        }
+
+        /* Button CTA Header */
+        .header-cta {
+            display: none;
+        }
+
+        .header-cta button {
+            background: linear-gradient(135deg, var(--rose-700), var(--rose-500));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(196, 125, 217, 0.3);
+        }
+
+        .header-cta button:hover {
+            background: linear-gradient(135deg, var(--rose-500), var(--rose-300));
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(196, 125, 217, 0.4);
+        }
+
+        /* Mobile toggle */
+        .nav-toggle {
+            background: none;
+            border: 2px solid var(--rose-500);
+            color: var(--rose-700);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: block;
+        }
+
+        .nav-toggle:hover {
+            background: var(--rose-500);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Mobile Menu */
+        .nav-menu.mobile-active {
+            display: block;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-bottom: 1px solid var(--rose-300);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-menu.mobile-active ul {
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .nav-menu.mobile-active li {
+            border-bottom: 1px solid var(--rose-300);
+            width: 100%;
+        }
+
+        .nav-menu.mobile-active li:last-child {
+            border-bottom: none;
+        }
+
+        .nav-menu.mobile-active a {
+            padding: 1rem 2rem;
+            border-radius: 0;
+            border: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-menu.mobile-active a:hover {
+            background: var(--rose-300);
+            transform: none;
+            box-shadow: none;
+            padding-left: 2.5rem;
+        }
+
         /* STYLES POUR LE MODAL - CRITIQUE */
         .modal-overlay {
             position: fixed;
@@ -282,8 +509,43 @@
             transform: none;
         }
 
-        /* Responsive pour mobile */
-        @media (max-width: 768px) {
+        /* Responsive Header */
+        @media (min-width: 768px) {
+            .nav-toggle {
+                display: none;
+            }
+
+            .nav-menu {
+                display: flex !important;
+                position: static;
+                background: none;
+                border: none;
+                padding: 0;
+                box-shadow: none;
+            }
+
+            .header-cta {
+                display: block;
+            }
+
+            .logo-name {
+                font-size: 1.4rem;
+            }
+
+            .logo-subtitle {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .logo-text {
+                display: none;
+            }
+
+            .header-container {
+                gap: 1rem;
+            }
+
             .modal-content {
                 margin: 10px;
                 padding: 1.5rem;

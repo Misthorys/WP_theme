@@ -3,50 +3,45 @@
 <!-- Header épuré avec logo et boutons -->
 <header class="header">
   <div class="header-container">
-    <!-- Logo à gauche -->
-    <div class="logo-section">
-      <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-link">
-        <?php 
-        $header_logo = isabel_get_option('isabel_header_logo', '');
-        if (!empty($header_logo)) {
-          echo '<img src="' . esc_url($header_logo) . '" alt="Logo" class="header-logo" />';
-        } else {
-          // Fallback texte si pas de logo
-          echo '<span class="logo-text">' . esc_html(isabel_get_option('isabel_main_name', 'Isabel GONCALVES')) . '</span>';
-        }
-        ?>
-      </a>
-    </div>
+    <!-- Logo Section -->
+    <a href="<?php echo esc_url(home_url('/')); ?>" class="header-logo">
+      <?php 
+      $header_logo = isabel_get_option('isabel_header_logo', '');
+      if (!empty($header_logo)) {
+        echo '<img src="' . esc_url($header_logo) . '" alt="Logo Isabel GONCALVES" class="logo-image" />';
+      } else {
+        echo '<div class="logo-placeholder">IG</div>';
+      }
+      ?>
+      <div class="logo-text">
+        <div class="logo-name"><?php echo esc_html(isabel_get_option('isabel_header_name', 'Isabel GONCALVES')); ?></div>
+        <div class="logo-subtitle"><?php echo esc_html(isabel_get_option('isabel_header_subtitle', 'Formatrice & Coach Certifiée')); ?></div>
+      </div>
+    </a>
 
-    <!-- Navigation mobile toggle -->
-    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-
-    <!-- Navigation principale -->
+    <!-- Navigation avec boutons -->
     <nav class="nav-menu" id="nav-menu">
       <?php
       wp_nav_menu(array(
         'theme_location' => 'main-menu',
         'container' => false,
-        'items_wrap' => '<ul class="nav-list">%3$s</ul>',
+        'items_wrap' => '<ul>%3$s</ul>',
         'fallback_cb' => 'isabel_default_menu'
       ));
       ?>
     </nav>
 
-    <!-- Bouton CTA header (desktop seulement) -->
+    <!-- Button CTA Header -->
     <div class="header-cta">
-      <button class="btn-header-cta" onclick="openPopup()">
-        <?php echo esc_html(isabel_get_option('isabel_header_cta_text', 'Prendre rendez-vous')); ?>
-      </button>
+      <button onclick="openPopup()">Prendre rendez-vous</button>
     </div>
+
+    <!-- Mobile Toggle -->
+    <button class="nav-toggle" id="nav-toggle">Menu</button>
   </div>
 </header>
 
-<!-- Hero Section avec zones séparées -->
+<!-- Hero Section avec image de fond uniforme -->
 <section class="hero-floating" id="accueil">
   <!-- Le contenu principal de la section hero -->
   <div class="hero-content-wrapper">
@@ -56,51 +51,44 @@
       <?php 
       $mobile_profile_image = isabel_get_option('isabel_mobile_profile_image', '');
       if (!empty($mobile_profile_image)) {
-        echo '<div class="mobile-profile-container">';
+        echo '<div class="mobile-profile-container-simple">';
         echo '<img src="' . esc_url($mobile_profile_image) . '" alt="Photo d\'Isabel GONCALVES" class="mobile-profile-image" />';
         echo '</div>';
       }
       ?>
     </div>
 
-    <!-- Contenu texte principal -->
+    <!-- Contenu texte -->
     <div class="intro-card">
-      <!-- Badge formatrice (SÉPARÉ du nom) -->
       <div class="hero-badge">
         <span>✨</span>
-        <?php echo esc_html(isabel_get_option('isabel_hero_badge_text', 'Formatrice et coach certifiée')); ?>
+        <?php echo esc_html(isabel_get_option('isabel_hero_badge', 'Coach certifiée')); ?>
       </div>
       
-      <!-- Nom principal (SÉPARÉ du badge) -->
       <div class="profile-info">
-        <h1><?php echo esc_html(isabel_get_option('isabel_hero_main_name', 'Isabel GONCALVES')); ?></h1>
+        <h1><?php echo esc_html(isabel_get_option('isabel_main_name', 'Isabel GONCALVES')); ?></h1>
       </div>
       
-      <!-- Sous-titre métier (SÉPARÉ) -->
       <div class="profile-subtitle">
-        <?php echo esc_html(isabel_get_option('isabel_hero_subtitle', 'Coach personnelle & Hypnocoach certifiée')); ?>
+        <?php echo esc_html(isabel_get_option('isabel_subtitle', 'Coach personnelle & Hypnocoach certifiée')); ?>
       </div>
       
-      <!-- Texte d'introduction (SÉPARÉ) -->
       <div class="intro-text">
-        <?php echo esc_html(isabel_get_option('isabel_hero_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.')); ?>
+        <?php echo esc_html(isabel_get_option('isabel_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.')); ?>
       </div>
       
-      <!-- Boutons d'action -->
       <div class="hero-cta">
         <button class="cta-main" onclick="openPopup()">
           <span>🚀</span>
-          <span><?php echo esc_html(isabel_get_option('isabel_hero_main_button_text', 'Prendre rendez-vous')); ?></span>
+          <span><?php echo esc_html(isabel_get_option('isabel_main_button_text', 'Prendre rendez-vous')); ?></span>
         </button>
-        <a href="#services" class="btn-secondary">
-          <?php echo esc_html(isabel_get_option('isabel_hero_secondary_button_text', 'Découvrir mes services')); ?>
-        </a>
+        <button class="btn-secondary">En savoir plus</button>
       </div>
     </div>
 
     <!-- Image de profil principale (desktop seulement) -->
     <div class="hero-right">
-      <div class="hero-profile-container">
+      <div class="hero-profile-container-simple">
         <?php 
         $profile_image = isabel_get_option('isabel_profile_image', '');
         if (!empty($profile_image)) {
@@ -146,6 +134,45 @@ document.addEventListener('DOMContentLoaded', function() {
         // Pas d'image de fond, utiliser le dégradé par défaut
         heroSection.classList.add('no-bg-image');
         console.log('🎨 Dégradé par défaut utilisé pour le hero');
+    }
+
+    // Gestion de la navigation mobile améliorée
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('mobile-active');
+            
+            // Amélioration accessibilité
+            const isOpen = navMenu.classList.contains('mobile-active');
+            navToggle.setAttribute('aria-expanded', isOpen);
+            navMenu.setAttribute('aria-hidden', !isOpen);
+            navToggle.textContent = isOpen ? 'Fermer' : 'Menu';
+        });
+
+        // Fermer le menu en cliquant sur un lien
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (navMenu.classList.contains('mobile-active')) {
+                    navMenu.classList.remove('mobile-active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navMenu.setAttribute('aria-hidden', 'true');
+                    navToggle.textContent = 'Menu';
+                }
+            });
+        });
+
+        // Fermer le menu en cliquant ailleurs
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('mobile-active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.setAttribute('aria-hidden', 'true');
+                navToggle.textContent = 'Menu';
+            }
+        });
     }
 });
 </script>
@@ -394,34 +421,9 @@ window.closePopup = function() {
 
 // Initialisation au chargement du DOM
 document.addEventListener('DOMContentLoaded', function() {
-    initNavigation();
     initModal();
     initContactForm();
 });
-
-function initNavigation() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-
-    if (!navToggle || !navMenu) return;
-
-    navToggle.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-        const isOpen = navMenu.classList.contains('active');
-        navToggle.setAttribute('aria-expanded', isOpen);
-    });
-
-    navMenu.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-            if (navMenu.classList.contains('active')) {
-                navMenu.classList.remove('active');
-                navToggle.classList.remove('active');
-                navToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-    });
-}
 
 function initModal() {
     const overlay = document.getElementById('modal-overlay');
@@ -548,7 +550,7 @@ function showMessage(message, type) {
 <?php
 // DÉPLACER LA FONCTION ICI - AVANT get_footer()
 function isabel_default_menu() {
-    echo '<ul class="nav-list">';
+    echo '<ul>';
     echo '<li><a href="' . home_url('/') . '">Accueil</a></li>';
     echo '<li><a href="' . home_url('/coaching-personnel') . '">Coaching Personnel</a></li>';
     echo '<li><a href="' . home_url('/accompagnement-vae') . '">Accompagnement VAE</a></li>';
