@@ -1,6 +1,6 @@
 /**
- * Script principal pour le thème Isabel GONCALVES - Design Minimaliste
- * VERSION CORRIGÉE avec debug amélioré
+ * Script principal pour le thème Isabel GONCALVES - VERSION COMPLÈTE CORRIGÉE
+ * Gestion robuste avec fallbacks et vérifications
  */
 
 (function() {
@@ -12,6 +12,37 @@
         MESSAGE_DURATION: 4000,
         MODAL_CLOSE_DELAY: 300
     };
+
+    // Vérifier la disponibilité d'isabel_ajax AU DÉBUT
+    if (typeof isabel_ajax === 'undefined') {
+        console.error('❌ isabel_ajax non défini - Création fallback');
+        
+        // Créer un fallback basique
+        window.isabel_ajax = {
+            ajax_url: window.location.origin + '/wp-admin/admin-ajax.php',
+            nonce: 'fallback_nonce',
+            debug: false
+        };
+        
+        // Essayer de récupérer les vraies valeurs depuis le DOM si disponibles
+        const scripts = document.querySelectorAll('script');
+        scripts.forEach(script => {
+            if (script.textContent.includes('isabel_ajax')) {
+                try {
+                    const match = script.textContent.match(/isabel_ajax\s*=\s*({[^}]+})/);
+                    if (match) {
+                        const parsed = JSON.parse(match[1]);
+                        window.isabel_ajax = parsed;
+                        console.log('✅ isabel_ajax récupéré depuis le DOM');
+                    }
+                } catch(e) {
+                    console.warn('Erreur parsing isabel_ajax depuis DOM');
+                }
+            }
+        });
+    } else {
+        console.log('✅ isabel_ajax disponible:', isabel_ajax);
+    }
 
     // Utilitaires
     const utils = {
@@ -62,14 +93,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         console.log('🔧 Initialisation du thème Isabel...');
         
-        // Vérifier que isabel_ajax est disponible
-        if (typeof isabel_ajax === 'undefined') {
-            console.error('❌ isabel_ajax non défini - problème de localisation du script');
-            showMessage('Erreur de configuration. Veuillez recharger la page.', 'error');
-        } else {
-            console.log('✅ isabel_ajax disponible:', isabel_ajax);
-        }
-        
         initNavigation();
         initModal();
         initFormHandling();
@@ -78,7 +101,7 @@
         initScrollAnimations();
         initParallax();
         
-        console.log('🎨 Thème Isabel GONCALVES - Design Minimaliste initialisé !');
+        console.log('🎨 Thème Isabel GONCALVES initialisé !');
     });
 
     /**
@@ -147,43 +170,47 @@
         );
         let lastFocusedElement = null;
 
-        // Fonctions globales pour les boutons
-        window.openPopup = function() {
-            console.log('📝 Ouverture de la modal de contact');
-            lastFocusedElement = document.activeElement;
-            
-            overlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-            
-            // Restaurer le brouillon si disponible
-            const draft = utils.restoreFormDraft();
-            if (draft) {
-                restoreFormFromDraft(draft);
-            }
-            
-            setTimeout(() => {
-                overlay.classList.add('active');
-                // Focus sur le premier élément focusable
-                if (focusableElements.length > 0) {
-                    focusableElements[0].focus();
-                }
-            }, 10);
-        };
-
-        window.closePopup = function() {
-            console.log('❌ Fermeture de la modal');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-            
-            setTimeout(function() {
-                overlay.style.display = 'none';
+        // Fonctions globales pour les boutons - CORRECTION: Vérifier si déjà définies
+        if (typeof window.openPopup === 'undefined') {
+            window.openPopup = function() {
+                console.log('📝 Ouverture de la modal de contact');
+                lastFocusedElement = document.activeElement;
                 
-                // Restaurer le focus
-                if (lastFocusedElement) {
-                    lastFocusedElement.focus();
+                overlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                
+                // Restaurer le brouillon si disponible
+                const draft = utils.restoreFormDraft();
+                if (draft) {
+                    restoreFormFromDraft(draft);
                 }
-            }, CONFIG.MODAL_CLOSE_DELAY);
-        };
+                
+                setTimeout(() => {
+                    overlay.classList.add('active');
+                    // Focus sur le premier élément focusable
+                    if (focusableElements.length > 0) {
+                        focusableElements[0].focus();
+                    }
+                }, 10);
+            };
+        }
+
+        if (typeof window.closePopup === 'undefined') {
+            window.closePopup = function() {
+                console.log('❌ Fermeture de la modal');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+                
+                setTimeout(function() {
+                    overlay.style.display = 'none';
+                    
+                    // Restaurer le focus
+                    if (lastFocusedElement) {
+                        lastFocusedElement.focus();
+                    }
+                }, CONFIG.MODAL_CLOSE_DELAY);
+            };
+        }
 
         // Fermeture en cliquant à côté
         overlay.addEventListener('click', function(e) {
@@ -226,18 +253,25 @@
     }
 
     /**
-     * Gestion du formulaire avec AJAX + sauvegarde brouillon - VERSION CORRIGÉE
+     * Gestion du formulaire avec AJAX + sauvegarde brouillon - VERSION COMPLÈTE
      */
     function initFormHandling() {
+        // NOUVELLE APPROCHE: Vérifier si handleFormSubmit est déjà défini dans le header
+        if (typeof window.handleFormSubmit !== 'undefined') {
+            console.log('✅ handleFormSubmit déjà défini dans header.php');
+            return;
+        }
+
+        // Définir la fonction de soumission si pas encore définie
         window.handleFormSubmit = function(event) {
             event.preventDefault();
-            console.log('📤 Soumission du formulaire commencée');
+            console.log('📤 Soumission du formulaire commencée (depuis main.js)');
             
             const form = event.target;
             const submitButton = form.querySelector('.form-submit');
             const originalText = submitButton.textContent;
             
-            // Vérifier que isabel_ajax est disponible AVANT tout
+            // Vérifier que isabel_ajax est disponible
             if (typeof isabel_ajax === 'undefined') {
                 console.error('❌ isabel_ajax non défini lors de la soumission');
                 showMessage('Erreur de configuration. Veuillez recharger la page et réessayer.', 'error');
@@ -315,7 +349,7 @@
             console.log('🌐 Envoi AJAX vers:', isabel_ajax.ajax_url);
             console.log('🔑 Nonce utilisé:', isabel_ajax.nonce);
 
-            // Envoi AJAX avec debug amélioré
+            // Envoi AJAX avec gestion d'erreur robuste
             fetch(isabel_ajax.ajax_url, {
                 method: 'POST',
                 body: ajaxData
@@ -362,6 +396,13 @@
                 resetSubmitButton(submitButton, originalText);
             });
         };
+
+        // Attacher l'événement au formulaire si il n'est pas déjà attaché via onsubmit
+        const form = document.querySelector('.modal-form');
+        if (form && !form.getAttribute('onsubmit')) {
+            form.addEventListener('submit', window.handleFormSubmit);
+            console.log('📝 Event listener attaché au formulaire');
+        }
 
         // Sauvegarder automatiquement le brouillon
         const formInputs = document.querySelectorAll('#modal-overlay input, #modal-overlay select, #modal-overlay textarea');
@@ -419,7 +460,7 @@
     }
 
     /**
-     * Afficher un message de notification avec barre de progression - VERSION AMÉLIORÉE
+     * Afficher un message de notification avec barre de progression
      */
     function showMessage(message, type, duration = CONFIG.MESSAGE_DURATION) {
         console.log('💬 Affichage message:', type, message);
@@ -557,6 +598,8 @@
      * Animations au scroll - Intersection Observer
      */
     function initScrollAnimations() {
+        if (!window.IntersectionObserver) return;
+
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -628,10 +671,12 @@
         console.log('- isabel_ajax:', typeof isabel_ajax !== 'undefined' ? '✅' : '❌');
         console.log('- Modal overlay:', document.getElementById('modal-overlay') ? '✅' : '❌');
         console.log('- Form:', document.querySelector('.modal-form') ? '✅' : '❌');
+        console.log('- openPopup:', typeof window.openPopup !== 'undefined' ? '✅' : '❌');
+        console.log('- handleFormSubmit:', typeof window.handleFormSubmit !== 'undefined' ? '✅' : '❌');
     });
 
     // Respecter les préférences d'animation réduite
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         // Désactiver les animations pour les utilisateurs qui préfèrent
         document.documentElement.style.setProperty('--animation-duration', '0.01ms');
         
@@ -645,11 +690,21 @@
     // FONCTION DE DEBUG GLOBALE
     window.isabelDebug = function() {
         console.log('=== ISABEL DEBUG INFO ===');
-        console.log('isabel_ajax:', isabel_ajax);
+        console.log('isabel_ajax:', typeof isabel_ajax !== 'undefined' ? isabel_ajax : 'UNDEFINED');
         console.log('Modal overlay:', document.getElementById('modal-overlay'));
         console.log('Form:', document.querySelector('.modal-form'));
-        console.log('Actions AJAX enregistrées:', window.wp?.hooks?.hasAction('wp_ajax_isabel_contact'));
+        console.log('openPopup function:', typeof window.openPopup);
+        console.log('closePopup function:', typeof window.closePopup);
+        console.log('handleFormSubmit function:', typeof window.handleFormSubmit);
         console.log('========================');
+    };
+
+    // Export des fonctions principales pour usage externe si nécessaire
+    window.isabelTheme = {
+        openPopup: () => window.openPopup(),
+        closePopup: () => window.closePopup(),
+        showMessage: showMessage,
+        debug: () => window.isabelDebug()
     };
 
 })();

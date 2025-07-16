@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 /**
  * Customizer COMPLET pour le thème Isabel
  * TOUS les textes sont maintenant modifiables
- * VERSION COMPLÈTE
+ * VERSION COMPLÈTE AVEC QUALIOPI
  */
 
 function isabel_customize_register($wp_customize) {
@@ -392,6 +392,109 @@ function isabel_customize_register($wp_customize) {
         'settings' => 'isabel_primary_color',
     )));
 
+    // ===== SECTION CERTIFICATION QUALIOPI =====
+    $wp_customize->add_section('isabel_qualiopi_section', array(
+        'title' => '🏆 Certification Qualiopi',
+        'description' => 'Gérez l\'affichage de votre certification Qualiopi sur toutes les pages',
+        'priority' => 38,
+    ));
+
+    // Activer/Désactiver la section Qualiopi
+    $wp_customize->add_setting('isabel_qualiopi_enable', array(
+        'default' => true,
+        'sanitize_callback' => 'isabel_sanitize_checkbox',
+    ));
+
+    $wp_customize->add_control('isabel_qualiopi_enable', array(
+        'label' => 'Afficher la certification Qualiopi',
+        'description' => 'Cochez pour afficher la section certification sur toutes les pages',
+        'section' => 'isabel_qualiopi_section',
+        'type' => 'checkbox',
+    ));
+
+    // Logo Qualiopi
+    $wp_customize->add_setting('isabel_qualiopi_logo', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'isabel_qualiopi_logo', array(
+        'label' => 'Logo Qualiopi',
+        'description' => 'Uploadez votre logo de certification Qualiopi (format PNG ou JPG recommandé)',
+        'section' => 'isabel_qualiopi_section',
+        'settings' => 'isabel_qualiopi_logo',
+    )));
+
+    // Titre principal
+    $wp_customize->add_setting('isabel_qualiopi_title', array(
+        'default' => 'Organisme de formation certifié Qualiopi',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('isabel_qualiopi_title', array(
+        'label' => 'Titre principal',
+        'description' => 'Le titre affiché avec la certification',
+        'section' => 'isabel_qualiopi_section',
+        'type' => 'text',
+    ));
+
+    // Texte descriptif
+    $wp_customize->add_setting('isabel_qualiopi_description', array(
+        'default' => 'La certification qualité a été délivrée au titre de la catégorie d\'actions suivante : actions de formation',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+
+    $wp_customize->add_control('isabel_qualiopi_description', array(
+        'label' => 'Description',
+        'description' => 'Texte descriptif de la certification (mention légale)',
+        'section' => 'isabel_qualiopi_section',
+        'type' => 'textarea',
+    ));
+
+    // Numéro de certification (optionnel)
+    $wp_customize->add_setting('isabel_qualiopi_number', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('isabel_qualiopi_number', array(
+        'label' => 'Numéro de certification (optionnel)',
+        'description' => 'Si vous souhaitez afficher le numéro de votre certification',
+        'section' => 'isabel_qualiopi_section',
+        'type' => 'text',
+    ));
+
+    // Date d'obtention (optionnel)
+    $wp_customize->add_setting('isabel_qualiopi_date', array(
+        'default' => '',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+
+    $wp_customize->add_control('isabel_qualiopi_date', array(
+        'label' => 'Date d\'obtention (optionnel)',
+        'description' => 'Ex: Certifié depuis 2023',
+        'section' => 'isabel_qualiopi_section',
+        'type' => 'text',
+    ));
+
+    // Style d'affichage
+    $wp_customize->add_setting('isabel_qualiopi_style', array(
+        'default' => 'standard',
+        'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+
+    $wp_customize->add_control('isabel_qualiopi_style', array(
+        'label' => 'Style d\'affichage',
+        'description' => 'Choisissez le style de présentation',
+        'section' => 'isabel_qualiopi_section',
+        'type' => 'select',
+        'choices' => array(
+            'standard' => 'Standard (Logo + Texte)',
+            'compact' => 'Compact (Plus petit)',
+            'premium' => 'Premium (Avec bordure colorée)',
+        ),
+    ));
+
     // ===== INCLURE LES PAGES DE SERVICES =====
     isabel_add_coaching_customizer($wp_customize);
     isabel_add_vae_customizer($wp_customize);
@@ -767,113 +870,6 @@ function isabel_add_benefits_and_steps($wp_customize, $service_name, $benefits, 
     }
 }
 
-// AJOUTER CETTE SECTION DANS inc/customizer.php APRÈS LA SECTION COULEURS
-
-    // ===== SECTION CERTIFICATION QUALIOPI =====
-    $wp_customize->add_section('isabel_qualiopi_section', array(
-        'title' => '🏆 Certification Qualiopi',
-        'description' => 'Gérez l\'affichage de votre certification Qualiopi sur toutes les pages',
-        'priority' => 38,
-    ));
-
-    // Activer/Désactiver la section Qualiopi
-    $wp_customize->add_setting('isabel_qualiopi_enable', array(
-        'default' => true,
-        'sanitize_callback' => 'isabel_sanitize_checkbox',
-    ));
-
-    $wp_customize->add_control('isabel_qualiopi_enable', array(
-        'label' => 'Afficher la certification Qualiopi',
-        'description' => 'Cochez pour afficher la section certification sur toutes les pages',
-        'section' => 'isabel_qualiopi_section',
-        'type' => 'checkbox',
-    ));
-
-    // Logo Qualiopi
-    $wp_customize->add_setting('isabel_qualiopi_logo', array(
-        'default' => '',
-        'sanitize_callback' => 'esc_url_raw',
-    ));
-
-    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'isabel_qualiopi_logo', array(
-        'label' => 'Logo Qualiopi',
-        'description' => 'Uploadez votre logo de certification Qualiopi (format PNG ou JPG recommandé)',
-        'section' => 'isabel_qualiopi_section',
-        'settings' => 'isabel_qualiopi_logo',
-    )));
-
-    // Titre principal
-    $wp_customize->add_setting('isabel_qualiopi_title', array(
-        'default' => 'Organisme de formation certifié Qualiopi',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-
-    $wp_customize->add_control('isabel_qualiopi_title', array(
-        'label' => 'Titre principal',
-        'description' => 'Le titre affiché avec la certification',
-        'section' => 'isabel_qualiopi_section',
-        'type' => 'text',
-    ));
-
-    // Texte descriptif
-    $wp_customize->add_setting('isabel_qualiopi_description', array(
-        'default' => 'La certification qualité a été délivrée au titre de la catégorie d\'actions suivante : actions de formation',
-        'sanitize_callback' => 'sanitize_textarea_field',
-    ));
-
-    $wp_customize->add_control('isabel_qualiopi_description', array(
-        'label' => 'Description',
-        'description' => 'Texte descriptif de la certification (mention légale)',
-        'section' => 'isabel_qualiopi_section',
-        'type' => 'textarea',
-    ));
-
-    // Numéro de certification (optionnel)
-    $wp_customize->add_setting('isabel_qualiopi_number', array(
-        'default' => '',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-
-    $wp_customize->add_control('isabel_qualiopi_number', array(
-        'label' => 'Numéro de certification (optionnel)',
-        'description' => 'Si vous souhaitez afficher le numéro de votre certification',
-        'section' => 'isabel_qualiopi_section',
-        'type' => 'text',
-    ));
-
-    // Date d'obtention (optionnel)
-    $wp_customize->add_setting('isabel_qualiopi_date', array(
-        'default' => '',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-
-    $wp_customize->add_control('isabel_qualiopi_date', array(
-        'label' => 'Date d\'obtention (optionnel)',
-        'description' => 'Ex: Certifié depuis 2023',
-        'section' => 'isabel_qualiopi_section',
-        'type' => 'text',
-    ));
-
-    // Style d'affichage
-    $wp_customize->add_setting('isabel_qualiopi_style', array(
-        'default' => 'standard',
-        'sanitize_callback' => 'isabel_sanitize_select',
-    ));
-
-    $wp_customize->add_control('isabel_qualiopi_style', array(
-        'label' => 'Style d\'affichage',
-        'description' => 'Choisissez le style de présentation',
-        'section' => 'isabel_qualiopi_section',
-        'type' => 'select',
-        'choices' => array(
-            'standard' => 'Standard (Logo + Texte)',
-            'compact' => 'Compact (Plus petit)',
-            'premium' => 'Premium (Avec bordure colorée)',
-        ),
-    ));
-
-// AJOUTER CES FONCTIONS À LA FIN DU FICHIER customizer.php
-
 /**
  * Fonction de validation pour checkbox
  */
@@ -889,4 +885,5 @@ function isabel_sanitize_select($input, $setting) {
     $choices = $setting->manager->get_control($setting->id)->choices;
     return (array_key_exists($input, $choices) ? $input : $setting->default);
 }
+
 ?>

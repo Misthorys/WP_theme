@@ -230,9 +230,9 @@ function isabel_handle_contact_ajax() {
     }
 }
 
-// Hook pour les utilisateurs connectés et non connectés
-add_action('wp_ajax_isabel_contact', 'isabel_handle_contact_ajax');
-add_action('wp_ajax_nopriv_isabel_contact', 'isabel_handle_contact_ajax');
+// Hook pour les utilisateurs connectés et non connectés - CORRECTION PRIORITÉ
+add_action('wp_ajax_isabel_contact', 'isabel_handle_contact_ajax', 1);
+add_action('wp_ajax_nopriv_isabel_contact', 'isabel_handle_contact_ajax', 1);
 
 // ========================================
 // SUPPRESSION DES CONTACTS
@@ -278,7 +278,28 @@ function isabel_delete_contact_ajax() {
 add_action('wp_ajax_isabel_delete_contact', 'isabel_delete_contact_ajax');
 
 // ========================================
-// FONCTIONS DE DEBUG
+// VÉRIFICATIONS ET HOOKS DE SAUVEGARDE
+// ========================================
+
+// S'assurer que les hooks AJAX sont bien enregistrés
+add_action('wp_loaded', function() {
+    if (!has_action('wp_ajax_isabel_contact')) {
+        add_action('wp_ajax_isabel_contact', 'isabel_handle_contact_ajax', 1);
+        add_action('wp_ajax_nopriv_isabel_contact', 'isabel_handle_contact_ajax', 1);
+        error_log('Isabel Contact Form - Hooks AJAX réenregistrés');
+    }
+});
+
+// Debug pour vérifier que les hooks sont actifs
+add_action('init', function() {
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+        error_log('Isabel Contact Form - Hooks enregistrés: ' . 
+            (has_action('wp_ajax_isabel_contact') ? 'OUI' : 'NON'));
+    }
+});
+
+// ========================================
+// FONCTIONS DE TEST ET DEBUG
 // ========================================
 
 // Fonction pour tester la configuration email
@@ -307,23 +328,118 @@ function isabel_test_email_config() {
 // Hook pour tester la config email depuis l'admin
 add_action('wp_ajax_isabel_test_email', 'isabel_test_email_config');
 
+// Test direct de l'action AJAX
+add_action('wp_ajax_test_isabel', 'test_isabel_ajax');
+add_action('wp_ajax_nopriv_test_isabel', 'test_isabel_ajax');
+
+function test_isabel_ajax() {
+    wp_send_json_success('Test AJAX fonctionne ! Heure: ' . current_time('mysql'));
+}
+
 // ========================================
-// HOOKS POUR AMÉLIORER LA COMPATIBILITÉ
+// INTERCEPTION D'URGENCE POUR DEBUG
 // ========================================
 
-// S'assurer que les hooks AJAX sont bien enregistrés
-add_action('wp_loaded', function() {
-    if (!has_action('wp_ajax_isabel_contact')) {
-        add_action('wp_ajax_isabel_contact', 'isabel_handle_contact_ajax');
-        add_action('wp_ajax_nopriv_isabel_contact', 'isabel_handle_contact_ajax');
-        error_log('Isabel Contact Form - Hooks AJAX réenregistrés');
+// Intercepter TOUTES les requêtes AJAX avec priorité maximale
+add_action('wp_ajax_isabel_contact', function() {
+    error_log('ISABEL: Action isabel_contact interceptée avec POST: ' . print_r($_POST, true));
+    
+    // Appeler la fonction originale si elle existe
+    if (function_exists('isabel_handle_contact_ajax')) {
+        remove_action('wp_ajax_isabel_contact', 'isabel_handle_contact_ajax', 1);
+        isabel_handle_contact_ajax();
+    } else {
+        error_log('ISABEL: Fonction isabel_handle_contact_ajax non trouvée');
+        wp_send_json_error('Fonction de traitement non trouvée');
+    }
+}, 0); // Priorité 0 = très haute
+
+add_action('wp_ajax_nopriv_isabel_contact', function() {
+    error_log('ISABEL: Action isabel_contact (nopriv) interceptée');
+    
+    if (function_exists('isabel_handle_contact_ajax')) {
+        remove_action('wp_ajax_nopriv_isabel_contact', 'isabel_handle_contact_ajax', 1);
+        isabel_handle_contact_ajax();
+    } else {
+        error_log('ISABEL: Fonction isabel_handle_contact_ajax non trouvée');
+        wp_send_json_error('Fonction de traitement non trouvée');
+    }
+}, 0); // Priorité 0 = très haute
+
+// ========================================
+// VÉRIFICATION DE LA TABLE AU CHARGEMENT
+// ========================================
+
+// Forcer la vérification de la table à chaque chargement
+add_action('plugins_loaded', function() {
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'isabel_contacts';
+    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name;
+    
+    if (!$table_exists) {
+        error_log('ISABEL: Table contacts manquante - création forcée');
+        isabel_create_contacts_table();
+        
+        // Vérifier à nouveau
+        $table_exists_after = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name;
+        error_log('ISABEL: Table créée: ' . ($table_exists_after ? 'OUI' : 'NON'));
     }
 });
 
-// Debug pour vérifier que les hooks sont actifs
-add_action('init', function() {
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-        error_log('Isabel Contact Form - Hooks enregistrés: ' . 
-            (has_action('wp_ajax_isabel_contact') ? 'OUI' : 'NON'));
+// ========================================
+// FONCTIONS DE FALLBACK
+// ========================================
+
+// Fonction de fallback si l'AJAX ne fonctionne pas
+function isabel_fallback_contact_handler() {
+    if (isset($_POST['isabel_contact_submit'])) {
+        
+        // Vérification nonce
+        if (!wp_verify_nonce($_POST['isabel_contact_nonce'], 'isabel_contact_form')) {
+            wp_die('Erreur de sécurité');
+        }
+        
+        // Traitement des données
+        $name = sanitize_text_field($_POST['name']);
+        $email = sanitize_email($_POST['email']);
+        $phone = sanitize_text_field($_POST['phone']);
+        $service = sanitize_text_field($_POST['service']);
+        $message = sanitize_textarea_field($_POST['message']);
+        
+        // Validation
+        if (empty($name) || empty($email) || empty($phone)) {
+            wp_die('Veuillez remplir tous les champs obligatoires.');
+        }
+        
+        if (!is_email($email)) {
+            wp_die('Adresse email invalide.');
+        }
+        
+        // Sauvegarde
+        $saved = isabel_save_contact_to_db($name, $email, $phone, $service, $message);
+        
+        if ($saved) {
+            // Redirection avec message de succès
+            wp_redirect(add_query_arg('contact_sent', '1', home_url()));
+            exit;
+        } else {
+            wp_die('Erreur lors de l\'enregistrement.');
+        }
+    }
+}
+add_action('init', 'isabel_fallback_contact_handler');
+
+// Afficher message de succès après redirection
+add_action('wp_footer', function() {
+    if (isset($_GET['contact_sent']) && $_GET['contact_sent'] == '1') {
+        ?>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            alert('Votre message a été envoyé avec succès !');
+        });
+        </script>
+        <?php
     }
 });
+
+?>
