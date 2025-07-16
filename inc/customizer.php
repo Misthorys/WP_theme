@@ -7,10 +7,40 @@ if (!defined('ABSPATH')) {
 /**
  * Customizer COMPLET pour le thème Isabel
  * TOUS les textes sont maintenant modifiables
- * VERSION COMPLÈTE AVEC QUALIOPI
+ * VERSION COMPLÈTE AVEC HEADER + ZONES SÉPARÉES + QUALIOPI
  */
 
 function isabel_customize_register($wp_customize) {
+    
+    // ===== SECTION HEADER =====
+    $wp_customize->add_section('isabel_header_section', array(
+        'title' => '🎯 Header (Barre de navigation)',
+        'priority' => 28,
+    ));
+
+    // Logo header
+    $wp_customize->add_setting('isabel_header_logo', array(
+        'default' => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ));
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'isabel_header_logo', array(
+        'label' => 'Logo du header',
+        'description' => 'Logo affiché dans la barre de navigation (recommandé: 150x50px, format PNG)',
+        'section' => 'isabel_header_section',
+        'settings' => 'isabel_header_logo',
+    )));
+
+    // Texte bouton CTA header
+    $wp_customize->add_setting('isabel_header_cta_text', array(
+        'default' => 'Prendre rendez-vous',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_header_cta_text', array(
+        'label' => 'Texte bouton header',
+        'description' => 'Texte du bouton dans la barre de navigation (visible sur desktop)',
+        'section' => 'isabel_header_section',
+        'type' => 'text',
+    ));
     
     // ===== SECTION IMAGES =====
     $wp_customize->add_section('isabel_profile_section', array(
@@ -54,86 +84,95 @@ function isabel_customize_register($wp_customize) {
         'settings' => 'isabel_mobile_profile_image',
     )));
     
-    // ===== SECTION HERO =====
+    // ===== SECTION HERO - ZONES SÉPARÉES =====
     $wp_customize->add_section('isabel_hero_section', array(
-        'title' => '🏠 Section d\'accueil',
+        'title' => '🏠 Section d\'accueil (zones séparées)',
         'priority' => 30,
     ));
     
-    // Nom principal
+    // Badge formatrice (SÉPARÉ du nom)
+    $wp_customize->add_setting('isabel_hero_badge_text', array(
+        'default' => 'Formatrice et coach certifiée',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_hero_badge_text', array(
+        'label' => 'Texte du badge (séparé)',
+        'description' => 'Le petit badge coloré en haut (ex: "Formatrice et coach certifiée")',
+        'section' => 'isabel_hero_section',
+        'type' => 'text',
+    ));
+
+    // Nom principal hero (SÉPARÉ du header)
+    $wp_customize->add_setting('isabel_hero_main_name', array(
+        'default' => 'Isabel GONCALVES',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_hero_main_name', array(
+        'label' => 'Nom principal hero (séparé)',
+        'description' => 'Le nom affiché en grand dans la section hero (peut être différent du header)',
+        'section' => 'isabel_hero_section',
+        'type' => 'text',
+    ));
+
+    // Sous-titre hero (SÉPARÉ)
+    $wp_customize->add_setting('isabel_hero_subtitle', array(
+        'default' => 'Coach personnelle & Hypnocoach certifiée',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_hero_subtitle', array(
+        'label' => 'Sous-titre métier (séparé)',
+        'description' => 'Description de votre métier sous le nom (ex: "Coach personnelle & Hypnocoach")',
+        'section' => 'isabel_hero_section',
+        'type' => 'text',
+    ));
+
+    // Texte d'introduction hero (SÉPARÉ)
+    $wp_customize->add_setting('isabel_hero_intro_text', array(
+        'default' => 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.',
+        'sanitize_callback' => 'sanitize_textarea_field',
+    ));
+    $wp_customize->add_control('isabel_hero_intro_text', array(
+        'label' => 'Texte d\'introduction (séparé)',
+        'description' => 'Le paragraphe d\'introduction dans la section hero',
+        'section' => 'isabel_hero_section',
+        'type' => 'textarea',
+    ));
+
+    // Bouton principal hero (SÉPARÉ)
+    $wp_customize->add_setting('isabel_hero_main_button_text', array(
+        'default' => 'Prendre rendez-vous',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_hero_main_button_text', array(
+        'label' => 'Texte bouton principal hero',
+        'description' => 'Bouton principal coloré de la section hero',
+        'section' => 'isabel_hero_section',
+        'type' => 'text',
+    ));
+
+    // Bouton secondaire hero (SÉPARÉ)
+    $wp_customize->add_setting('isabel_hero_secondary_button_text', array(
+        'default' => 'Découvrir mes services',
+        'sanitize_callback' => 'sanitize_text_field',
+    ));
+    $wp_customize->add_control('isabel_hero_secondary_button_text', array(
+        'label' => 'Texte bouton secondaire hero',
+        'description' => 'Bouton secondaire transparent de la section hero',
+        'section' => 'isabel_hero_section',
+        'type' => 'text',
+    ));
+    
+    // Nom principal legacy (pour header fallback)
     $wp_customize->add_setting('isabel_main_name', array(
         'default' => 'Isabel GONCALVES',
         'sanitize_callback' => 'sanitize_text_field',
     ));
     $wp_customize->add_control('isabel_main_name', array(
-        'label' => 'Nom principal',
+        'label' => 'Nom principal (fallback header)',
+        'description' => 'Utilisé comme fallback si pas de logo header',
         'section' => 'isabel_hero_section',
         'type' => 'text',
     ));
-    
-    // Sous-titre
-    $wp_customize->add_setting('isabel_subtitle', array(
-        'default' => 'Coach Certifiée & Hypnocoach',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('isabel_subtitle', array(
-        'label' => 'Sous-titre',
-        'section' => 'isabel_hero_section',
-        'type' => 'text',
-    ));
-    
-    // Texte d'introduction
-    $wp_customize->add_setting('isabel_intro_text', array(
-        'default' => 'Bienvenue dans votre espace de transformation personnelle ! Je vous accompagne avec bienveillance vers l\'épanouissement de votre potentiel grâce au coaching, à la VAE et à l\'hypnocoaching.',
-        'sanitize_callback' => 'sanitize_textarea_field',
-    ));
-    $wp_customize->add_control('isabel_intro_text', array(
-        'label' => 'Texte d\'introduction',
-        'section' => 'isabel_hero_section',
-        'type' => 'textarea',
-    ));
-    
-    // Texte du bouton principal
-    $wp_customize->add_setting('isabel_main_button_text', array(
-        'default' => 'Prendre rendez-vous',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('isabel_main_button_text', array(
-        'label' => 'Texte du bouton principal',
-        'section' => 'isabel_hero_section',
-        'type' => 'text',
-    ));
-    
-    // === SECTION CARD SECONDAIRE ===
-    $wp_customize->add_setting('isabel_why_choose_title', array(
-        'default' => '✨ Pourquoi me choisir ?',
-        'sanitize_callback' => 'sanitize_text_field',
-    ));
-    $wp_customize->add_control('isabel_why_choose_title', array(
-        'label' => 'Titre "Pourquoi me choisir"',
-        'section' => 'isabel_hero_section',
-        'type' => 'text',
-    ));
-    
-    // 4 points "Pourquoi me choisir"
-    for ($i = 1; $i <= 4; $i++) {
-        $defaults = array(
-            1 => '🎯 Approche personnalisée',
-            2 => '📜 Certification professionnelle',
-            3 => '🧠 Méthodes innovantes',
-            4 => '💼 Accompagnement sur mesure'
-        );
-        
-        $wp_customize->add_setting("isabel_why_point_$i", array(
-            'default' => $defaults[$i],
-            'sanitize_callback' => 'sanitize_text_field',
-        ));
-        $wp_customize->add_control("isabel_why_point_$i", array(
-            'label' => "Point $i - Pourquoi me choisir",
-            'section' => 'isabel_hero_section',
-            'type' => 'text',
-        ));
-    }
     
     // ===== SECTION ALERTE =====
     $wp_customize->add_section('isabel_alert_section', array(
@@ -533,13 +572,6 @@ function isabel_add_coaching_customizer($wp_customize) {
         1 => 'Définissez clairement vos priorités et tracez un chemin précis vers vos aspirations personnelles et professionnelles.',
         2 => 'Développez une estime de soi solide et apprenez à croire en vos capacités pour relever tous les défis.',
         3 => 'Naviguez sereinement dans les transitions de vie et transformez les obstacles en opportunités de croissance.',
-        4 => 'Trouvez l\'harmonie parfaite entre vos ambitions professionnelles et votre épanouissement personnel.'
-    );
-    
-    $coaching_steps = array(
-        1 => 'Nous explorons ensemble votre situation actuelle, vos défis et vos aspirations pour définir un plan d\'action personnalisé.',
-        2 => 'Nous clarifions vos objectifs SMART et établissons une feuille de route claire avec des étapes concrètes.',
-        3 => 'Sessions régulières pour travailler sur vos blocages, développer de nouvelles compétences et avancer vers vos objectifs.',
         4 => 'Évaluation continue de vos progrès et adaptation de la stratégie pour optimiser votre réussite.'
     );
     
@@ -886,4 +918,11 @@ function isabel_sanitize_select($input, $setting) {
     return (array_key_exists($input, $choices) ? $input : $setting->default);
 }
 
-?>
+?>Trouvez l\'harmonie parfaite entre vos ambitions professionnelles et votre épanouissement personnel.'
+    );
+    
+    $coaching_steps = array(
+        1 => 'Nous explorons ensemble votre situation actuelle, vos défis et vos aspirations pour définir un plan d\'action personnalisé.',
+        2 => 'Nous clarifions vos objectifs SMART et établissons une feuille de route claire avec des étapes concrètes.',
+        3 => 'Sessions régulières pour travailler sur vos blocages, développer de nouvelles compétences et avancer vers vos objectifs.',
+        4 => '

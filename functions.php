@@ -128,8 +128,12 @@ add_filter('wp_mail_from_name', function($from_name) {
     return get_bloginfo('name');
 });
 
+// ========================================
+// SECTION QUALIOPI - VERSION CORRIGÉE
+// ========================================
+
 /**
- * Affiche la section certification Qualiopi
+ * Affiche la section certification Qualiopi - VERSION CORRIGÉE
  * @param string $context - 'home' pour la page d'accueil, 'page' pour les autres pages
  */
 function isabel_display_qualiopi_section($context = 'page') {
@@ -139,7 +143,7 @@ function isabel_display_qualiopi_section($context = 'page') {
         return;
     }
     
-    // Récupérer les options
+    // Récupérer les options depuis le customizer
     $logo = isabel_get_option('isabel_qualiopi_logo', '');
     $title = isabel_get_option('isabel_qualiopi_title', 'Organisme de formation certifié Qualiopi');
     $description = isabel_get_option('isabel_qualiopi_description', 'La certification qualité a été délivrée au titre de la catégorie d\'actions suivante : actions de formation');
@@ -173,34 +177,35 @@ function isabel_display_qualiopi_section($context = 'page') {
         echo '<div class="section-container">';
     }
     
-    ?>
-    <div class="<?php echo esc_attr($container_class . $style_classes); ?>">
-        <div class="<?php echo esc_attr($content_class); ?>">
-            <?php if (!empty($logo)) : ?>
-                <div class="<?php echo esc_attr($logo_class); ?>">
-                    <img src="<?php echo esc_url($logo); ?>" alt="Certification Qualiopi" />
-                </div>
-            <?php endif; ?>
-            
-            <div class="<?php echo esc_attr($text_class); ?>">
-                <h3><?php echo esc_html($title); ?></h3>
-                <p><?php echo esc_html($description); ?></p>
-                
-                <?php if (!empty($number)) : ?>
-                    <p class="qualiopi-number">
-                        <strong>N° de certification :</strong> <?php echo esc_html($number); ?>
-                    </p>
-                <?php endif; ?>
-                
-                <?php if (!empty($date)) : ?>
-                    <p class="qualiopi-date">
-                        <?php echo esc_html($date); ?>
-                    </p>
-                <?php endif; ?>
-            </div>
-        </div>
-    </div>
-    <?php
+    // CORRECTION: Utiliser echo au lieu de mélanger PHP et HTML
+    echo '<div class="' . esc_attr($container_class . $style_classes) . '">';
+    echo '<div class="' . esc_attr($content_class) . '">';
+    
+    if (!empty($logo)) {
+        echo '<div class="' . esc_attr($logo_class) . '">';
+        echo '<img src="' . esc_url($logo) . '" alt="Certification Qualiopi" />';
+        echo '</div>';
+    }
+    
+    echo '<div class="' . esc_attr($text_class) . '">';
+    echo '<h3>' . esc_html($title) . '</h3>';
+    echo '<p>' . esc_html($description) . '</p>';
+    
+    if (!empty($number)) {
+        echo '<p class="qualiopi-number">';
+        echo '<strong>N° de certification :</strong> ' . esc_html($number);
+        echo '</p>';
+    }
+    
+    if (!empty($date)) {
+        echo '<p class="qualiopi-date">';
+        echo esc_html($date);
+        echo '</p>';
+    }
+    
+    echo '</div>'; // Fermer text_class
+    echo '</div>'; // Fermer content_class
+    echo '</div>'; // Fermer container_class
     
     // Fermer le conteneur pour la page d'accueil
     if ($context === 'home') {
@@ -210,7 +215,7 @@ function isabel_display_qualiopi_section($context = 'page') {
 }
 
 /**
- * CSS pour les différents styles Qualiopi
+ * CSS pour les différents styles Qualiopi - VERSION COMPLÈTE
  */
 function isabel_qualiopi_styles() {
     ?>
@@ -328,6 +333,8 @@ function isabel_qualiopi_styles() {
     .qualiopi-home-certification {
         max-width: 700px;
         margin: 0 auto;
+        position: relative;
+        overflow: hidden;
     }
     
     .qualiopi-home-logo img {
@@ -404,6 +411,7 @@ function isabel_qualiopi_styles() {
         .qualiopi-home-certification {
             padding: 2rem;
             border-radius: 16px;
+            margin: 0 1rem;
         }
     }
     

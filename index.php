@@ -1,33 +1,52 @@
 <?php get_header(); ?>
 
-<!-- Header épuré -->
+<!-- Header épuré avec logo et boutons -->
 <header class="header">
   <div class="header-container">
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-circle">
-      <?php echo esc_html(isabel_get_option('isabel_main_name', 'Isabel GONCALVES')); ?>
-      <div class="logo-dot"></div>
-    </a>
+    <!-- Logo à gauche -->
+    <div class="logo-section">
+      <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-link">
+        <?php 
+        $header_logo = isabel_get_option('isabel_header_logo', '');
+        if (!empty($header_logo)) {
+          echo '<img src="' . esc_url($header_logo) . '" alt="Logo" class="header-logo" />';
+        } else {
+          // Fallback texte si pas de logo
+          echo '<span class="logo-text">' . esc_html(isabel_get_option('isabel_main_name', 'Isabel GONCALVES')) . '</span>';
+        }
+        ?>
+      </a>
+    </div>
 
-    <button class="nav-toggle" id="nav-toggle">☰</button>
+    <!-- Navigation mobile toggle -->
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
 
+    <!-- Navigation principale -->
     <nav class="nav-menu" id="nav-menu">
       <?php
       wp_nav_menu(array(
         'theme_location' => 'main-menu',
         'container' => false,
-        'items_wrap' => '<ul>%3$s</ul>',
+        'items_wrap' => '<ul class="nav-list">%3$s</ul>',
         'fallback_cb' => 'isabel_default_menu'
       ));
       ?>
     </nav>
 
+    <!-- Bouton CTA header (desktop seulement) -->
     <div class="header-cta">
-      <button onclick="openPopup()">Prendre rendez-vous</button>
+      <button class="btn-header-cta" onclick="openPopup()">
+        <?php echo esc_html(isabel_get_option('isabel_header_cta_text', 'Prendre rendez-vous')); ?>
+      </button>
     </div>
   </div>
 </header>
 
-<!-- Hero Section avec image de fond uniforme -->
+<!-- Hero Section avec zones séparées -->
 <section class="hero-floating" id="accueil">
   <!-- Le contenu principal de la section hero -->
   <div class="hero-content-wrapper">
@@ -44,31 +63,38 @@
       ?>
     </div>
 
-    <!-- Contenu texte -->
+    <!-- Contenu texte principal -->
     <div class="intro-card">
+      <!-- Badge formatrice (SÉPARÉ du nom) -->
       <div class="hero-badge">
         <span>✨</span>
-        <?php echo esc_html(isabel_get_option('isabel_subtitle', 'Coach certifiée')); ?>
+        <?php echo esc_html(isabel_get_option('isabel_hero_badge_text', 'Formatrice et coach certifiée')); ?>
       </div>
       
+      <!-- Nom principal (SÉPARÉ du badge) -->
       <div class="profile-info">
-        <h1><?php echo esc_html(isabel_get_option('isabel_main_name', 'Isabel GONCALVES')); ?></h1>
+        <h1><?php echo esc_html(isabel_get_option('isabel_hero_main_name', 'Isabel GONCALVES')); ?></h1>
       </div>
       
+      <!-- Sous-titre métier (SÉPARÉ) -->
       <div class="profile-subtitle">
-        <?php echo esc_html(isabel_get_option('isabel_subtitle', 'Coach personnelle & Hypnocoach certifiée')); ?>
+        <?php echo esc_html(isabel_get_option('isabel_hero_subtitle', 'Coach personnelle & Hypnocoach certifiée')); ?>
       </div>
       
+      <!-- Texte d'introduction (SÉPARÉ) -->
       <div class="intro-text">
-        <?php echo esc_html(isabel_get_option('isabel_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.')); ?>
+        <?php echo esc_html(isabel_get_option('isabel_hero_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.')); ?>
       </div>
       
+      <!-- Boutons d'action -->
       <div class="hero-cta">
         <button class="cta-main" onclick="openPopup()">
           <span>🚀</span>
-          <span><?php echo esc_html(isabel_get_option('isabel_main_button_text', 'Prendre rendez-vous')); ?></span>
+          <span><?php echo esc_html(isabel_get_option('isabel_hero_main_button_text', 'Prendre rendez-vous')); ?></span>
         </button>
-        <button class="btn-secondary">En savoir plus</button>
+        <a href="#services" class="btn-secondary">
+          <?php echo esc_html(isabel_get_option('isabel_hero_secondary_button_text', 'Découvrir mes services')); ?>
+        </a>
       </div>
     </div>
 
@@ -381,6 +407,7 @@ function initNavigation() {
 
     navToggle.addEventListener('click', function() {
         navMenu.classList.toggle('active');
+        navToggle.classList.toggle('active');
         const isOpen = navMenu.classList.contains('active');
         navToggle.setAttribute('aria-expanded', isOpen);
     });
@@ -389,6 +416,7 @@ function initNavigation() {
         link.addEventListener('click', function() {
             if (navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
                 navToggle.setAttribute('aria-expanded', 'false');
             }
         });
@@ -520,7 +548,7 @@ function showMessage(message, type) {
 <?php
 // DÉPLACER LA FONCTION ICI - AVANT get_footer()
 function isabel_default_menu() {
-    echo '<ul>';
+    echo '<ul class="nav-list">';
     echo '<li><a href="' . home_url('/') . '">Accueil</a></li>';
     echo '<li><a href="' . home_url('/coaching-personnel') . '">Coaching Personnel</a></li>';
     echo '<li><a href="' . home_url('/accompagnement-vae') . '">Accompagnement VAE</a></li>';
