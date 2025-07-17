@@ -12,6 +12,288 @@ if (!defined('ABSPATH')) {
 
 function isabel_customize_register($wp_customize) {
     
+    // Ajouter cette section dans votre fichier inc/customizer.php
+    // Après les sections existantes, ajoutez cette nouvelle section
+
+    // ===== SECTION FORMATAGE DE TEXTE =====
+    $wp_customize->add_section('isabel_text_formatting_section', array(
+    'title' => '✍️ Formatage du texte',
+    'description' => 'Contrôlez la taille des polices, les retours à la ligne et autres options de formatage',
+    'priority' => 39,
+    ));
+
+    // === TAILLES DE POLICE ===
+    $text_size_options = array(
+    'xs' => 'Très petit (12px)',
+    'sm' => 'Petit (14px)', 
+    'base' => 'Normal (16px)',
+    'lg' => 'Grand (18px)',
+    'xl' => 'Très grand (20px)',
+    '2xl' => 'Extra grand (24px)',
+    '3xl' => 'Énorme (30px)'
+    );
+
+    // Taille de police pour les titres principaux
+    $wp_customize->add_setting('isabel_heading_size', array(
+    'default' => 'xl',
+    'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+    $wp_customize->add_control('isabel_heading_size', array(
+    'label' => 'Taille des titres principaux (H1)',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'select',
+    'choices' => $text_size_options,
+    ));
+
+    // Taille de police pour les sous-titres
+    $wp_customize->add_setting('isabel_subtitle_size', array(
+    'default' => 'lg',
+    'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+    $wp_customize->add_control('isabel_subtitle_size', array(
+    'label' => 'Taille des sous-titres (H2)',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'select',
+    'choices' => $text_size_options,
+    ));
+
+    // Taille de police pour le texte standard
+    $wp_customize->add_setting('isabel_body_size', array(
+    'default' => 'base',
+    'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+    $wp_customize->add_control('isabel_body_size', array(
+    'label' => 'Taille du texte standard',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'select',
+    'choices' => $text_size_options,
+    ));
+
+    // === ESPACEMENT ET RETOURS À LA LIGNE ===
+    $line_height_options = array(
+    'tight' => 'Serré (1.25)',
+    'normal' => 'Normal (1.5)',
+    'relaxed' => 'Détendu (1.75)',
+    'loose' => 'Large (2.0)'
+    );
+
+    $wp_customize->add_setting('isabel_line_height', array(
+    'default' => 'normal',
+    'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+    $wp_customize->add_control('isabel_line_height', array(
+    'label' => 'Espacement entre les lignes',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'select',
+    'choices' => $line_height_options,
+    ));
+
+    // Espacement entre les paragraphes
+    $paragraph_spacing_options = array(
+    'tight' => 'Serré (0.5rem)',
+    'normal' => 'Normal (1rem)',
+    'relaxed' => 'Détendu (1.5rem)',
+    'loose' => 'Large (2rem)'
+    );
+
+    $wp_customize->add_setting('isabel_paragraph_spacing', array(
+    'default' => 'normal',
+    'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+    $wp_customize->add_control('isabel_paragraph_spacing', array(
+    'label' => 'Espacement entre les paragraphes',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'select',
+    'choices' => $paragraph_spacing_options,
+    ));
+
+    // === FORMATAGE DES SECTIONS SPÉCIFIQUES ===
+
+    // Hero - permettre du HTML simple
+    $wp_customize->add_setting('isabel_intro_text_formatted', array(
+    'default' => isabel_get_option('isabel_intro_text', ''),
+    'sanitize_callback' => 'wp_kses_post', // Permet HTML de base
+    ));
+    $wp_customize->add_control('isabel_intro_text_formatted', array(
+    'label' => 'Texte d\'introduction avec formatage',
+    'description' => 'Vous pouvez utiliser <br> pour les retours à la ligne, <strong> pour le gras, <em> pour l\'italique',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'textarea',
+    ));
+
+    // Services - description avec formatage
+    for ($i = 1; $i <= 4; $i++) {
+    $wp_customize->add_setting("isabel_service{$i}_desc_formatted", array(
+        'default' => isabel_get_option("isabel_service{$i}_desc", ''),
+        'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_control("isabel_service{$i}_desc_formatted", array(
+        'label' => "Service $i - Description avec formatage",
+        'description' => 'Utilisez <br> pour les retours à la ligne, <strong> pour le gras',
+        'section' => 'isabel_text_formatting_section',
+        'type' => 'textarea',
+    ));
+    }
+
+    // CTA texte avec formatage
+    $wp_customize->add_setting('isabel_cta_text_formatted', array(
+    'default' => isabel_get_option('isabel_cta_text', ''),
+    'sanitize_callback' => 'wp_kses_post',
+    ));
+    $wp_customize->add_control('isabel_cta_text_formatted', array(
+    'label' => 'Texte CTA avec formatage',
+    'description' => 'Vous pouvez utiliser <br> pour les retours à la ligne, <strong> pour le gras',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'textarea',
+    ));
+
+    // === POLICES PERSONNALISÉES ===
+    $font_family_options = array(
+    'system' => 'Police système (par défaut)',
+    'inter' => 'Inter (moderne)',
+    'roboto' => 'Roboto (lisible)',
+    'open-sans' => 'Open Sans (web)',
+    'lato' => 'Lato (élégante)',
+    'nunito' => 'Nunito (arrondie)',
+    'poppins' => 'Poppins (géométrique)',
+    'montserrat' => 'Montserrat (display)'
+    );
+
+    $wp_customize->add_setting('isabel_font_family', array(
+    'default' => 'system',
+    'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+    $wp_customize->add_control('isabel_font_family', array(
+    'label' => 'Police de caractères',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'select',
+    'choices' => $font_family_options,
+    ));
+
+    // Poids de police pour les titres
+    $font_weight_options = array(
+    '300' => 'Léger (300)',
+    '400' => 'Normal (400)',
+    '500' => 'Moyen (500)',
+    '600' => 'Semi-gras (600)',
+    '700' => 'Gras (700)',
+    '800' => 'Extra-gras (800)',
+    '900' => 'Ultra-gras (900)'
+    );
+
+    $wp_customize->add_setting('isabel_heading_weight', array(
+    'default' => '700',
+    'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+    $wp_customize->add_control('isabel_heading_weight', array(
+    'label' => 'Poids des titres',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'select',
+    'choices' => $font_weight_options,
+    ));
+
+    $wp_customize->add_setting('isabel_body_weight', array(
+    'default' => '400',
+    'sanitize_callback' => 'isabel_sanitize_select',
+    ));
+    $wp_customize->add_control('isabel_body_weight', array(
+    'label' => 'Poids du texte standard',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'select',
+    'choices' => $font_weight_options,
+    ));
+
+    // === COULEURS DE TEXTE PERSONNALISÉES ===
+    $wp_customize->add_setting('isabel_text_primary_color', array(
+    'default' => '#2d1b3d',
+    'sanitize_callback' => 'sanitize_hex_color',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'isabel_text_primary_color', array(
+    'label' => 'Couleur du texte principal',
+    'section' => 'isabel_text_formatting_section',
+    'settings' => 'isabel_text_primary_color',
+    )));
+
+    $wp_customize->add_setting('isabel_text_secondary_color', array(
+    'default' => '#6b5b73',
+    'sanitize_callback' => 'sanitize_hex_color',
+    ));
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'isabel_text_secondary_color', array(
+    'label' => 'Couleur du texte secondaire',
+    'section' => 'isabel_text_formatting_section',
+    'settings' => 'isabel_text_secondary_color',
+    )));
+
+    // === OPTION RESPONSIVE ===
+    $wp_customize->add_setting('isabel_responsive_text', array(
+    'default' => true,
+    'sanitize_callback' => 'isabel_sanitize_checkbox',
+    ));
+    $wp_customize->add_control('isabel_responsive_text', array(
+    'label' => 'Texte adaptatif (plus petit sur mobile)',
+    'description' => 'Réduit automatiquement la taille des textes sur mobile',
+    'section' => 'isabel_text_formatting_section',
+    'type' => 'checkbox',
+    ));
+
+    // === FONCTION HELPER POUR RÉCUPÉRER LES STYLES ===
+    if (!function_exists('isabel_get_text_styles')) {
+    function isabel_get_text_styles() {
+        // Map des tailles
+        $size_map = array(
+            'xs' => '0.75rem',
+            'sm' => '0.875rem',
+            'base' => '1rem',
+            'lg' => '1.125rem',
+            'xl' => '1.25rem',
+            '2xl' => '1.5rem',
+            '3xl' => '1.875rem'
+        );
+        
+        // Map des line-heights
+        $line_height_map = array(
+            'tight' => '1.25',
+            'normal' => '1.5',
+            'relaxed' => '1.75',
+            'loose' => '2.0'
+        );
+        
+        // Map des espacements
+        $spacing_map = array(
+            'tight' => '0.5rem',
+            'normal' => '1rem',
+            'relaxed' => '1.5rem',
+            'loose' => '2rem'
+        );
+        
+        // Map des polices
+        $font_map = array(
+            'system' => '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            'inter' => '"Inter", -apple-system, BlinkMacSystemFont, sans-serif',
+            'roboto' => '"Roboto", -apple-system, BlinkMacSystemFont, sans-serif',
+            'open-sans' => '"Open Sans", -apple-system, BlinkMacSystemFont, sans-serif',
+            'lato' => '"Lato", -apple-system, BlinkMacSystemFont, sans-serif',
+            'nunito' => '"Nunito", -apple-system, BlinkMacSystemFont, sans-serif',
+            'poppins' => '"Poppins", -apple-system, BlinkMacSystemFont, sans-serif',
+            'montserrat' => '"Montserrat", -apple-system, BlinkMacSystemFont, sans-serif'
+        );
+        
+        return array(
+            'heading_size' => $size_map[isabel_get_option('isabel_heading_size', 'xl')] ?? '1.25rem',
+            'subtitle_size' => $size_map[isabel_get_option('isabel_subtitle_size', 'lg')] ?? '1.125rem',
+            'body_size' => $size_map[isabel_get_option('isabel_body_size', 'base')] ?? '1rem',
+            'line_height' => $line_height_map[isabel_get_option('isabel_line_height', 'normal')] ?? '1.5',
+            'paragraph_spacing' => $spacing_map[isabel_get_option('isabel_paragraph_spacing', 'normal')] ?? '1rem',
+            'font_family' => $font_map[isabel_get_option('isabel_font_family', 'system')] ?? '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+            'heading_weight' => isabel_get_option('isabel_heading_weight', '700'),
+            'body_weight' => isabel_get_option('isabel_body_weight', '400'),
+            'text_primary' => isabel_get_option('isabel_text_primary_color', '#2d1b3d'),
+            'text_secondary' => isabel_get_option('isabel_text_secondary_color', '#6b5b73'),
+            'responsive' => isabel_get_option('isabel_responsive_text', true)
+        );
+    }
+    }
+
     // ===== SECTION HEADER ET LOGO =====
     $wp_customize->add_section('isabel_header_section', array(
         'title' => '🏠 Header et Logo',
