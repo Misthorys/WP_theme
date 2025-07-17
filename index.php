@@ -41,7 +41,7 @@
   </div>
 </header>
 
-<!-- Hero Section avec contenu WYSIWYG -->
+<!-- Hero Section avec image de fond uniforme -->
 <section class="hero-floating" id="accueil">
   <!-- Le contenu principal de la section hero -->
   <div class="hero-content-wrapper">
@@ -58,7 +58,7 @@
       ?>
     </div>
 
-    <!-- Contenu texte avec formatage WYSIWYG -->
+    <!-- Contenu texte -->
     <div class="intro-card">
       <div class="hero-badge">
         <span>✨</span>
@@ -73,22 +73,8 @@
         <?php echo esc_html(isabel_get_option('isabel_subtitle', 'Coach personnelle & Hypnocoach certifiée')); ?>
       </div>
       
-      <!-- Texte d'introduction WYSIWYG -->
-      <div class="intro-text formatted-content">
-        <?php 
-        // Utiliser le contenu WYSIWYG en priorité
-        $intro_wysiwyg = isabel_get_option('isabel_intro_text_wysiwyg', '');
-        if (!empty($intro_wysiwyg)) {
-            echo $intro_wysiwyg; // Déjà formaté par l'éditeur WYSIWYG
-        } else {
-            // Fallback vers l'ancien système
-            $intro_formatted = isabel_get_option('isabel_intro_text_formatted', '');
-            $intro_standard = isabel_get_option('isabel_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.');
-            
-            $intro_text = !empty($intro_formatted) ? $intro_formatted : $intro_standard;
-            echo isabel_display_formatted_content($intro_text, array('class' => 'intro-text-formatted'));
-        }
-        ?>
+      <div class="intro-text">
+        <?php echo esc_html(isabel_get_option('isabel_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.')); ?>
       </div>
       
       <div class="hero-cta">
@@ -129,127 +115,115 @@
   </div>
 </section>
 
-<!-- Section Certification Qualiopi avec contenu WYSIWYG -->
+<!-- Section Certification Qualiopi - MODIFIABLE DEPUIS LE CUSTOMIZER -->
 <?php isabel_display_qualiopi_section('home'); ?>
 
-<!-- Services Section avec contenu WYSIWYG - 4 SERVICES -->
+<!-- Script pour gérer l'image de fond dynamiquement -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Récupérer l'image de fond depuis WordPress
+    const heroSection = document.querySelector('.hero-floating');
+    const bgImage = '<?php echo esc_js(isabel_get_option('isabel_hero_background_image', '')); ?>';
+    
+    if (bgImage && heroSection) {
+        // Définir l'image de fond via CSS custom property
+        document.documentElement.style.setProperty('--hero-bg-image', `url(${bgImage})`);
+        heroSection.classList.add('has-bg-image');
+        console.log('🖼️ Image de fond hero définie:', bgImage);
+    } else {
+        // Pas d'image de fond, utiliser le dégradé par défaut
+        heroSection.classList.add('no-bg-image');
+        console.log('🎨 Dégradé par défaut utilisé pour le hero');
+    }
+
+    // Gestion de la navigation mobile améliorée
+    const navToggle = document.getElementById('nav-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('mobile-active');
+            
+            // Amélioration accessibilité
+            const isOpen = navMenu.classList.contains('mobile-active');
+            navToggle.setAttribute('aria-expanded', isOpen);
+            navMenu.setAttribute('aria-hidden', !isOpen);
+            navToggle.textContent = isOpen ? 'Fermer' : 'Menu';
+        });
+
+        // Fermer le menu en cliquant sur un lien
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (navMenu.classList.contains('mobile-active')) {
+                    navMenu.classList.remove('mobile-active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    navMenu.setAttribute('aria-hidden', 'true');
+                    navToggle.textContent = 'Menu';
+                }
+            });
+        });
+
+        // Fermer le menu en cliquant ailleurs
+        document.addEventListener('click', function(e) {
+            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
+                navMenu.classList.remove('mobile-active');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.setAttribute('aria-hidden', 'true');
+                navToggle.textContent = 'Menu';
+            }
+        });
+    }
+});
+</script>
+
+<!-- Services Section avec liens - 4 SERVICES -->
 <section class="services-section" id="services">
   <div class="section-container">
     <h2 class="section-title"><?php echo esc_html(isabel_get_option('isabel_services_title', 'Mes Accompagnements')); ?></h2>
-    <div class="section-subtitle formatted-content">
-      <?php 
-      // Utiliser le contenu WYSIWYG en priorité
-      $services_subtitle_wysiwyg = isabel_get_option('isabel_services_subtitle_wysiwyg', '');
-      if (!empty($services_subtitle_wysiwyg)) {
-          echo $services_subtitle_wysiwyg;
-      } else {
-          // Fallback
-          echo isabel_display_formatted_content(isabel_get_option('isabel_services_subtitle', 'Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.'));
-      }
-      ?>
-    </div>
+    <p class="section-subtitle">
+      <?php echo esc_html(isabel_get_option('isabel_services_subtitle', 'Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.')); ?>
+    </p>
 
     <div class="services-grid">
-      <!-- Service 1 - Coaching Personnel -->
       <a href="<?php echo esc_url(home_url('/coaching-personnel')); ?>" class="service-card service-link">
         <div class="service-icon">01</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service1_title', 'Coaching Personnel')); ?></h3>
-        <div class="service-card-formatted">
-          <?php 
-          // Utiliser le contenu WYSIWYG en priorité
-          $service1_wysiwyg = isabel_get_option('isabel_service1_desc_wysiwyg', '');
-          if (!empty($service1_wysiwyg)) {
-              echo $service1_wysiwyg;
-          } else {
-              // Fallback vers l'ancien système
-              $service1_formatted = isabel_get_option('isabel_service1_desc_formatted', '');
-              $service1_standard = isabel_get_option('isabel_service1_desc', 'Accompagnement personnalisé pour développer votre potentiel, clarifier vos objectifs et transformer votre vie personnelle et professionnelle.');
-              $service1_text = !empty($service1_formatted) ? $service1_formatted : $service1_standard;
-              echo isabel_display_formatted_content($service1_text);
-          }
-          ?>
-        </div>
+        <p><?php echo esc_html(isabel_get_option('isabel_service1_desc', 'Accompagnement personnalisé pour développer votre potentiel, clarifier vos objectifs et transformer votre vie personnelle et professionnelle.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
 
-      <!-- Service 2 - VAE -->
       <a href="<?php echo esc_url(home_url('/accompagnement-vae')); ?>" class="service-card service-link">
         <div class="service-icon">02</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service2_title', 'Validation des Acquis (VAE)')); ?></h3>
-        <div class="service-card-formatted">
-          <?php 
-          $service2_wysiwyg = isabel_get_option('isabel_service2_desc_wysiwyg', '');
-          if (!empty($service2_wysiwyg)) {
-              echo $service2_wysiwyg;
-          } else {
-              $service2_formatted = isabel_get_option('isabel_service2_desc_formatted', '');
-              $service2_standard = isabel_get_option('isabel_service2_desc', 'Valorisez votre expérience professionnelle et obtenez une certification officielle grâce à un accompagnement expert dans votre démarche VAE.');
-              $service2_text = !empty($service2_formatted) ? $service2_formatted : $service2_standard;
-              echo isabel_display_formatted_content($service2_text);
-          }
-          ?>
-        </div>
+        <p><?php echo esc_html(isabel_get_option('isabel_service2_desc', 'Valorisez votre expérience professionnelle et obtenez une certification officielle grâce à un accompagnement expert dans votre démarche VAE.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
 
-      <!-- Service 3 - Hypnocoaching -->
       <a href="<?php echo esc_url(home_url('/hypnocoaching')); ?>" class="service-card service-link">
         <div class="service-icon">03</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?></h3>
-        <div class="service-card-formatted">
-          <?php 
-          $service3_wysiwyg = isabel_get_option('isabel_service3_desc_wysiwyg', '');
-          if (!empty($service3_wysiwyg)) {
-              echo $service3_wysiwyg;
-          } else {
-              $service3_formatted = isabel_get_option('isabel_service3_desc_formatted', '');
-              $service3_standard = isabel_get_option('isabel_service3_desc', 'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching pour une transformation durable.');
-              $service3_text = !empty($service3_formatted) ? $service3_formatted : $service3_standard;
-              echo isabel_display_formatted_content($service3_text);
-          }
-          ?>
-        </div>
+        <p><?php echo esc_html(isabel_get_option('isabel_service3_desc', 'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching pour une transformation durable.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
 
-      <!-- Service 4 - Consultation Découverte -->
       <a href="<?php echo esc_url(home_url('/consultation-decouverte')); ?>" class="service-card service-link">
         <div class="service-icon">04</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service4_title', 'Consultation Découverte')); ?></h3>
-        <div class="service-card-formatted">
-          <?php 
-          $service4_wysiwyg = isabel_get_option('isabel_service4_desc_wysiwyg', '');
-          if (!empty($service4_wysiwyg)) {
-              echo $service4_wysiwyg;
-          } else {
-              $service4_formatted = isabel_get_option('isabel_service4_desc_formatted', '');
-              $service4_standard = isabel_get_option('isabel_service4_desc', 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.');
-              $service4_text = !empty($service4_formatted) ? $service4_formatted : $service4_standard;
-              echo isabel_display_formatted_content($service4_text);
-          }
-          ?>
-        </div>
+        <p><?php echo esc_html(isabel_get_option('isabel_service4_desc', 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- Témoignages Section avec contenu WYSIWYG -->
+<!-- Témoignages Section -->
 <section class="testimonials-section" id="temoignages">
   <div class="section-container">
     <h2 class="section-title"><?php echo esc_html(isabel_get_option('isabel_testimonials_title', 'Ce que disent mes clients')); ?></h2>
-    <div class="section-subtitle formatted-content">
-      <?php 
-      // Utiliser le contenu WYSIWYG en priorité
-      $testimonials_subtitle_wysiwyg = isabel_get_option('isabel_testimonials_subtitle_wysiwyg', '');
-      if (!empty($testimonials_subtitle_wysiwyg)) {
-          echo $testimonials_subtitle_wysiwyg;
-      } else {
-          echo isabel_display_formatted_content(isabel_get_option('isabel_testimonials_subtitle', 'Découvrez les témoignages de personnes qui ont transformé leur vie grâce à un accompagnement personnalisé.'));
-      }
-      ?>
-    </div>
+    <p class="section-subtitle">
+      <?php echo esc_html(isabel_get_option('isabel_testimonials_subtitle', 'Découvrez les témoignages de personnes qui ont transformé leur vie grâce à un accompagnement personnalisé.')); ?>
+    </p>
 
     <div class="testimonials-grid">
       <?php
@@ -267,8 +241,8 @@
           $author_initials = get_post_meta($testimonial->ID, '_testimonial_author_initials', true);
           ?>
           <div class="testimonial-card">
-            <div class="testimonial-content formatted-content">
-              <?php echo isabel_display_formatted_content(get_the_content(null, false, $testimonial)); ?>
+            <div class="testimonial-content">
+              <?php echo esc_html(get_the_content(null, false, $testimonial)); ?>
             </div>
             <div class="testimonial-author">
               <div class="author-avatar"><?php echo esc_html($author_initials); ?></div>
@@ -284,8 +258,8 @@
         // Témoignages par défaut si aucun n'est créé
         ?>
         <div class="testimonial-card">
-          <div class="testimonial-content formatted-content">
-            <?php echo isabel_display_formatted_content('"Grâce à Isabel, j\'ai enfin trouvé ma voie professionnelle.<br><strong>Son approche bienveillante</strong> et ses outils concrets m\'ont permis de reprendre confiance en moi et d\'atteindre mes objectifs."'); ?>
+          <div class="testimonial-content">
+            "Grâce à Isabel, j'ai enfin trouvé ma voie professionnelle. Son approche bienveillante et ses outils concrets m'ont permis de reprendre confiance en moi et d'atteindre mes objectifs."
           </div>
           <div class="testimonial-author">
             <div class="author-avatar">ML</div>
@@ -297,8 +271,8 @@
         </div>
 
         <div class="testimonial-card">
-          <div class="testimonial-content formatted-content">
-            <?php echo isabel_display_formatted_content('"L\'accompagnement VAE avec Isabel a été un <em>véritable succès</em>.<br>Elle m\'a guidé à chaque étape avec professionnalisme et empathie.<br><strong>Je recommande vivement</strong> ses services."'); ?>
+          <div class="testimonial-content">
+            "L'accompagnement VAE avec Isabel a été un véritable succès. Elle m'a guidé à chaque étape avec professionnalisme et empathie. Je recommande vivement ses services."
           </div>
           <div class="testimonial-author">
             <div class="author-avatar">TR</div>
@@ -310,8 +284,8 @@
         </div>
 
         <div class="testimonial-card">
-          <div class="testimonial-content formatted-content">
-            <?php echo isabel_display_formatted_content('"Les séances d\'hypnocoaching m\'ont aidée à surmonter mes angoisses et à retrouver un équilibre.<br><strong>Merci Isabel</strong> pour cette <em>transformation profonde et durable</em>."'); ?>
+          <div class="testimonial-content">
+            "Les séances d'hypnocoaching m'ont aidée à surmonter mes angoisses et à retrouver un équilibre. Merci Isabel pour cette transformation profonde et durable."
           </div>
           <div class="testimonial-author">
             <div class="author-avatar">LM</div>
@@ -328,26 +302,14 @@
   </div>
 </section>
 
-<!-- CTA Section avec contenu WYSIWYG -->
+<!-- CTA Section -->
 <section class="cta-section" id="contact">
   <div class="section-container">
     <div class="cta-box">
       <h2 class="cta-title"><?php echo esc_html(isabel_get_option('isabel_cta_title', 'Prêt(e) à transformer votre vie ?')); ?></h2>
-      <div class="cta-text formatted-content">
-        <?php 
-        // Utiliser le contenu WYSIWYG en priorité
-        $cta_wysiwyg = isabel_get_option('isabel_cta_text_wysiwyg', '');
-        if (!empty($cta_wysiwyg)) {
-            echo $cta_wysiwyg;
-        } else {
-            // Fallback vers l'ancien système
-            $cta_formatted = isabel_get_option('isabel_cta_text_formatted', '');
-            $cta_standard = isabel_get_option('isabel_cta_text', 'Contactez-moi dès maintenant pour discuter de vos objectifs et découvrir comment je peux vous accompagner.');
-            $cta_text = !empty($cta_formatted) ? $cta_formatted : $cta_standard;
-            echo isabel_display_formatted_content($cta_text);
-        }
-        ?>
-      </div>
+      <p class="cta-text">
+        <?php echo esc_html(isabel_get_option('isabel_cta_text', 'Contactez-moi dès maintenant pour discuter de vos objectifs et découvrir comment je peux vous accompagner.')); ?>
+      </p>
       <button class="cta-button" onclick="openPopup()">
         <?php echo esc_html(isabel_get_option('isabel_cta_button', 'Prendre rendez-vous')); ?>
       </button>
@@ -369,7 +331,7 @@
   </svg>
 </div>
 
-<!-- Modal avec contenu WYSIWYG dans les textes -->
+<!-- Modal avec JavaScript COMPLET intégré -->
 <div class="modal-overlay" id="modal-overlay">
   <div class="modal-content">
     <button class="modal-close" onclick="closePopup()">×</button>
@@ -409,16 +371,10 @@
         <textarea class="form-input form-textarea" placeholder="Décrivez-nous brièvement votre situation actuelle et ce que vous aimeriez accomplir..." rows="4" name="message"></textarea>
       </div>
 
-      <div class="form-note formatted-content">
+      <div class="form-note">
         <?php 
-        // Utiliser le contenu WYSIWYG en priorité pour la note du formulaire
-        $form_note_wysiwyg = isabel_get_option('isabel_form_note_wysiwyg', '');
-        if (!empty($form_note_wysiwyg)) {
-            echo $form_note_wysiwyg;
-        } else {
-            $form_note = isabel_get_option('isabel_form_note', '💼 Première consultation pour faire connaissance et définir vos besoins ensemble.');
-            echo isabel_display_formatted_content($form_note);
-        }
+        $form_note = isabel_get_option('isabel_form_note', '💼 Première consultation pour faire connaissance et définir vos besoins ensemble.');
+        echo wp_kses($form_note, array('strong' => array(), 'br' => array(), 'em' => array()));
         ?>
       </div>
 
@@ -431,7 +387,7 @@
   </div>
 </div>
 
-<!-- Scripts JavaScript intégrés -->
+<!-- SCRIPT COMPLET INTÉGRÉ -->
 <script>
 // Configuration AJAX WordPress
 const ISABEL_CONFIG = {
@@ -467,9 +423,6 @@ window.closePopup = function() {
 document.addEventListener('DOMContentLoaded', function() {
     initModal();
     initContactForm();
-    initNavigation();
-    initFormattingHelpers();
-    console.log('🎨 Site Isabel GONCALVES avec éditeurs WYSIWYG chargé !');
 });
 
 function initModal() {
@@ -496,88 +449,6 @@ function initContactForm() {
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         handleFormSubmission(form);
-    });
-}
-
-function initNavigation() {
-    const navToggle = document.getElementById('nav-toggle');
-    const navMenu = document.getElementById('nav-menu');
-
-    if (navToggle && navMenu) {
-        navToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('mobile-active');
-            
-            const isOpen = navMenu.classList.contains('mobile-active');
-            navToggle.setAttribute('aria-expanded', isOpen);
-            navMenu.setAttribute('aria-hidden', !isOpen);
-            navToggle.textContent = isOpen ? 'Fermer' : 'Menu';
-        });
-
-        const navLinks = navMenu.querySelectorAll('a');
-        navLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                if (navMenu.classList.contains('mobile-active')) {
-                    navMenu.classList.remove('mobile-active');
-                    navToggle.setAttribute('aria-expanded', 'false');
-                    navMenu.setAttribute('aria-hidden', 'true');
-                    navToggle.textContent = 'Menu';
-                }
-            });
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('mobile-active');
-                navToggle.setAttribute('aria-expanded', 'false');
-                navMenu.setAttribute('aria-hidden', 'true');
-                navToggle.textContent = 'Menu';
-            }
-        });
-    }
-}
-
-// Nouvelles fonctions pour le formatage WYSIWYG
-function initFormattingHelpers() {
-    // Améliorer l'affichage des contenus formatés par WYSIWYG
-    document.querySelectorAll('.formatted-content').forEach(function(element) {
-        // Ajouter des classes pour les éléments HTML générés par WYSIWYG
-        element.style.opacity = '0';
-        element.style.transform = 'translateY(10px)';
-        element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        
-        // Améliorer les liens
-        const links = element.querySelectorAll('a');
-        links.forEach(function(link) {
-            link.style.color = '#c47dd9';
-            link.style.textDecoration = 'underline';
-        });
-        
-        // Améliorer les éléments strong
-        const strongElements = element.querySelectorAll('strong');
-        strongElements.forEach(function(strong) {
-            strong.style.color = '#c47dd9';
-            strong.style.fontWeight = '600';
-        });
-        
-        // Améliorer les éléments em
-        const emElements = element.querySelectorAll('em');
-        emElements.forEach(function(em) {
-            em.style.color = '#6b5b73';
-        });
-        
-        // Animation d'apparition
-        setTimeout(() => {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
-        }, 100);
-    });
-    
-    // Gestion des éléments mark (surligneur)
-    document.querySelectorAll('mark').forEach(function(mark) {
-        mark.style.background = '#fff3cd';
-        mark.style.padding = '2px 4px';
-        mark.style.borderRadius = '2px';
-        mark.style.color = '#856404';
     });
 }
 
@@ -674,33 +545,10 @@ function showMessage(message, type) {
         messagesDiv.innerHTML = '';
     }, 5000);
 }
-
-// Image de fond hero dynamique
-document.addEventListener('DOMContentLoaded', function() {
-    const heroSection = document.querySelector('.hero-floating');
-    const bgImage = '<?php echo esc_js(isabel_get_option('isabel_hero_background_image', '')); ?>';
-    
-    if (bgImage && heroSection) {
-        document.documentElement.style.setProperty('--hero-bg-image', `url(${bgImage})`);
-        heroSection.classList.add('has-bg-image');
-        console.log('🖼️ Image de fond hero définie:', bgImage);
-    } else {
-        heroSection.classList.add('no-bg-image');
-        console.log('🎨 Dégradé par défaut utilisé pour le hero');
-    }
-    
-    // Message de notification pour les éditeurs WYSIWYG
-    console.log('📝 Contenu WYSIWYG chargé - Formatage comme Word disponible !');
-});
-
-// Notification pour l'administrateur
-<?php if (current_user_can('manage_options')): ?>
-console.log('🎨 Vous pouvez maintenant éditer tous les textes comme dans Word depuis Apparence > Personnaliser !');
-<?php endif; ?>
 </script>
 
 <?php
-// Fonction par défaut pour le menu
+// DÉPLACER LA FONCTION ICI - AVANT get_footer()
 function isabel_default_menu() {
     echo '<ul>';
     echo '<li><a href="' . home_url('/') . '">Accueil</a></li>';
