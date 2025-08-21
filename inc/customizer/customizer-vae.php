@@ -416,3 +416,4 @@ Exemple : "Évaluer mon projet VAE", "Commencer ma VAE"',
  * Une page complète qui démystifie la VAE,
  * rassure sur votre accompagnement et incite
  * à l'évaluation de projet.
+ */
