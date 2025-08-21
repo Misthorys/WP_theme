@@ -44,7 +44,7 @@ add_action('wp_enqueue_scripts', 'isabel_theme_scripts');
 // ========================================
 
 // Charger le customizer (toutes les options de personnalisation)
-require_once get_template_directory() . '/inc/customizer.php';
+require_once get_template_directory() . '/inc/customizer/customizer-main.php';
 
 // Charger la gestion des contacts
 require_once get_template_directory() . '/inc/contact-handler.php';
