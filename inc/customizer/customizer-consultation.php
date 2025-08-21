@@ -5,317 +5,435 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * 🎯 MES SERVICES
- * Section pour présenter vos 4 services principaux
- * Cœur de votre offre professionnelle
+ * 📋 PAGE CONSULTATION DÉCOUVERTE
+ * Personnalisation complète de la page consultation découverte
+ * Quatrième page de service détaillée
  */
 
-function isabel_customizer_services($wp_customize) {
+function isabel_customizer_consultation($wp_customize) {
     
     // ==========================================
-    // SECTION : MES SERVICES
+    // SECTION : PAGE CONSULTATION DÉCOUVERTE
     // ==========================================
     isabel_add_customizer_section(
         $wp_customize,
-        'isabel_services_section',
-        '🎯 Mes services',
-        'Présentez vos 4 services principaux de manière claire et attractive',
-        50 // Priorité 50 = après Qualiopi
+        'isabel_consultation_section',
+        '📋 Page Consultation Découverte',
+        'Personnalisez entièrement votre page de consultation découverte',
+        94 // Priorité 94 = pages détaillées
     );
     
     // ==========================================
-    // TITRE DE LA SECTION SERVICES
+    // EN-TÊTE DE LA PAGE
     // ==========================================
     isabel_add_text_control(
         $wp_customize,
-        'isabel_services_title',
-        'isabel_services_section',
-        'Titre de vos services',
-        'Le titre principal de votre section services.
-Exemple : "Mes Accompagnements Sur Mesure", "Mes Services", "Comment je vous aide"
+        'isabel_consultation_title',
+        'isabel_consultation_section',
+        'Titre de la page',
+        'Le titre principal affiché en haut de la page.
+Exemple : "Consultation Découverte", "Rendez-vous Gratuit"
 
-📢 Où ça apparaît : Grand titre au-dessus de vos 4 services.',
-        'Mes Accompagnements Sur Mesure'
-    );
-    
-    // ==========================================
-    // SOUS-TITRE / DESCRIPTION DES SERVICES
-    // ==========================================
-    isabel_add_textarea_control(
-        $wp_customize,
-        'isabel_services_subtitle',
-        'isabel_services_section',
-        'Description de vos services',
-        'Texte d\'introduction pour présenter votre approche.
-Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.
-
-Exemple : Quatre approches **complémentaires** pour révéler votre potentiel
-et atteindre vos objectifs personnels et professionnels.
-
-💬 Où ça apparaît : Sous le titre, avant la grille des services.',
-        'Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.'
-    );
-    
-    // ==========================================
-    // SERVICE 1 : COACHING PERSONNEL
-    // ==========================================
-    
-    // Icône Service 1
-    isabel_add_text_control(
-        $wp_customize,
-        'isabel_service1_icon',
-        'isabel_services_section',
-        'Service 1 - Icône',
-        'Icône ou numéro pour votre premier service.
-Exemple : "🎯", "01", "💼", "✨"
-
-🎯 Où ça apparaît : Dans le cercle coloré du service 1.',
-        '01'
-    );
-    
-    // Titre Service 1
-    isabel_add_text_control(
-        $wp_customize,
-        'isabel_service1_title',
-        'isabel_services_section',
-        'Service 1 - Titre',
-        'Nom de votre premier service.
-Exemple : "Coaching Personnel", "Accompagnement Individuel"
-
-📢 Où ça apparaît : Titre du premier service.',
-        'Coaching Personnel'
-    );
-    
-    // Description Service 1
-    isabel_add_textarea_control(
-        $wp_customize,
-        'isabel_service1_desc',
-        'isabel_services_section',
-        'Service 1 - Description',
-        'Description complète de votre premier service.
-Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.
-
-Exemple : Révélez votre **potentiel**, clarifiez vos objectifs et transformez votre vie
-avec un accompagnement personnalisé et des outils concrets.
-
-💬 Où ça apparaît : Texte explicatif du service 1.',
-        'Révélez votre potentiel, clarifiez vos objectifs et transformez votre vie avec un accompagnement personnalisé et des outils concrets.'
-    );
-    
-    // ==========================================
-    // SERVICE 2 : ACCOMPAGNEMENT VAE
-    // ==========================================
-    
-    isabel_add_text_control(
-        $wp_customize,
-        'isabel_service2_icon',
-        'isabel_services_section',
-        'Service 2 - Icône',
-        'Icône ou numéro pour votre deuxième service.
-Exemple : "🎓", "02", "📜", "🏆"',
-        '02'
-    );
-    
-    isabel_add_text_control(
-        $wp_customize,
-        'isabel_service2_title',
-        'isabel_services_section',
-        'Service 2 - Titre',
-        'Nom de votre deuxième service.
-Exemple : "Accompagnement VAE", "Validation des Acquis"',
-        'Accompagnement VAE'
-    );
-    
-    isabel_add_textarea_control(
-        $wp_customize,
-        'isabel_service2_desc',
-        'isabel_services_section',
-        'Service 2 - Description',
-        'Description complète de votre accompagnement VAE.
-Exemple : Valorisez votre **expérience** et obtenez une reconnaissance officielle
-de vos compétences grâce à un accompagnement expert VAE.',
-        'Valorisez votre expérience et obtenez une reconnaissance officielle de vos compétences grâce à un accompagnement expert VAE.'
-    );
-    
-    // ==========================================
-    // SERVICE 3 : HYPNOCOACHING
-    // ==========================================
-    
-    isabel_add_text_control(
-        $wp_customize,
-        'isabel_service3_icon',
-        'isabel_services_section',
-        'Service 3 - Icône',
-        'Icône ou numéro pour votre troisième service.
-Exemple : "🧘", "03", "🌟", "🧠"',
-        '03'
-    );
-    
-    isabel_add_text_control(
-        $wp_customize,
-        'isabel_service3_title',
-        'isabel_services_section',
-        'Service 3 - Titre',
-        'Nom de votre troisième service.
-Exemple : "Hypnocoaching", "Hypnose & Coaching"',
-        'Hypnocoaching'
-    );
-    
-    isabel_add_textarea_control(
-        $wp_customize,
-        'isabel_service3_desc',
-        'isabel_services_section',
-        'Service 3 - Description',
-        'Description complète de votre hypnocoaching.
-Exemple : Libérez-vous de vos **blocages** en profondeur
-en combinant les bienfaits de l\'hypnose thérapeutique et du coaching.',
-        'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching de vie.'
-    );
-    
-    // ==========================================
-    // SERVICE 4 : CONSULTATION DÉCOUVERTE
-    // ==========================================
-    
-    isabel_add_text_control(
-        $wp_customize,
-        'isabel_service4_icon',
-        'isabel_services_section',
-        'Service 4 - Icône',
-        'Icône ou numéro pour votre quatrième service.
-Exemple : "💡", "04", "🎁", "☕"',
-        '04'
-    );
-    
-    isabel_add_text_control(
-        $wp_customize,
-        'isabel_service4_title',
-        'isabel_services_section',
-        'Service 4 - Titre',
-        'Nom de votre quatrième service.
-Exemple : "Consultation Découverte", "Rendez-vous Gratuit"',
+📢 Où ça apparaît : Grand titre en haut de la page consultation.',
         'Consultation Découverte'
     );
     
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_subtitle',
+        'isabel_consultation_section',
+        'Sous-titre de la page',
+        'Phrase d\'accroche sous le titre principal.
+Exemple : "Première rencontre gratuite pour définir ensemble votre parcours"
+
+💫 Où ça apparaît : Sous le titre principal, en plus petit.',
+        'Première rencontre gratuite pour définir ensemble votre parcours'
+    );
+    
+    // ==========================================
+    // SECTION INTRODUCTION
+    // ==========================================
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_section1_title',
+        'isabel_consultation_section',
+        'Titre section introduction',
+        'Titre de votre première section de contenu.
+Exemple : "Qu\'est-ce que la consultation découverte ?", "Comment ça se passe"',
+        'Qu\'est-ce que la consultation découverte ?'
+    );
+    
     isabel_add_textarea_control(
         $wp_customize,
-        'isabel_service4_desc',
-        'isabel_services_section',
-        'Service 4 - Description',
-        'Description de votre consultation découverte.
-Exemple : Première rencontre **gratuite** pour faire connaissance,
-comprendre vos besoins et définir ensemble le meilleur accompagnement.',
-        'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.'
+        'isabel_consultation_intro',
+        'isabel_consultation_section',
+        'Texte d\'introduction',
+        'Premier paragraphe qui explique la consultation découverte.
+Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.
+
+Exemple : La consultation découverte est un moment **privilégié** pour faire connaissance
+et comprendre vos besoins spécifiques.',
+        'La consultation découverte est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_description',
+        'isabel_consultation_section',
+        'Description détaillée',
+        'Deuxième paragraphe avec plus de détails sur le déroulement.
+Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.',
+        'Durant cette première rencontre gratuite de 30 minutes, nous prenons le temps d\'échanger sur votre situation, vos objectifs et vos attentes.'
     );
     
     // ==========================================
-    // STYLE D'AFFICHAGE DES SERVICES
+    // BOXES DE BÉNÉFICES (2 texte + 2 images)
     // ==========================================
-    isabel_add_select_control(
+    isabel_add_text_control(
         $wp_customize,
-        'isabel_services_layout',
-        'isabel_services_section',
-        'Disposition des services',
-        array(
-            'grid_2x2' => '2x2 (2 lignes de 2 services)',
-            'grid_4x1' => '4x1 (1 ligne de 4 services)',
-            'grid_1x4' => '1x4 (4 lignes de 1 service)',
-        ),
-        'Comment disposer vos 4 services sur la page.
-2x2 = Recommandé pour la plupart des écrans.
-Sur mobile, toujours en colonne unique.',
-        'grid_2x2'
+        'isabel_consultation_benefits_title',
+        'isabel_consultation_section',
+        'Titre des bénéfices',
+        'Titre au-dessus de vos 4 boxes de bénéfices.
+Exemple : "Ce que vous obtenez", "Pourquoi cette consultation"',
+        'Déroulement de la consultation'
+    );
+    
+    // Box 1 - Texte
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_box1_icon',
+        'isabel_consultation_section',
+        'Box 1 - Icône',
+        'Icône pour la première box (emoji ou texte court).
+Exemple : "💬", "🤝", "01"',
+        '💬'
+    );
+    
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_box1_title',
+        'isabel_consultation_section',
+        'Box 1 - Titre',
+        'Titre de votre premier bénéfice.',
+        'Échange personnalisé'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_box1_text',
+        'isabel_consultation_section',
+        'Box 1 - Texte',
+        'Description du premier bénéfice.
+Vous pouvez utiliser **texte** en gras.',
+        'Échange personnalisé pour comprendre votre situation et vos objectifs de vie ou professionnels.'
+    );
+    
+    // Box 2 - Image
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_box2_icon',
+        'isabel_consultation_section',
+        'Box 2 - Icône (optionnel)',
+        'Icône pour la deuxième box (qui aura une image).',
+        '🎯'
+    );
+    
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_box2_title',
+        'isabel_consultation_section',
+        'Box 2 - Titre',
+        'Titre affiché sur l\'image.',
+        'Approche adaptée'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_box2_text',
+        'isabel_consultation_section',
+        'Box 2 - Texte',
+        'Description du deuxième bénéfice.',
+        'Présentation des différentes approches de coaching adaptées à votre profil et vos besoins.'
+    );
+    
+    isabel_add_image_control(
+        $wp_customize,
+        'isabel_consultation_box2_image',
+        'isabel_consultation_section',
+        'Box 2 - Image',
+        'Image pour illustrer ce bénéfice.
+Taille recommandée : 400x300 pixels.'
+    );
+    
+    // Box 3 - Texte
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_box3_icon',
+        'isabel_consultation_section',
+        'Box 3 - Icône',
+        'Icône pour la troisième box.',
+        '🧰'
+    );
+    
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_box3_title',
+        'isabel_consultation_section',
+        'Box 3 - Titre',
+        'Titre du troisième bénéfice.',
+        'Premiers conseils'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_box3_text',
+        'isabel_consultation_section',
+        'Box 3 - Texte',
+        'Description du troisième bénéfice.',
+        'Conseils immédiats et premiers outils pour commencer votre réflexion personnelle.'
+    );
+    
+    // Box 4 - Image
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_box4_icon',
+        'isabel_consultation_section',
+        'Box 4 - Icône (optionnel)',
+        'Icône pour la quatrième box.',
+        '🗺️'
+    );
+    
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_box4_title',
+        'isabel_consultation_section',
+        'Box 4 - Titre',
+        'Titre affiché sur l\'image.',
+        'Plan personnalisé'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_box4_text',
+        'isabel_consultation_section',
+        'Box 4 - Texte',
+        'Description du quatrième bénéfice.',
+        'Définition ensemble du parcours d\'accompagnement le plus adapté à votre situation.'
+    );
+    
+    isabel_add_image_control(
+        $wp_customize,
+        'isabel_consultation_box4_image',
+        'isabel_consultation_section',
+        'Box 4 - Image',
+        'Image pour illustrer ce quatrième bénéfice.'
     );
     
     // ==========================================
-    // COULEUR DES SERVICES
+    // PROCESSUS EN 4 ÉTAPES
     // ==========================================
-    isabel_add_color_control(
+    isabel_add_text_control(
         $wp_customize,
-        'isabel_services_color',
-        'isabel_services_section',
-        'Couleur des icônes services',
-        '#e4a7f5'
+        'isabel_consultation_process_title',
+        'isabel_consultation_section',
+        'Titre du processus',
+        'Titre au-dessus de vos 4 étapes.
+Exemple : "Déroulement de la consultation", "Comment ça se passe"',
+        'Déroulement de la consultation'
+    );
+    
+    // 4 étapes du processus consultation
+    $step_defaults = array(
+        1 => 'Accueil et présentation mutuelle pour créer un climat de confiance et d\'écoute bienveillante.',
+        2 => 'Écoute active de votre situation, vos défis actuels et vos aspirations pour l\'avenir.',
+        3 => 'Exploration des différentes possibilités d\'accompagnement et explication de mes méthodes.',
+        4 => 'Proposition d\'un plan d\'accompagnement personnalisé adapté à vos besoins et votre rythme.'
+    );
+    
+    for ($i = 1; $i <= 4; $i++) {
+        isabel_add_textarea_control(
+            $wp_customize,
+            "isabel_consultation_step$i",
+            'isabel_consultation_section',
+            "Étape $i de la consultation",
+            "Description de l\'étape $i de votre consultation découverte.
+Vous pouvez utiliser **texte** en gras.",
+            $step_defaults[$i]
+        );
+    }
+    
+    // ==========================================
+    // SECTIONS SUPPLÉMENTAIRES
+    // ==========================================
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_section2_title',
+        'isabel_consultation_section',
+        'Titre section 2',
+        'Titre de votre deuxième section de contenu.
+Exemple : "Modalités pratiques", "Informations pratiques"',
+        'Modalités pratiques'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_duration',
+        'isabel_consultation_section',
+        'Durée et modalités',
+        'Informations sur la durée et comment se déroule la consultation.',
+        'Cette consultation dure environ 30 minutes et se déroule par téléphone ou en visioconférence, selon votre préférence.'
+    );
+    
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_section3_title',
+        'isabel_consultation_section',
+        'Titre section 3',
+        'Titre de votre troisième section.
+Exemple : "Ce que vous en retirerez", "Vos bénéfices"',
+        'Ce que vous en retirerez'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_benefits_text',
+        'isabel_consultation_section',
+        'Bénéfices de la consultation',
+        'Expliquez ce que le client va retirer de cette consultation.',
+        'Cette rencontre vous permet de poser toutes vos questions et de découvrir comment mes services peuvent vous aider à atteindre vos objectifs.'
     );
     
     // ==========================================
-    // SERVICES CLIQUABLES
+    // ENCADRÉ MISE EN AVANT
     // ==========================================
-    isabel_add_checkbox_control(
+    isabel_add_text_control(
         $wp_customize,
-        'isabel_services_clickable',
-        'isabel_services_section',
-        'Rendre les services cliquables',
-        'Cochez pour que chaque service mène vers sa page détaillée.
-Les pages de services sont créées automatiquement.',
-        true
+        'isabel_consultation_highlight_title',
+        'isabel_consultation_section',
+        'Titre encadré mise en avant',
+        'Titre de votre encadré spécial (gratuit, sans engagement, etc.).
+Exemple : "🎁 Consultation 100% gratuite", "✨ Sans engagement"',
+        '🎁 Consultation 100% gratuite'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_highlight_text',
+        'isabel_consultation_section',
+        'Texte encadré mise en avant',
+        'Texte rassurant dans l\'encadré coloré.
+Vous pouvez utiliser **texte** en gras.',
+        'Cette première rencontre est entièrement offerte et sans aucun engagement. C\'est mon cadeau pour vous permettre de découvrir mes services en toute sérénité.'
     );
     
     // ==========================================
-    // ANIMATION AU SURVOL
+    // APPEL À L'ACTION FINAL
     // ==========================================
-    isabel_add_checkbox_control(
+    isabel_add_text_control(
         $wp_customize,
-        'isabel_services_hover_effect',
-        'isabel_services_section',
-        'Effet au survol',
-        'Cochez pour ajouter un effet d\'animation quand on survole les services.
-Recommandé pour un site moderne.',
-        true
+        'isabel_consultation_cta_title',
+        'isabel_consultation_section',
+        'Titre de l\'appel à l\'action',
+        'Titre encourageant pour finaliser la conversion.
+Exemple : "Prêt(e) à faire le premier pas ?", "Réservez maintenant"',
+        'Prêt(e) à faire le premier pas ?'
+    );
+    
+    isabel_add_textarea_control(
+        $wp_customize,
+        'isabel_consultation_cta_text',
+        'isabel_consultation_section',
+        'Texte de l\'appel à l\'action',
+        'Message encourageant avant le bouton.
+Vous pouvez utiliser **texte** en gras.',
+        'Réservez dès maintenant votre consultation découverte gratuite et commençons ensemble votre parcours de transformation.'
+    );
+    
+    isabel_add_text_control(
+        $wp_customize,
+        'isabel_consultation_cta_button',
+        'isabel_consultation_section',
+        'Texte du bouton',
+        'Texte affiché sur le bouton d\'action final.
+Exemple : "Réserver ma consultation gratuite", "Prendre rendez-vous"',
+        'Réserver ma consultation gratuite'
     );
 }
 
 /**
  * Documentation pour Isabel :
  * 
- * SECTION MES SERVICES :
+ * SECTION PAGE CONSULTATION DÉCOUVERTE :
  * 
- * C'est le cœur de votre site ! Cette section présente clairement
- * ce que vous proposez à vos clients potentiels.
+ * Cette section vous permet de personnaliser entièrement votre page
+ * de consultation découverte pour convertir les prospects hésitants.
  * 
- * 📍 VOS 4 SERVICES ACTUELS :
+ * 📍 STRUCTURE DE LA PAGE CONSULTATION :
  * 
- * 1. 🎯 COACHING PERSONNEL
- *    → Accompagnement individuel personnalisé
+ * 1. 📢 EN-TÊTE
+ *    → Titre principal et sous-titre rassurant
  * 
- * 2. 🎓 ACCOMPAGNEMENT VAE  
- *    → Validation des acquis de l'expérience
+ * 2. 📝 INTRODUCTION
+ *    → Explication de ce qu'est cette consultation
+ *    → Durée et format (30 min gratuit)
  * 
- * 3. 🧘 HYPNOCOACHING
- *    → Alliance hypnose + coaching
+ * 3. 📋 DÉROULEMENT (2+2)
+ *    → Échange personnalisé + Approche adaptée
+ *    → Premiers conseils + Plan personnalisé
  * 
- * 4. 💡 CONSULTATION DÉCOUVERTE
- *    → Premier rendez-vous gratuit
+ * 4. 🔄 PROCESSUS EN 4 ÉTAPES
+ *    → Accueil et présentation
+ *    → Écoute de vos besoins
+ *    → Exploration des solutions
+ *    → Proposition personnalisée
  * 
- * 🎯 STRUCTURE DE CHAQUE SERVICE :
+ * 5. 🎯 SECTIONS INFORMATIVES
+ *    → Modalités pratiques (durée, format)
+ *    → Bénéfices concrets pour le client
  * 
- * • ICÔNE : Identifie visuellement (🎯, 01, etc.)
- * • TITRE : Nom clair du service  
- * • DESCRIPTION : Bénéfices et promesse
+ * 6. 🎁 ENCADRÉ MISE EN AVANT
+ *    → "Consultation 100% gratuite"
+ *    → Sans engagement, rassurant
  * 
- * 💡 CONSEILS POUR VOS DESCRIPTIONS :
+ * 7. 📞 APPEL À L'ACTION
+ *    → Réservation de la consultation
  * 
- * ✅ ORIENTÉES BÉNÉFICES : "Révélez votre potentiel" plutôt que "Je fais du coaching"
- * ✅ MOTS IMPACTANTS : "Transformez", "Libérez-vous", "Révélez"
- * ✅ MISE EN FORME : Utilisez **mots clés** en gras
- * ✅ LONGUEUR : 2-3 lignes par service maximum
+ * 💡 CONSEILS SPÉCIFIQUES CONSULTATION :
  * 
- * 📱 AFFICHAGE RESPONSIVE :
- * - Desktop : 2x2 ou 4x1 selon votre choix
- * - Mobile : Toujours 1 colonne pour la lisibilité
+ * ✅ RASSURANT : Insistez sur "gratuit" et "sans engagement"
+ * ✅ PRÉCIS : Durée claire (30 minutes)
+ * ✅ BÉNÉFICES : Ce que le client va obtenir
+ * ✅ PROCESSUS : Déroulement étape par étape
+ * ✅ ACCESSIBLE : Format flexible (téléphone/visio)
  * 
- * 🔗 PAGES DE SERVICES :
- * Si vous activez "Services cliquables", chaque service
- * mène vers sa page détaillée (créées automatiquement).
+ * 🎯 OBJECTIFS DE CETTE PAGE :
  * 
- * 🎨 PERSONNALISATION :
- * - Couleurs des icônes 
- * - Effets au survol
- * - Disposition flexible
+ * • Lever les objections ("c'est gratuit")
+ * • Rassurer sur l'engagement ("sans obligation")
+ * • Expliquer clairement le déroulement
+ * • Montrer la valeur de cette première rencontre
+ * • Faciliter la prise de rendez-vous
  * 
- * 🔄 RÉSULTAT :
- * Vos visiteurs comprennent immédiatement :
- * - Ce que vous proposez
- * - Comment vous pouvez les aider  
- * - Quel service leur convient
- * - Comment vous contacter
+ * 📞 CONVERSION :
+ * 
+ * Cette page transforme les "hésitants" en "prospects qualifiés"
+ * en proposant un premier pas sans risque.
+ * 
+ * 🎯 MOTS-CLÉS IMPORTANTS :
+ * - Consultation gratuite
+ * - Sans engagement
+ * - Première rencontre
+ * - Faire connaissance
+ * - Écoute bienveillante
+ * - Plan personnalisé
+ * 
+ * 📱 RESPONSIVE :
+ * - Desktop : 2 colonnes pour les boxes
+ * - Mobile : 1 colonne, tout empilé
+ * 
+ * 🔄 RÉSULTAT ATTENDU :
+ * Une page qui lève toutes les objections
+ * et facilite la prise du premier rendez-vous
+ * en toute confiance.
  */
