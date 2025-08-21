@@ -12,7 +12,7 @@
     </div>
     
     <h1><?php echo esc_html(isabel_get_option('isabel_consultation_title', 'Consultation Découverte')); ?></h1>
-    <p class="subtitle"><?php echo esc_html(isabel_get_option('isabel_consultation_subtitle', 'Première rencontre gratuite pour définir ensemble votre parcours')); ?></p>
+    <p class="subtitle"><?php echo isabel_format_text(isabel_get_option('isabel_consultation_subtitle', 'Première rencontre gratuite pour définir ensemble votre parcours')); ?></p>
   </div>
 </section>
 
@@ -23,9 +23,9 @@
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_consultation_section1_title', 'Qu\'est-ce que la consultation découverte ?')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_consultation_intro', 'La consultation découverte est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_intro', 'La consultation découverte est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.')); ?></p>
     
-    <p><?php echo esc_html(isabel_get_option('isabel_consultation_description', 'Durant cette première rencontre gratuite de 30 minutes, nous prenons le temps d\'échanger sur votre situation, vos objectifs et vos attentes.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_description', 'Durant cette première rencontre gratuite de 30 minutes, nous prenons le temps d\'échanger sur votre situation, vos objectifs et vos attentes.')); ?></p>
   </div>
 
   <!-- Nouvelle grille avec 2 boxes texte + 2 boxes images - TAILLES CORRIGÉES -->
@@ -36,7 +36,7 @@
         <span class="benefit-icon"><?php echo esc_html(isabel_get_option('isabel_consultation_box1_icon', '💬')); ?></span> 
         <?php echo esc_html(isabel_get_option('isabel_consultation_box1_title', 'Échange personnalisé')); ?>
       </h3>
-      <p><?php echo esc_html(isabel_get_option('isabel_consultation_box1_text', 'Échange personnalisé pour comprendre votre situation et vos objectifs de vie ou professionnels.')); ?></p>
+      <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_box1_text', 'Échange personnalisé pour comprendre votre situation et vos objectifs de vie ou professionnels.')); ?></p>
     </div>
     
     <!-- Box 2 - Image pure (remplit toute la box) -->
@@ -63,7 +63,7 @@
         <span class="benefit-icon"><?php echo esc_html(isabel_get_option('isabel_consultation_box3_icon', '🧰')); ?></span> 
         <?php echo esc_html(isabel_get_option('isabel_consultation_box3_title', 'Premiers outils')); ?>
       </h3>
-      <p><?php echo esc_html(isabel_get_option('isabel_consultation_box3_text', 'Conseils immédiats et premiers outils pour commencer votre réflexion personnelle.')); ?></p>
+      <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_box3_text', 'Conseils immédiats et premiers outils pour commencer votre réflexion personnelle.')); ?></p>
     </div>
     
     <!-- Box 4 - Image pure (remplit toute la box) -->
@@ -93,7 +93,7 @@
         <div class="step-number">1</div>
         <div class="step-content">
           <h4>Accueil et présentation</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_consultation_step1', 'Accueil et présentation mutuelle pour créer un climat de confiance et d\'écoute bienveillante.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_step1', 'Accueil et présentation mutuelle pour créer un climat de confiance et d\'écoute bienveillante.')); ?></p>
         </div>
       </div>
       
@@ -101,7 +101,7 @@
         <div class="step-number">2</div>
         <div class="step-content">
           <h4>Écoute de vos besoins</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_consultation_step2', 'Écoute active de votre situation, vos défis actuels et vos aspirations pour l\'avenir.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_step2', 'Écoute active de votre situation, vos défis actuels et vos aspirations pour l\'avenir.')); ?></p>
         </div>
       </div>
       
@@ -109,7 +109,7 @@
         <div class="step-number">3</div>
         <div class="step-content">
           <h4>Exploration des solutions</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_consultation_step3', 'Exploration des différentes possibilités d\'accompagnement et explication de mes méthodes.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_step3', 'Exploration des différentes possibilités d\'accompagnement et explication de mes méthodes.')); ?></p>
         </div>
       </div>
       
@@ -117,7 +117,7 @@
         <div class="step-number">4</div>
         <div class="step-content">
           <h4>Proposition personnalisée</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_consultation_step4', 'Proposition d\'un plan d\'accompagnement personnalisé adapté à vos besoins et votre rythme.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_step4', 'Proposition d\'un plan d\'accompagnement personnalisé adapté à vos besoins et votre rythme.')); ?></p>
         </div>
       </div>
     </div>
@@ -126,26 +126,26 @@
   <!-- Detailed Content -->
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_consultation_section2_title', 'Modalités pratiques')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_consultation_duration', 'Cette consultation dure environ 30 minutes et se déroule par téléphone ou en visioconférence, selon votre préférence.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_duration', 'Cette consultation dure environ 30 minutes et se déroule par téléphone ou en visioconférence, selon votre préférence.')); ?></p>
   </div>
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_consultation_section3_title', 'Ce que vous en retirerez')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_consultation_benefits_text', 'Cette rencontre vous permet de poser toutes vos questions et de découvrir comment mes services peuvent vous aider à atteindre vos objectifs.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_benefits_text', 'Cette rencontre vous permet de poser toutes vos questions et de découvrir comment mes services peuvent vous aider à atteindre vos objectifs.')); ?></p>
   </div>
 
   <!-- Highlight Box -->
   <div style="background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-pink)); border-radius: 16px; padding: 2rem; margin: 3rem 0; text-align: center;">
     <h3 style="color: var(--rose-700); margin-bottom: 1rem; font-size: 1.3rem;"><?php echo esc_html(isabel_get_option('isabel_consultation_highlight_title', '🎁 Consultation 100% gratuite')); ?></h3>
     <p style="color: var(--text-dark); font-size: 1.1rem; margin: 0; font-weight: 500;">
-      <?php echo esc_html(isabel_get_option('isabel_consultation_highlight_text', 'Cette première rencontre est entièrement offerte et sans aucun engagement. C\'est mon cadeau pour vous permettre de découvrir mes services en toute sérénité.')); ?>
+      <?php echo isabel_format_text(isabel_get_option('isabel_consultation_highlight_text', 'Cette première rencontre est entièrement offerte et sans aucun engagement. C\'est mon cadeau pour vous permettre de découvrir mes services en toute sérénité.')); ?>
     </p>
   </div>
 
   <!-- CTA Section -->
   <div class="cta-service">
     <h3><?php echo esc_html(isabel_get_option('isabel_consultation_cta_title', 'Prêt(e) à faire le premier pas ?')); ?></h3>
-    <p><?php echo esc_html(isabel_get_option('isabel_consultation_cta_text', 'Réservez dès maintenant votre consultation découverte gratuite et commençons ensemble votre parcours de transformation.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_cta_text', 'Réservez dès maintenant votre consultation découverte gratuite et commençons ensemble votre parcours de transformation.')); ?></p>
     <button class="btn-cta" onclick="openPopup()"><?php echo esc_html(isabel_get_option('isabel_consultation_cta_button', 'Réserver ma consultation gratuite')); ?></button>
   </div>
 </div>

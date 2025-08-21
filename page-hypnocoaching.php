@@ -12,7 +12,7 @@
     </div>
     
     <h1><?php echo esc_html(isabel_get_option('isabel_hypno_title', 'Hypnocoaching')); ?></h1>
-    <p class="subtitle"><?php echo esc_html(isabel_get_option('isabel_hypno_subtitle', 'Libérez-vous de vos blocages en profondeur grâce à l\'alliance du coaching et de l\'hypnose')); ?></p>
+    <p class="subtitle"><?php echo isabel_format_text(isabel_get_option('isabel_hypno_subtitle', 'Libérez-vous de vos blocages en profondeur grâce à l\'alliance du coaching et de l\'hypnose')); ?></p>
   </div>
 </section>
 
@@ -23,9 +23,9 @@
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_hypno_section1_title', 'Qu\'est-ce que l\'hypnocoaching ?')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_hypno_intro', 'L\'hypnocoaching est une approche innovante qui combine les bienfaits du coaching traditionnel avec la puissance de l\'hypnose thérapeutique.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_intro', 'L\'hypnocoaching est une approche innovante qui combine les bienfaits du coaching traditionnel avec la puissance de l\'hypnose thérapeutique.')); ?></p>
     
-    <p><?php echo esc_html(isabel_get_option('isabel_hypno_description', 'En état d\'hypnose, votre esprit devient plus réceptif aux changements positifs. Cette approche douce et respectueuse vous permet de transformer en profondeur vos croyances limitantes.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_description', 'En état d\'hypnose, votre esprit devient plus réceptif aux changements positifs. Cette approche douce et respectueuse vous permet de transformer en profondeur vos croyances limitantes.')); ?></p>
   </div>
 
   <!-- Nouvelle grille avec 2 boxes texte + 2 boxes images - TAILLES CORRIGÉES -->
@@ -36,7 +36,7 @@
         <span class="benefit-icon"><?php echo esc_html(isabel_get_option('isabel_hypno_box1_icon', '🧠')); ?></span> 
         <?php echo esc_html(isabel_get_option('isabel_hypno_box1_title', 'Accès à l\'inconscient')); ?>
       </h3>
-      <p><?php echo esc_html(isabel_get_option('isabel_hypno_box1_text', 'Travaillez directement avec votre inconscient pour identifier et transformer les blocages à leur source.')); ?></p>
+      <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_box1_text', 'Travaillez directement avec votre inconscient pour identifier et transformer les blocages à leur source.')); ?></p>
     </div>
     
     <!-- Box 2 - Image pure (remplit toute la box) -->
@@ -63,7 +63,7 @@
         <span class="benefit-icon"><?php echo esc_html(isabel_get_option('isabel_hypno_box3_icon', '🌱')); ?></span> 
         <?php echo esc_html(isabel_get_option('isabel_hypno_box3_title', 'Transformation profonde')); ?>
       </h3>
-      <p><?php echo esc_html(isabel_get_option('isabel_hypno_box3_text', 'Modifiez vos schémas de pensée limitants et installez de nouveaux automatismes positifs.')); ?></p>
+      <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_box3_text', 'Modifiez vos schémas de pensée limitants et installez de nouveaux automatismes positifs.')); ?></p>
     </div>
     
     <!-- Box 4 - Image pure (remplit toute la box) -->
@@ -93,7 +93,7 @@
         <div class="step-number">1</div>
         <div class="step-content">
           <h4>Entretien préliminaire</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_hypno_step1', 'Discussion pour comprendre vos objectifs, vos blocages et adapter la séance à vos besoins spécifiques.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_step1', 'Discussion pour comprendre vos objectifs, vos blocages et adapter la séance à vos besoins spécifiques.')); ?></p>
         </div>
       </div>
       
@@ -101,7 +101,7 @@
         <div class="step-number">2</div>
         <div class="step-content">
           <h4>Induction hypnotique</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_hypno_step2', 'Accompagnement vers un état de relaxation profonde où votre inconscient devient plus réceptif.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_step2', 'Accompagnement vers un état de relaxation profonde où votre inconscient devient plus réceptif.')); ?></p>
         </div>
       </div>
       
@@ -109,7 +109,7 @@
         <div class="step-number">3</div>
         <div class="step-content">
           <h4>Travail thérapeutique</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_hypno_step3', 'Utilisation de techniques spécifiques pour lever les blocages et installer de nouveaux comportements positifs.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_step3', 'Utilisation de techniques spécifiques pour lever les blocages et installer de nouveaux comportements positifs.')); ?></p>
         </div>
       </div>
       
@@ -117,7 +117,7 @@
         <div class="step-number">4</div>
         <div class="step-content">
           <h4>Retour et intégration</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_hypno_step4', 'Retour à l\'état de veille normale et échange sur l\'expérience vécue pour optimiser l\'intégration.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_step4', 'Retour à l\'état de veille normale et échange sur l\'expérience vécue pour optimiser l\'intégration.')); ?></p>
         </div>
       </div>
     </div>
@@ -126,28 +126,28 @@
   <!-- Detailed Content -->
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_hypno_section2_title', 'Domaines d\'application')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_hypno_applications', 'L\'hypnocoaching est particulièrement efficace pour : gérer le stress et l\'anxiété, surmonter les phobies et les peurs, améliorer la confiance en soi, arrêter de fumer ou perdre du poids.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_applications', 'L\'hypnocoaching est particulièrement efficace pour : gérer le stress et l\'anxiété, surmonter les phobies et les peurs, améliorer la confiance en soi, arrêter de fumer ou perdre du poids.')); ?></p>
   </div>
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_hypno_section3_title', 'Mythes et réalités sur l\'hypnose')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_hypno_myths', 'Contrairement aux idées reçues, l\'hypnose thérapeutique n\'a rien à voir avec l\'hypnose de spectacle. Vous restez conscient(e) et maître(sse) de vos choix à tout moment.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_myths', 'Contrairement aux idées reçues, l\'hypnose thérapeutique n\'a rien à voir avec l\'hypnose de spectacle. Vous restez conscient(e) et maître(sse) de vos choix à tout moment.')); ?></p>
   </div>
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_hypno_section4_title', 'Ma formation et mon approche')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_hypno_formation', 'Certifiée en hypnose thérapeutique, je pratique une approche éthique et bienveillante. Chaque séance est adaptée à votre personnalité et à vos objectifs.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_formation', 'Certifiée en hypnose thérapeutique, je pratique une approche éthique et bienveillante. Chaque séance est adaptée à votre personnalité et à vos objectifs.')); ?></p>
   </div>
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_hypno_section5_title', 'Contre-indications')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_hypno_contraindications', 'L\'hypnose est contre-indiquée en cas de troubles psychiatriques sévères, de psychose, de troubles dissociatifs ou de dépendances lourdes.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_contraindications', 'L\'hypnose est contre-indiquée en cas de troubles psychiatriques sévères, de psychose, de troubles dissociatifs ou de dépendances lourdes.')); ?></p>
   </div>
 
   <!-- CTA Section -->
   <div class="cta-service">
     <h3><?php echo esc_html(isabel_get_option('isabel_hypno_cta_title', 'Prêt(e) à libérer votre potentiel ?')); ?></h3>
-    <p><?php echo esc_html(isabel_get_option('isabel_hypno_cta_text', 'Découvrez la puissance de l\'hypnocoaching lors d\'une consultation. Ensemble, nous explorerons comment cette approche peut vous aider.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_cta_text', 'Découvrez la puissance de l\'hypnocoaching lors d\'une consultation. Ensemble, nous explorerons comment cette approche peut vous aider.')); ?></p>
     <button class="btn-cta" onclick="openPopup()"><?php echo esc_html(isabel_get_option('isabel_hypno_cta_button', 'Découvrir l\'hypnocoaching')); ?></button>
   </div>
 </div>

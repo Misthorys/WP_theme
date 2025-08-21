@@ -12,7 +12,7 @@
     </div>
     
     <h1><?php echo esc_html(isabel_get_option('isabel_coaching_title', 'Coaching Personnel')); ?></h1>
-    <p class="subtitle"><?php echo esc_html(isabel_get_option('isabel_coaching_subtitle', 'Révélez votre potentiel et transformez votre vie personnelle et professionnelle')); ?></p>
+    <p class="subtitle"><?php echo isabel_format_text(isabel_get_option('isabel_coaching_subtitle', 'Révélez votre potentiel et transformez votre vie personnelle et professionnelle')); ?></p>
   </div>
 </section>
 
@@ -23,9 +23,9 @@
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_coaching_section1_title', 'Qu\'est-ce que le coaching personnel ?')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_coaching_intro', 'Le coaching personnel est un accompagnement sur mesure qui vous aide à clarifier vos objectifs, développer votre potentiel et créer la vie que vous désirez vraiment.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_intro', 'Le coaching personnel est un accompagnement sur mesure qui vous aide à clarifier vos objectifs, développer votre potentiel et créer la vie que vous désirez vraiment.')); ?></p>
     
-    <p><?php echo esc_html(isabel_get_option('isabel_coaching_description', 'Que vous souhaitiez améliorer votre confiance en vous, changer de carrière, améliorer vos relations ou simplement mieux vous connaître, le coaching personnel vous offre l\'espace et les ressources nécessaires.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_description', 'Que vous souhaitiez améliorer votre confiance en vous, changer de carrière, améliorer vos relations ou simplement mieux vous connaître, le coaching personnel vous offre l\'espace et les ressources nécessaires.')); ?></p>
   </div>
 
   <!-- Nouvelle grille avec 2 boxes texte + 2 boxes images - TAILLES CORRIGÉES -->
@@ -36,7 +36,7 @@
         <span class="benefit-icon"><?php echo esc_html(isabel_get_option('isabel_coaching_box1_icon', '💬')); ?></span> 
         <?php echo esc_html(isabel_get_option('isabel_coaching_box1_title', 'Échange personnalisé')); ?>
       </h3>
-      <p><?php echo esc_html(isabel_get_option('isabel_coaching_box1_text', 'Échange personnalisé pour comprendre votre situation et vos objectifs de vie ou professionnels.')); ?></p>
+      <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_box1_text', 'Échange personnalisé pour comprendre votre situation et vos objectifs de vie ou professionnels.')); ?></p>
     </div>
     
     <!-- Box 2 - Image pure (remplit toute la box) -->
@@ -63,7 +63,7 @@
         <span class="benefit-icon"><?php echo esc_html(isabel_get_option('isabel_coaching_box3_icon', '🧰')); ?></span> 
         <?php echo esc_html(isabel_get_option('isabel_coaching_box3_title', 'Premiers outils')); ?>
       </h3>
-      <p><?php echo esc_html(isabel_get_option('isabel_coaching_box3_text', 'Conseils immédiats et premiers outils pour commencer votre réflexion personnelle.')); ?></p>
+      <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_box3_text', 'Conseils immédiats et premiers outils pour commencer votre réflexion personnelle.')); ?></p>
     </div>
     
     <!-- Box 4 - Image pure (remplit toute la box) -->
@@ -93,7 +93,7 @@
         <div class="step-number">1</div>
         <div class="step-content">
           <h4>Évaluation initiale</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_coaching_step1', 'Nous explorons ensemble votre situation actuelle, vos défis et vos aspirations pour définir un plan d\'action personnalisé.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_step1', 'Nous explorons ensemble votre situation actuelle, vos défis et vos aspirations pour définir un plan d\'action personnalisé.')); ?></p>
         </div>
       </div>
       
@@ -101,7 +101,7 @@
         <div class="step-number">2</div>
         <div class="step-content">
           <h4>Définition d'objectifs</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_coaching_step2', 'Nous clarifions vos objectifs SMART et établissons une feuille de route claire avec des étapes concrètes.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_step2', 'Nous clarifions vos objectifs SMART et établissons une feuille de route claire avec des étapes concrètes.')); ?></p>
         </div>
       </div>
       
@@ -109,7 +109,7 @@
         <div class="step-number">3</div>
         <div class="step-content">
           <h4>Séances d'accompagnement</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_coaching_step3', 'Sessions régulières pour travailler sur vos blocages, développer de nouvelles compétences et avancer vers vos objectifs.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_step3', 'Sessions régulières pour travailler sur vos blocages, développer de nouvelles compétences et avancer vers vos objectifs.')); ?></p>
         </div>
       </div>
       
@@ -117,7 +117,7 @@
         <div class="step-number">4</div>
         <div class="step-content">
           <h4>Suivi et ajustements</h4>
-          <p><?php echo esc_html(isabel_get_option('isabel_coaching_step4', 'Évaluation continue de vos progrès et adaptation de la stratégie pour optimiser votre réussite.')); ?></p>
+          <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_step4', 'Évaluation continue de vos progrès et adaptation de la stratégie pour optimiser votre réussite.')); ?></p>
         </div>
       </div>
     </div>
@@ -126,18 +126,18 @@
   <!-- Detailed Content -->
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_coaching_section2_title', 'Pour qui ?')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_coaching_who', 'Le coaching personnel s\'adresse à toute personne qui souhaite évoluer, qu\'elle soit en questionnement professionnel, en transition de vie, ou simplement désireuse d\'améliorer sa qualité de vie.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_who', 'Le coaching personnel s\'adresse à toute personne qui souhaite évoluer, qu\'elle soit en questionnement professionnel, en transition de vie, ou simplement désireuse d\'améliorer sa qualité de vie.')); ?></p>
   </div>
 
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_coaching_section3_title', 'Mes domaines d\'expertise')); ?></h2>
-    <p><?php echo esc_html(isabel_get_option('isabel_coaching_expertise', 'Fort de mon expérience et de ma certification professionnelle, je vous accompagne sur diverses thématiques : développement de la confiance en soi, gestion du stress et des émotions.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_expertise', 'Fort de mon expérience et de ma certification professionnelle, je vous accompagne sur diverses thématiques : développement de la confiance en soi, gestion du stress et des émotions.')); ?></p>
   </div>
 
   <!-- CTA Section -->
   <div class="cta-service">
     <h3><?php echo esc_html(isabel_get_option('isabel_coaching_cta_title', 'Prêt(e) à commencer votre transformation ?')); ?></h3>
-    <p><?php echo esc_html(isabel_get_option('isabel_coaching_cta_text', 'Contactez-moi pour discuter de vos objectifs et découvrir comment le coaching personnel peut vous aider.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_cta_text', 'Contactez-moi pour discuter de vos objectifs et découvrir comment le coaching personnel peut vous aider.')); ?></p>
     <button class="btn-cta" onclick="openPopup()"><?php echo esc_html(isabel_get_option('isabel_coaching_cta_button', 'Prendre rendez-vous')); ?></button>
   </div>
 </div>

@@ -79,6 +79,39 @@ function isabel_get_profile_image($size = 'full', $css_class = '') {
 }
 
 // ========================================
+// FONCTION DE FORMATAGE DE TEXTE - NOUVELLE
+// ========================================
+
+/**
+ * Formate le texte en supportant les retours à la ligne et le gras markdown
+ * @param string $text Le texte à formater
+ * @return string Le texte formaté avec HTML sécurisé
+ */
+function isabel_format_text($text) {
+    // Vérifier que le texte n'est pas vide
+    if (empty($text)) {
+        return '';
+    }
+    
+    // Échapper le texte pour la sécurité
+    $text = esc_html($text);
+    
+    // Convertir **texte** en <strong>texte</strong>
+    $text = preg_replace('/\*\*(.*?)\*\*/', '<strong>$1</strong>', $text);
+    
+    // Convertir les retours à la ligne en <br>
+    $text = nl2br($text);
+    
+    // Utiliser wp_kses pour s'assurer que seuls <strong> et <br> sont autorisés
+    $allowed_html = array(
+        'strong' => array(),
+        'br' => array()
+    );
+    
+    return wp_kses($text, $allowed_html);
+}
+
+// ========================================
 // SÉCURITÉ ET NETTOYAGE
 // ========================================
 

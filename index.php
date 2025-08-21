@@ -70,11 +70,11 @@
       </div>
       
       <div class="profile-subtitle">
-        <?php echo esc_html(isabel_get_option('isabel_subtitle', 'Coach personnelle & Hypnocoach certifiée')); ?>
+        <?php echo isabel_format_text(isabel_get_option('isabel_subtitle', 'Coach personnelle & Hypnocoach certifiée')); ?>
       </div>
       
       <div class="intro-text">
-        <?php echo nl2br(esc_html(isabel_get_option('isabel_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.'))); ?>
+        <?php echo isabel_format_text(isabel_get_option('isabel_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.')); ?>
       </div>
       
       <div class="hero-cta">
@@ -182,35 +182,35 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="section-container">
     <h2 class="section-title"><?php echo esc_html(isabel_get_option('isabel_services_title', 'Mes Accompagnements')); ?></h2>
     <p class="section-subtitle">
-      <?php echo esc_html(isabel_get_option('isabel_services_subtitle', 'Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.')); ?>
+      <?php echo isabel_format_text(isabel_get_option('isabel_services_subtitle', 'Quatre approches complémentaires pour révéler votre potentiel et atteindre vos objectifs personnels et professionnels.')); ?>
     </p>
 
     <div class="services-grid">
       <a href="<?php echo esc_url(home_url('/coaching-personnel')); ?>" class="service-card service-link">
         <div class="service-icon">01</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service1_title', 'Coaching Personnel')); ?></h3>
-        <p><?php echo esc_html(isabel_get_option('isabel_service1_desc', 'Accompagnement personnalisé pour développer votre potentiel, clarifier vos objectifs et transformer votre vie personnelle et professionnelle.')); ?></p>
+        <p><?php echo isabel_format_text(isabel_get_option('isabel_service1_desc', 'Accompagnement personnalisé pour développer votre potentiel, clarifier vos objectifs et transformer votre vie personnelle et professionnelle.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
 
       <a href="<?php echo esc_url(home_url('/accompagnement-vae')); ?>" class="service-card service-link">
         <div class="service-icon">02</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service2_title', 'Validation des Acquis (VAE)')); ?></h3>
-        <p><?php echo esc_html(isabel_get_option('isabel_service2_desc', 'Valorisez votre expérience professionnelle et obtenez une certification officielle grâce à un accompagnement expert dans votre démarche VAE.')); ?></p>
+        <p><?php echo isabel_format_text(isabel_get_option('isabel_service2_desc', 'Valorisez votre expérience professionnelle et obtenez une certification officielle grâce à un accompagnement expert dans votre démarche VAE.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
 
       <a href="<?php echo esc_url(home_url('/hypnocoaching')); ?>" class="service-card service-link">
         <div class="service-icon">03</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?></h3>
-        <p><?php echo esc_html(isabel_get_option('isabel_service3_desc', 'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching pour une transformation durable.')); ?></p>
+        <p><?php echo isabel_format_text(isabel_get_option('isabel_service3_desc', 'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching pour une transformation durable.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
 
       <a href="<?php echo esc_url(home_url('/consultation-decouverte')); ?>" class="service-card service-link">
         <div class="service-icon">04</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service4_title', 'Consultation Découverte')); ?></h3>
-        <p><?php echo esc_html(isabel_get_option('isabel_service4_desc', 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.')); ?></p>
+        <p><?php echo isabel_format_text(isabel_get_option('isabel_service4_desc', 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
     </div>
@@ -222,7 +222,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div class="section-container">
     <h2 class="section-title"><?php echo esc_html(isabel_get_option('isabel_testimonials_title', 'Ce que disent mes clients')); ?></h2>
     <p class="section-subtitle">
-      <?php echo esc_html(isabel_get_option('isabel_testimonials_subtitle', 'Découvrez les témoignages de personnes qui ont transformé leur vie grâce à un accompagnement personnalisé.')); ?>
+      <?php echo isabel_format_text(isabel_get_option('isabel_testimonials_subtitle', 'Découvrez les témoignages de personnes qui ont transformé leur vie grâce à un accompagnement personnalisé.')); ?>
     </p>
 
     <div class="testimonials-grid">
@@ -242,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function() {
           ?>
           <div class="testimonial-card">
             <div class="testimonial-content">
-              <?php echo esc_html(get_the_content(null, false, $testimonial)); ?>
+              <?php echo isabel_format_text(get_the_content(null, false, $testimonial)); ?>
             </div>
             <div class="testimonial-author">
               <div class="author-avatar"><?php echo esc_html($author_initials); ?></div>
@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <div class="cta-box">
       <h2 class="cta-title"><?php echo esc_html(isabel_get_option('isabel_cta_title', 'Prêt(e) à transformer votre vie ?')); ?></h2>
       <p class="cta-text">
-        <?php echo esc_html(isabel_get_option('isabel_cta_text', 'Contactez-moi dès maintenant pour discuter de vos objectifs et découvrir comment je peux vous accompagner.')); ?>
+        <?php echo isabel_format_text(isabel_get_option('isabel_cta_text', 'Contactez-moi dès maintenant pour discuter de vos objectifs et découvrir comment je peux vous accompagner.')); ?>
       </p>
       <button class="cta-button" onclick="openPopup()">
         <?php echo esc_html(isabel_get_option('isabel_cta_button', 'Prendre rendez-vous')); ?>
@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
       <div class="form-note">
         <?php 
         $form_note = isabel_get_option('isabel_form_note', '💼 Première consultation pour faire connaissance et définir vos besoins ensemble.');
-        echo wp_kses($form_note, array('strong' => array(), 'br' => array(), 'em' => array()));
+        echo isabel_format_text($form_note);
         ?>
       </div>
 

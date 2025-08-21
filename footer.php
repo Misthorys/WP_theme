@@ -9,8 +9,7 @@
                     <div style="width: 6px; height: 6px; background: var(--rose-500); border-radius: 50%;"></div>
                 </h3>
                 <p style="color: var(--text-light); line-height: 1.7; margin-bottom: 1.5rem; font-size: 1rem;">
-                    <?php echo esc_html(isabel_get_option('isabel_subtitle', 'Coach Certifiée & Hypnocoach')); ?><br>
-                    Accompagnement personnalisé pour votre transformation
+                    <?php echo isabel_format_text(isabel_get_option('isabel_subtitle', 'Coach Certifiée & Hypnocoach') . "\nAccompagnement personnalisé pour votre transformation"); ?>
                 </p>
                 <div style="display: flex; flex-direction: column; gap: 1rem;">
                     <a href="mailto:<?php echo esc_attr(isabel_get_option('isabel_email', 'contact@forma-coach.com')); ?>" 
@@ -62,7 +61,7 @@
                 <h3 style="color: var(--rose-700); margin-bottom: 1.5rem; font-size: 1.2rem; font-weight: 700;">À propos</h3>
                 <div style="color: var(--text-light); line-height: 1.8; display: flex; flex-direction: column; gap: 0.75rem;">
                     <p style="margin: 0; font-size: 0.95rem;">
-                        Accompagnement professionnel pour votre développement personnel et professionnel.
+                        <?php echo isabel_format_text(isabel_get_option('isabel_footer_about', 'Accompagnement professionnel pour votre développement personnel et professionnel.')); ?>
                     </p>
                     <div style="display: flex; align-items: center; gap: 0.75rem; padding: 0.5rem 0;">
                         <span style="color: var(--rose-500); font-weight: 600;">✨</span>
@@ -78,8 +77,7 @@
                     </div>
                     
                     <div style="margin-top: 1.5rem; padding: 1.5rem; background: linear-gradient(135deg, var(--pastel-lavender), var(--pastel-pink)); border-radius: 12px; font-size: 0.95rem; text-align: center;">
-                        <strong>Ensemble, réalisons vos objectifs</strong><br>
-                        Contactez-moi pour commencer votre transformation
+                        <?php echo isabel_format_text(isabel_get_option('isabel_footer_highlight', '**Ensemble, réalisons vos objectifs**\nContactez-moi pour commencer votre transformation')); ?>
                     </div>
                 </div>
             </div>
@@ -189,3 +187,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(function() {
                     overlay.style.display = 'none';
                 }, 300);
+            }
+        };
+    }
+});
+</script>
+
+</body>
+</html>
