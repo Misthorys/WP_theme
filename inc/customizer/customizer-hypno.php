@@ -444,3 +444,4 @@ Exemple : "Découvrir l\'hypnocoaching", "Essayer une séance"',
  * Une page qui démystifie l'hypnocoaching,
  * rassure sur votre approche éthique et
  * donne envie d'essayer cette méthode.
+ */

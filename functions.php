@@ -43,20 +43,51 @@ add_action('wp_enqueue_scripts', 'isabel_theme_scripts');
 // INCLUSIONS DES FICHIERS ORGANISÉS - VERSION MODULAIRE
 // ========================================
 
-// Charger le customizer modulaire (toutes les options de personnalisation)
-require_once get_template_directory() . '/inc/customizer/customizer-main.php';
-
-// Charger la gestion des contacts
-require_once get_template_directory() . '/inc/contact-handler.php';
-
-// Charger la gestion des témoignages
-require_once get_template_directory() . '/inc/testimonials.php';
-
-// Charger la gestion des pages de services
-require_once get_template_directory() . '/inc/service-pages.php';
-
-// Charger l'interface d'administration
-require_once get_template_directory() . '/inc/admin-interface.php';
+// CHOIX 1 : Système modulaire (recommandé)
+if (file_exists(get_template_directory() . '/inc/customizer/customizer-main.php')) {
+    require_once get_template_directory() . '/inc/customizer/customizer-main.php';
+    
+    // INITIALISER le système modulaire
+    isabel_init_modular_customizer();
+    
+    // Charger la gestion des contacts
+    require_once get_template_directory() . '/inc/contact-handler.php';
+    
+    // Charger la gestion des témoignages
+    require_once get_template_directory() . '/inc/testimonials.php';
+    
+    // Charger la gestion des pages de services
+    require_once get_template_directory() . '/inc/service-pages.php';
+    
+    // Charger l'interface d'administration
+    require_once get_template_directory() . '/inc/admin-interface.php';
+    
+} else {
+    // CHOIX 2 : Fallback vers l'ancien système si le modulaire n'existe pas
+    if (file_exists(get_template_directory() . '/inc/customizer1.php')) {
+        require_once get_template_directory() . '/inc/customizer1.php';
+        
+        // Hook pour enregistrer le customizer
+        add_action('customize_register', 'isabel_customize_register');
+    }
+    
+    // Charger les autres fichiers
+    if (file_exists(get_template_directory() . '/inc/contact-handler.php')) {
+        require_once get_template_directory() . '/inc/contact-handler.php';
+    }
+    
+    if (file_exists(get_template_directory() . '/inc/testimonials.php')) {
+        require_once get_template_directory() . '/inc/testimonials.php';
+    }
+    
+    if (file_exists(get_template_directory() . '/inc/service-pages.php')) {
+        require_once get_template_directory() . '/inc/service-pages.php';
+    }
+    
+    if (file_exists(get_template_directory() . '/inc/admin-interface.php')) {
+        require_once get_template_directory() . '/inc/admin-interface.php';
+    }
+}
 
 // ========================================
 // FONCTIONS UTILITAIRES
@@ -119,6 +150,63 @@ function isabel_format_text($text) {
 remove_action('wp_head', 'wp_generator');
 remove_action('wp_head', 'wlwmanifest_link');
 remove_action('wp_head', 'rsd_link');
+
+// ========================================
+// CUSTOMIZER TEMPS RÉEL - POSTMESSAGE
+// ========================================
+
+/**
+ * Enregistrer le JavaScript pour le customizer temps réel
+ */
+function isabel_customizer_live_preview() {
+    wp_enqueue_script(
+        'isabel-customizer-live',
+        get_template_directory_uri() . '/js/customizer-live.js',
+        array('jquery', 'customize-preview'),
+        '1.0.0',
+        true
+    );
+}
+add_action('customize_preview_init', 'isabel_customizer_live_preview');
+
+// ========================================
+// DEBUG TEMPORAIRE POUR LES PAGES DE SERVICE
+// ========================================
+
+// Debug des options de pages de service
+add_action('wp_head', function() {
+    // Debug pour la page VAE
+    if (is_page('accompagnement-vae')) {
+        echo '<!-- DEBUG VAE: ';
+        echo 'isabel_vae_title = ' . get_theme_mod('isabel_vae_title', 'NON TROUVÉ');
+        echo ' | isabel_vae_subtitle = ' . get_theme_mod('isabel_vae_subtitle', 'NON TROUVÉ');
+        echo ' -->';
+    }
+    
+    // Debug pour la page Coaching
+    if (is_page('coaching-personnel')) {
+        echo '<!-- DEBUG COACHING: ';
+        echo 'isabel_coaching_title = ' . get_theme_mod('isabel_coaching_title', 'NON TROUVÉ');
+        echo ' | isabel_coaching_subtitle = ' . get_theme_mod('isabel_coaching_subtitle', 'NON TROUVÉ');
+        echo ' -->';
+    }
+    
+    // Debug pour la page Consultation
+    if (is_page('consultation-decouverte')) {
+        echo '<!-- DEBUG CONSULTATION: ';
+        echo 'isabel_consultation_title = ' . get_theme_mod('isabel_consultation_title', 'NON TROUVÉ');
+        echo ' | isabel_consultation_subtitle = ' . get_theme_mod('isabel_consultation_subtitle', 'NON TROUVÉ');
+        echo ' -->';
+    }
+    
+    // Debug pour la page Hypno
+    if (is_page('hypnocoaching')) {
+        echo '<!-- DEBUG HYPNO: ';
+        echo 'isabel_hypno_title = ' . get_theme_mod('isabel_hypno_title', 'NON TROUVÉ');
+        echo ' | isabel_hypno_subtitle = ' . get_theme_mod('isabel_hypno_subtitle', 'NON TROUVÉ');
+        echo ' -->';
+    }
+});
 
 function isabel_remove_version() {
     return '';
@@ -478,47 +566,6 @@ add_action('wp_head', 'isabel_qualiopi_styles');
 // VÉRIFICATIONS ET DEBUG
 // ========================================
 
-// Vérification au chargement
-add_action('wp_loaded', function() {
-    if (defined('WP_DEBUG') && WP_DEBUG) {
-        error_log('=== ISABEL THEME LOADED CHECK (VERSION MODULAIRE) ===');
-        error_log('Contact handler hooks registered: ' . (has_action('wp_ajax_isabel_contact') ? 'YES' : 'NO'));
-        error_log('Admin interface loaded: ' . (function_exists('isabel_contacts_page') ? 'YES' : 'NO'));
-        error_log('Customizer modulaire loaded: ' . (function_exists('isabel_customize_register') ? 'YES' : 'NO'));
-        
-        // Vérifier la table
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'isabel_contacts';
-        $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name;
-        error_log('Contact table exists: ' . ($table_exists ? 'YES' : 'NO'));
-        
-        // Vérifier les fichiers modulaires
-        $customizer_files = array(
-            'customizer-main.php',
-            'customizer-header.php',
-            'customizer-images.php',
-            'customizer-homepage.php',
-            'customizer-qualiopi.php',
-            'customizer-services.php',
-            'customizer-testimonials.php',
-            'customizer-contact.php',
-            'customizer-footer.php',
-            'customizer-coaching.php',
-            'customizer-vae.php',
-            'customizer-hypno.php',
-            'customizer-consultation.php',
-            'customizer-colors.php'
-        );
-        
-        foreach ($customizer_files as $file) {
-            $file_path = get_template_directory() . '/inc/customizer/' . $file;
-            error_log("Customizer file $file: " . (file_exists($file_path) ? 'EXISTS' : 'MISSING'));
-        }
-        
-        error_log('=== FIN CHECK MODULAIRE ===');
-    }
-});
-
 // Fallback JavaScript pour isabel_ajax
 add_action('wp_footer', function() {
     if (is_front_page() || is_home()) {
@@ -541,23 +588,6 @@ add_action('wp_footer', function() {
 }, 5);
 
 // ========================================
-// VÉRIFICATION DE LA TABLE CONTACTS
-// ========================================
-
-add_action('init', function() {
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'isabel_contacts';
-    $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") == $table_name;
-    
-    if (!$table_exists) {
-        error_log('ISABEL: Table contacts manquante - création en cours');
-        if (function_exists('isabel_create_contacts_table')) {
-            isabel_create_contacts_table();
-        }
-    }
-});
-
-// ========================================
 // NOTIFICATION DE MIGRATION VERS LE SYSTÈME MODULAIRE
 // ========================================
 
@@ -567,55 +597,13 @@ add_action('admin_notices', function() {
         $screen = get_current_screen();
         if ($screen && ($screen->base === 'appearance_page_isabel-settings' || $screen->base === 'customize')) {
             echo '<div class="notice notice-success is-dismissible">';
-            echo '<p><strong>🎉 Customizer Modulaire Activé !</strong> ';
-            echo 'Votre customizer est maintenant organisé de <strong>HAUT en BAS</strong> selon l\'ordre visuel de votre page. ';
-            echo 'Plus simple et logique pour vos modifications ! ';
-            echo '<a href="' . admin_url('customize.php') . '">Voir les nouvelles sections organisées</a></p>';
+            echo '<p><strong>🎉 Thème Isabel Goncalves Activé !</strong> ';
+            echo 'Votre thème fonctionne correctement. ';
+            echo 'Utilisez <a href="' . admin_url('customize.php') . '">Apparence > Personnaliser</a> pour modifier votre contenu. ';
+            echo 'Consultez <a href="' . admin_url('admin.php?page=isabel-settings') . '">Configuration Isabel</a> pour plus d\'options.</p>';
             echo '</div>';
         }
     }
 });
 
 ?>
-
-<!--
-========================================
-📋 MIGRATION VERS LE SYSTÈME MODULAIRE
-========================================
-
-✅ CHANGEMENTS EFFECTUÉS :
-
-1. 📁 STRUCTURE MODULAIRE
-   • Customizer divisé en 14 fichiers séparés
-   • Organisation par ordre visuel (HAUT → BAS)
-   • Fichier principal customizer-main.php
-
-2. 🎯 ORDRE LOGIQUE POUR ISABEL
-   • 🏠 En-tête → 🖼️ Images → ✨ Hero → 🏆 Qualiopi
-   • 🎯 Services → 💬 Témoignages → 📞 Contact → 📄 Footer
-   • 📋 Pages détaillées → 🎨 Couleurs
-
-3. 📝 NOMS USER-FRIENDLY
-   • Titres clairs et explicites
-   • Descriptions détaillées avec exemples
-   • Emojis pour identification rapide
-
-4. 🔧 FONCTIONNALITÉS CONSERVÉES
-   • Toutes les options existantes maintenues
-   • Fonction isabel_format_text() pour **gras** et retours à la ligne
-   • Section Qualiopi complète et modulable
-
-5. 📱 RESPONSIVE ET MODERNE
-   • CSS optimisé pour tous les écrans
-   • Styles cohérents et professionnels
-   • Performance maintenue
-
-🚀 PROCHAINES ÉTAPES :
-1. Remplacer functions.php par cette version
-2. Créer le dossier /inc/customizer/
-3. Ajouter tous les fichiers modulaires
-4. Tester dans Apparence > Personnaliser
-5. Isabel peut maintenant modifier sa page de HAUT en BAS !
-
-========================================
--->

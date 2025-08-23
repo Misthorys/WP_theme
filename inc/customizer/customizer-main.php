@@ -6,76 +6,116 @@ if (!defined('ABSPATH')) {
 
 /**
  * CUSTOMIZER MODULAIRE ISABEL GONCALVES
- * Version 1.0 - Système organisé par ordre visuel de la page
+ * Version 1.1 - Système organisé par ordre visuel de la page
  * 
  * ORDRE STRICT : DE HAUT EN BAS DE LA PAGE
  * 🏠 En-tête → 🖼️ Images → ✨ Section hero → 🏆 Qualiopi → 🎯 Services → 
  * 💬 Témoignages → 📞 CTA → 📝 Formulaire → 📄 Footer → 📋 Pages détaillées → 🎨 Couleurs
  */
 
+// Variable globale pour éviter le double chargement
+global $isabel_customizer_loaded;
+$isabel_customizer_loaded = false;
+
 /**
  * Fonction principale du customizer - ORDRE STRICT DE HAUT EN BAS
  */
 function isabel_customize_register($wp_customize) {
     
+    // Charger tous les modules AVANT de les utiliser
+    isabel_load_customizer_modules();
+    
     // ==========================================
     // 1️⃣ EN-TÊTE DU SITE (priority: 10)
     // ==========================================
-    isabel_customizer_header($wp_customize);
+    if (function_exists('isabel_customizer_header')) {
+        isabel_customizer_header($wp_customize);
+    }
     
     // ==========================================
     // 2️⃣ MES PHOTOS (priority: 20)
     // ==========================================
-    isabel_customizer_images($wp_customize);
+    if (function_exists('isabel_customizer_images')) {
+        isabel_customizer_images($wp_customize);
+    }
     
     // ==========================================
     // 3️⃣ SECTION D'ACCUEIL - HERO (priority: 30)
     // ==========================================
-    isabel_customizer_homepage($wp_customize);
+    if (function_exists('isabel_customizer_homepage')) {
+        isabel_customizer_homepage($wp_customize);
+    }
     
     // ==========================================
     // 4️⃣ CERTIFICATION QUALIOPI (priority: 40)
     // ==========================================
-    isabel_customizer_qualiopi($wp_customize);
+    if (function_exists('isabel_customizer_qualiopi')) {
+        isabel_customizer_qualiopi($wp_customize);
+    }
     
     // ==========================================
     // 5️⃣ MES SERVICES (priority: 50)
     // ==========================================
-    isabel_customizer_services($wp_customize);
+    if (function_exists('isabel_customizer_services')) {
+        isabel_customizer_services($wp_customize);
+    }
     
     // ==========================================
     // 6️⃣ TÉMOIGNAGES CLIENTS (priority: 60)
     // ==========================================
-    isabel_customizer_testimonials($wp_customize);
+    if (function_exists('isabel_customizer_testimonials')) {
+        isabel_customizer_testimonials($wp_customize);
+    }
     
     // ==========================================
     // 7️⃣ APPEL À L'ACTION FINAL (priority: 70)
     // ==========================================
-    isabel_customizer_contact($wp_customize);
+    if (function_exists('isabel_customizer_contact')) {
+        isabel_customizer_contact($wp_customize);
+    }
     
     // ==========================================
     // 8️⃣ PIED DE PAGE (priority: 80)
     // ==========================================
-    isabel_customizer_footer($wp_customize);
+    if (function_exists('isabel_customizer_footer')) {
+        isabel_customizer_footer($wp_customize);
+    }
     
     // ==========================================
     // 9️⃣ PAGES DÉTAILLÉES (priority: 90+)
     // ==========================================
-    isabel_customizer_coaching($wp_customize);    // priority: 91
-    isabel_customizer_vae($wp_customize);         // priority: 92
-    isabel_customizer_hypno($wp_customize);       // priority: 93
-    isabel_customizer_consultation($wp_customize); // priority: 94
+    if (function_exists('isabel_customizer_coaching')) {
+        isabel_customizer_coaching($wp_customize);    // priority: 91
+    }
+    if (function_exists('isabel_customizer_vae')) {
+        isabel_customizer_vae($wp_customize);         // priority: 92
+    }
+    if (function_exists('isabel_customizer_hypno')) {
+        isabel_customizer_hypno($wp_customize);       // priority: 93
+    }
+    if (function_exists('isabel_customizer_consultation')) {
+        isabel_customizer_consultation($wp_customize); // priority: 94
+    }
     
     // ==========================================
     // 🔟 COULEURS ET STYLE GLOBAL (priority: 200)
     // ==========================================
-    isabel_customizer_colors($wp_customize);
+    if (function_exists('isabel_customizer_colors')) {
+        isabel_customizer_colors($wp_customize);
+    }
 }
 
 /**
  * Charger tous les fichiers modulaires dans l'ordre
  */
 function isabel_load_customizer_modules() {
+    global $isabel_customizer_loaded;
+    
+    // Éviter le double chargement
+    if ($isabel_customizer_loaded) {
+        return;
+    }
+    
     $customizer_dir = get_template_directory() . '/inc/customizer/';
     
     // Liste des fichiers dans l'ordre EXACT du cours de la page
@@ -105,6 +145,8 @@ function isabel_load_customizer_modules() {
             error_log('Isabel Customizer: Fichier manquant - ' . $file_path);
         }
     }
+    
+    $isabel_customizer_loaded = true;
 }
 
 /**
@@ -130,7 +172,7 @@ function isabel_add_text_control($wp_customize, $setting_id, $section, $label, $
     $wp_customize->add_setting($setting_id, array(
         'default' => $default,
         'sanitize_callback' => 'sanitize_text_field',
-        'transport' => 'refresh',
+        'transport' => 'postMessage',
     ));
     
     // Contrôle
@@ -150,7 +192,7 @@ function isabel_add_textarea_control($wp_customize, $setting_id, $section, $labe
     $wp_customize->add_setting($setting_id, array(
         'default' => $default,
         'sanitize_callback' => 'sanitize_textarea_field',
-        'transport' => 'refresh',
+        'transport' => 'postMessage',
     ));
     
     // Contrôle
@@ -170,7 +212,7 @@ function isabel_add_image_control($wp_customize, $setting_id, $section, $label, 
     $wp_customize->add_setting($setting_id, array(
         'default' => '',
         'sanitize_callback' => 'esc_url_raw',
-        'transport' => 'refresh',
+        'transport' => 'postMessage',
     ));
     
     // Contrôle
@@ -190,7 +232,7 @@ function isabel_add_color_control($wp_customize, $setting_id, $section, $label, 
     $wp_customize->add_setting($setting_id, array(
         'default' => $default,
         'sanitize_callback' => 'sanitize_hex_color',
-        'transport' => 'refresh',
+        'transport' => 'postMessage',
     ));
     
     // Contrôle
@@ -209,7 +251,7 @@ function isabel_add_checkbox_control($wp_customize, $setting_id, $section, $labe
     $wp_customize->add_setting($setting_id, array(
         'default' => $default,
         'sanitize_callback' => 'isabel_sanitize_checkbox',
-        'transport' => 'refresh',
+        'transport' => 'postMessage',
     ));
     
     // Contrôle
@@ -229,7 +271,7 @@ function isabel_add_select_control($wp_customize, $setting_id, $section, $label,
     $wp_customize->add_setting($setting_id, array(
         'default' => $default,
         'sanitize_callback' => 'isabel_sanitize_select',
-        'transport' => 'refresh',
+        'transport' => 'postMessage',
     ));
     
     // Contrôle
@@ -259,6 +301,13 @@ function isabel_sanitize_select($input, $setting) {
  * Initialisation du système modulaire
  */
 function isabel_init_modular_customizer() {
+    global $isabel_customizer_loaded;
+    
+    // Éviter le double chargement
+    if ($isabel_customizer_loaded) {
+        return;
+    }
+    
     // Charger tous les modules
     isabel_load_customizer_modules();
     
@@ -271,8 +320,8 @@ function isabel_init_modular_customizer() {
     }
 }
 
-// Lancer l'initialisation
-isabel_init_modular_customizer();
+// L'initialisation sera gérée par functions.php pour éviter les conflits
+// Ne pas initialiser automatiquement ici
 
 /**
  * Documentation pour Isabel
