@@ -5,21 +5,21 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * 📋 PAGE COACHING PERSONNEL
- * Personnalisation complète de la page de coaching personnel
+ * 📋 PAGE FORMATIONS PROFESSIONNELLES
+ * Personnalisation complète de la page de formations professionnelles
  * Première page de service détaillée
  */
 
 function isabel_customizer_coaching($wp_customize) {
     
     // ==========================================
-    // SECTION : PAGE COACHING PERSONNEL
+    // SECTION : PAGE FORMATIONS PROFESSIONNELLES
     // ==========================================
     isabel_add_customizer_section(
         $wp_customize,
         'isabel_coaching_section',
-        '📋 Page Coaching Personnel',
-        'Personnalisez entièrement votre page de coaching personnel',
+        '📋 Page Formations Professionnelles',
+        'Personnalisez entièrement votre page de formations professionnelles',
         91 // Priorité 91 = pages détaillées
     );
     
@@ -32,10 +32,10 @@ function isabel_customizer_coaching($wp_customize) {
         'isabel_coaching_section',
         'Titre de la page',
         'Le titre principal affiché en haut de la page.
-Exemple : "Coaching Personnel", "Accompagnement Individuel"
+Exemple : "Formations Professionnelles", "Accompagnement Formation"
 
-📢 Où ça apparaît : Grand titre en haut de la page coaching.',
-        'Coaching Personnel'
+📢 Où ça apparaît : Grand titre en haut de la page formations.',
+        'Formations Professionnelles'
     );
     
     isabel_add_text_control(
@@ -59,8 +59,8 @@ Exemple : "Révélez votre potentiel et transformez votre vie"
         'isabel_coaching_section',
         'Titre section introduction',
         'Titre de votre première section de contenu.
-Exemple : "Qu\'est-ce que le coaching personnel ?"',
-        'Qu\'est-ce que le coaching personnel ?'
+Exemple : "Qu\'est-ce que les formations professionnelles ?"',
+        'Qu\'est-ce que les formations professionnelles ?'
     );
     
     isabel_add_textarea_control(
@@ -71,9 +71,9 @@ Exemple : "Qu\'est-ce que le coaching personnel ?"',
         'Premier paragraphe qui explique votre service.
 Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.
 
-Exemple : Le coaching personnel est un accompagnement **sur mesure** qui vous aide
+Exemple : Les formations professionnelles sont un accompagnement **sur mesure** qui vous aide
 à clarifier vos objectifs et développer votre potentiel.',
-        'Le coaching personnel est un accompagnement sur mesure qui vous aide à clarifier vos objectifs, développer votre potentiel et créer la vie que vous désirez vraiment.'
+        'Les formations professionnelles sont un accompagnement sur mesure qui vous aide à clarifier vos objectifs, développer votre potentiel et créer la vie que vous désirez vraiment.'
     );
     
     isabel_add_textarea_control(
@@ -83,7 +83,7 @@ Exemple : Le coaching personnel est un accompagnement **sur mesure** qui vous ai
         'Description détaillée',
         'Deuxième paragraphe avec plus de détails sur votre approche.
 Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.',
-        'Que vous souhaitiez améliorer votre confiance en vous, changer de carrière, améliorer vos relations ou simplement mieux vous connaître, le coaching personnel vous offre l\'espace et les ressources nécessaires.'
+        'Que vous souhaitiez améliorer votre confiance en vous, changer de carrière, améliorer vos relations ou simplement mieux vous connaître, les formations professionnelles vous offrent l\'espace et les ressources nécessaires.'
     );
     
     // ==========================================
@@ -282,7 +282,7 @@ Exemple : "Pour qui ?", "À qui s\'adresse le coaching ?"',
         'isabel_coaching_section',
         'Pour qui est ce service',
         'Décrivez votre cible et qui peut bénéficier de ce service.',
-        'Le coaching personnel s\'adresse à toute personne qui souhaite évoluer, qu\'elle soit en questionnement professionnel, en transition de vie, ou simplement désireuse d\'améliorer sa qualité de vie.'
+        'Les formations professionnelles s\'adressent à toute personne qui souhaite évoluer, qu\'elle soit en questionnement professionnel, en transition de vie, ou simplement désireuse d\'améliorer sa qualité de vie.'
     );
     
     isabel_add_text_control(
@@ -324,7 +324,7 @@ Exemple : "Prêt(e) à commencer ?", "Transformez votre vie dès maintenant"',
         'Texte de l\'appel à l\'action',
         'Message encourageant avant le bouton.
 Vous pouvez utiliser **texte** en gras.',
-        'Contactez-moi pour discuter de vos objectifs et découvrir comment le coaching personnel peut vous aider.'
+        'Contactez-moi pour discuter de vos objectifs et découvrir comment les formations professionnelles peuvent vous aider.'
     );
     
     isabel_add_text_control(
@@ -341,10 +341,10 @@ Exemple : "Prendre rendez-vous", "Commencer maintenant"',
 /**
  * Documentation pour Isabel :
  * 
- * SECTION PAGE COACHING PERSONNEL :
+ * SECTION PAGE FORMATIONS PROFESSIONNELLES :
  * 
  * Cette section vous permet de personnaliser entièrement votre page
- * de coaching personnel pour convertir vos visiteurs en clients.
+ * de formations professionnelles pour convertir vos visiteurs en clients.
  * 
  * 📍 STRUCTURE DE LA PAGE :
  * 

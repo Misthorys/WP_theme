@@ -138,7 +138,7 @@ de vos compétences grâce à un accompagnement expert VAE.',
     );
     
     // ==========================================
-    // SERVICE 3 : HYPNOCOACHING
+    // SERVICE 3 : BILAN DE COMPÉTENCES
     // ==========================================
     
     isabel_add_text_control(
@@ -157,8 +157,8 @@ Exemple : "🧘", "03", "🌟", "🧠"',
         'isabel_services_section',
         'Service 3 - Titre',
         'Nom de votre troisième service.
-Exemple : "Hypnocoaching", "Hypnose & Coaching"',
-        'Hypnocoaching'
+Exemple : "Bilan de compétences", "Évaluation des compétences"',
+        'Bilan de compétences'
     );
     
     isabel_add_textarea_control(
@@ -166,7 +166,7 @@ Exemple : "Hypnocoaching", "Hypnose & Coaching"',
         'isabel_service3_desc',
         'isabel_services_section',
         'Service 3 - Description',
-        'Description complète de votre hypnocoaching.
+        'Description complète de votre bilan de compétences.
 Exemple : Libérez-vous de vos **blocages** en profondeur
 en combinant les bienfaits de l\'hypnose thérapeutique et du coaching.',
         'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching de vie.'
@@ -280,7 +280,7 @@ Recommandé pour un site moderne.',
  * 2. 🎓 ACCOMPAGNEMENT VAE  
  *    → Validation des acquis de l'expérience
  * 
- * 3. 🧘 HYPNOCOACHING
+ * 3. 🧘 BILAN DE COMPÉTENCES
  *    → Alliance hypnose + coaching
  * 
  * 4. 💡 CONSULTATION DÉCOUVERTE

@@ -1,17 +1,31 @@
+<?php
+/**
+ * Montagard Matéo - WordPress Theme Header
+ * 
+ * @package Montagard_Theme
+ * @author Montagard Matéo
+ * @copyright 2024 Montagard Matéo. Tous droits réservés.
+ * @license Proprietary - Tous droits réservés
+ * @version 1.0.0
+ * 
+ * Ce fichier header est la propriété exclusive de Montagard Matéo.
+ * Toute reproduction, distribution ou modification sans autorisation écrite est interdite.
+ */
+?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="<?php echo esc_attr(isabel_get_option('isabel_intro_text', 'Isabel GONCALVES - Coach Certifiée & Hypnocoach. Transformez votre vie avec un accompagnement personnalisé en coaching, VAE et hypnocoaching.')); ?>">
-    <meta name="keywords" content="coach, hypnocoaching, VAE, développement personnel, Isabel GONCALVES, coaching personnel, transformation">
+    <meta name="description" content="<?php echo esc_attr(isabel_get_option('isabel_intro_text', 'Isabel GONCALVES - Coach Certifiée & Hypnocoach. Transformez votre vie avec un accompagnement personnalisé en coaching, VAE et bilan de compétences.')); ?>">
+    <meta name="keywords" content="coach, bilan de compétences, VAE, développement personnel, Isabel GONCALVES, formations professionnelles, transformation">
     <meta name="author" content="<?php echo esc_attr(isabel_get_option('isabel_main_name', 'Isabel GONCALVES')); ?>">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="<?php echo esc_url(home_url('/')); ?>">
     <meta property="og:title" content="<?php echo esc_attr(isabel_get_option('isabel_main_name', 'Isabel GONCALVES')); ?> - <?php echo esc_attr(isabel_get_option('isabel_subtitle', 'Coach Certifiée & Hypnocoach')); ?>">
-    <meta property="og:description" content="<?php echo esc_attr(isabel_get_option('isabel_intro_text', 'Transformez votre vie avec un accompagnement personnalisé en coaching, VAE et hypnocoaching.')); ?>">
+    <meta property="og:description" content="<?php echo esc_attr(isabel_get_option('isabel_intro_text', 'Transformez votre vie avec un accompagnement personnalisé en coaching, VAE et bilan de compétences.')); ?>">
     <?php 
     $profile_image = isabel_get_option('isabel_profile_image', '');
     if (!empty($profile_image)) {
@@ -23,7 +37,7 @@
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="<?php echo esc_url(home_url('/')); ?>">
     <meta property="twitter:title" content="<?php echo esc_attr(isabel_get_option('isabel_main_name', 'Isabel GONCALVES')); ?> - <?php echo esc_attr(isabel_get_option('isabel_subtitle', 'Coach Certifiée & Hypnocoach')); ?>">
-    <meta property="twitter:description" content="<?php echo esc_attr(isabel_get_option('isabel_intro_text', 'Transformez votre vie avec un accompagnement personnalisé en coaching, VAE et hypnocoaching.')); ?>">
+    <meta property="twitter:description" content="<?php echo esc_attr(isabel_get_option('isabel_intro_text', 'Transformez votre vie avec un accompagnement personnalisé en coaching, VAE et bilan de compétences.')); ?>">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='%23e4a7f5'/><circle cx='50' cy='50' r='25' fill='%23c47dd9'/></svg>">
@@ -63,7 +77,7 @@
             },
             {
                 "@type": "Service",
-                "name": "<?php echo esc_js(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?>",
+                "name": "<?php echo esc_js(isabel_get_option('isabel_service3_title', 'Bilan de compétences')); ?>",
                 "description": "<?php echo esc_js(isabel_get_option('isabel_service3_desc', 'Libérez-vous de vos blocages en profondeur')); ?>"
             }
         ],

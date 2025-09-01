@@ -5,21 +5,21 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * 📋 PAGE HYPNOCOACHING
- * Personnalisation complète de la page hypnocoaching
+ * 📋 PAGE BILAN DE COMPÉTENCES
+ * Personnalisation complète de la page bilan de compétences
  * Troisième page de service détaillée
  */
 
 function isabel_customizer_hypno($wp_customize) {
     
     // ==========================================
-    // SECTION : PAGE HYPNOCOACHING
+    // SECTION : PAGE BILAN DE COMPÉTENCES
     // ==========================================
     isabel_add_customizer_section(
         $wp_customize,
         'isabel_hypno_section',
-        '📋 Page Hypnocoaching',
-        'Personnalisez entièrement votre page d\'hypnocoaching',
+        '📋 Page Bilan de compétences',
+        'Personnalisez entièrement votre page de bilan de compétences',
         93 // Priorité 93 = pages détaillées
     );
     
@@ -32,10 +32,10 @@ function isabel_customizer_hypno($wp_customize) {
         'isabel_hypno_section',
         'Titre de la page',
         'Le titre principal affiché en haut de la page.
-Exemple : "Hypnocoaching", "Hypnose & Coaching"
+Exemple : "Bilan de compétences", "Évaluation des compétences"
 
-📢 Où ça apparaît : Grand titre en haut de la page hypnocoaching.',
-        'Hypnocoaching'
+📢 Où ça apparaît : Grand titre en haut de la page bilan de compétences.',
+        'Bilan de compétences'
     );
     
     isabel_add_text_control(
@@ -59,8 +59,8 @@ Exemple : "Libérez-vous de vos blocages en profondeur"
         'isabel_hypno_section',
         'Titre section introduction',
         'Titre de votre première section de contenu.
-Exemple : "Qu\'est-ce que l\'hypnocoaching ?", "Une approche innovante"',
-        'Qu\'est-ce que l\'hypnocoaching ?'
+Exemple : "Qu\'est-ce que le bilan de compétences ?", "Une approche innovante"',
+        'Qu\'est-ce que le bilan de compétences ?'
     );
     
     isabel_add_textarea_control(
@@ -68,12 +68,12 @@ Exemple : "Qu\'est-ce que l\'hypnocoaching ?", "Une approche innovante"',
         'isabel_hypno_intro',
         'isabel_hypno_section',
         'Texte d\'introduction',
-        'Premier paragraphe qui explique l\'hypnocoaching.
+        'Premier paragraphe qui explique le bilan de compétences.
 Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.
 
-Exemple : L\'hypnocoaching combine les bienfaits du **coaching traditionnel**
+Exemple : Le bilan de compétences combine les bienfaits du **coaching traditionnel**
 avec la puissance de l\'hypnose thérapeutique.',
-        'L\'hypnocoaching est une approche innovante qui combine les bienfaits du coaching traditionnel avec la puissance de l\'hypnose thérapeutique.'
+        'Le bilan de compétences est une approche innovante qui combine les bienfaits du coaching traditionnel avec la puissance de l\'évaluation des compétences.'
     );
     
     isabel_add_textarea_control(
@@ -95,8 +95,8 @@ Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.',
         'isabel_hypno_section',
         'Titre des bénéfices',
         'Titre au-dessus de vos 4 boxes de bénéfices.
-Exemple : "Pourquoi l\'hypnocoaching ?", "Les avantages de cette approche"',
-        'Les bénéfices de l\'hypnocoaching'
+Exemple : "Pourquoi le bilan de compétences ?", "Les avantages de cette approche"',
+        'Les bénéfices du bilan de compétences'
     );
     
     // Box 1 - Texte
@@ -240,10 +240,10 @@ Taille recommandée : 400x300 pixels.'
         'Titre du processus',
         'Titre au-dessus de vos 4 étapes.
 Exemple : "Déroulement d\'une séance", "Comment ça se passe"',
-        'Déroulement d\'une séance d\'hypnocoaching'
+        'Déroulement d\'un bilan de compétences'
     );
     
-    // 4 étapes du processus hypnocoaching
+    // 4 étapes du processus bilan de compétences
     $step_defaults = array(
         1 => 'Discussion pour comprendre vos objectifs, vos blocages et adapter la séance à vos besoins spécifiques.',
         2 => 'Accompagnement vers un état de relaxation profonde où votre inconscient devient plus réceptif.',
@@ -257,7 +257,7 @@ Exemple : "Déroulement d\'une séance", "Comment ça se passe"',
             "isabel_hypno_step$i",
             'isabel_hypno_section',
             "Étape $i de la séance",
-            "Description de l\'étape $i d\'une séance d\'hypnocoaching.
+            "Description de l\'étape $i d\'un bilan de compétences.
 Vous pouvez utiliser **texte** en gras.",
             $step_defaults[$i]
         );
@@ -272,7 +272,7 @@ Vous pouvez utiliser **texte** en gras.",
         'isabel_hypno_section',
         'Titre section 2',
         'Titre de votre deuxième section de contenu.
-Exemple : "Domaines d\'application", "Pour quoi utiliser l\'hypnocoaching"',
+Exemple : "Domaines d\'application", "Pour quoi utiliser le bilan de compétences"',
         'Domaines d\'application'
     );
     
@@ -281,8 +281,8 @@ Exemple : "Domaines d\'application", "Pour quoi utiliser l\'hypnocoaching"',
         'isabel_hypno_applications',
         'isabel_hypno_section',
         'Domaines d\'application',
-        'Listez les problématiques que vous traitez avec l\'hypnocoaching.',
-        'L\'hypnocoaching est particulièrement efficace pour : gérer le stress et l\'anxiété, surmonter les phobies et les peurs, améliorer la confiance en soi, arrêter de fumer ou perdre du poids.'
+        'Listez les problématiques que vous traitez avec le bilan de compétences.',
+        'Le bilan de compétences est particulièrement efficace pour : évaluer vos compétences, identifier vos points forts, définir votre projet professionnel, améliorer votre confiance en soi.'
     );
     
     isabel_add_text_control(
@@ -351,7 +351,7 @@ Exemple : "Contre-indications", "Important à savoir"',
         'isabel_hypno_section',
         'Titre de l\'appel à l\'action',
         'Titre encourageant pour finaliser la conversion.
-Exemple : "Prêt(e) à libérer votre potentiel ?", "Découvrez l\'hypnocoaching"',
+Exemple : "Prêt(e) à évaluer vos compétences ?", "Découvrez le bilan de compétences"',
         'Prêt(e) à libérer votre potentiel ?'
     );
     
@@ -362,7 +362,7 @@ Exemple : "Prêt(e) à libérer votre potentiel ?", "Découvrez l\'hypnocoaching
         'Texte de l\'appel à l\'action',
         'Message encourageant avant le bouton.
 Vous pouvez utiliser **texte** en gras.',
-        'Découvrez la puissance de l\'hypnocoaching lors d\'une consultation. Ensemble, nous explorerons comment cette approche peut vous aider.'
+        'Découvrez la puissance du bilan de compétences lors d\'une consultation. Ensemble, nous explorerons comment cette approche peut vous aider.'
     );
     
     isabel_add_text_control(
@@ -371,26 +371,26 @@ Vous pouvez utiliser **texte** en gras.',
         'isabel_hypno_section',
         'Texte du bouton',
         'Texte affiché sur le bouton d\'action final.
-Exemple : "Découvrir l\'hypnocoaching", "Essayer une séance"',
-        'Découvrir l\'hypnocoaching'
+Exemple : "Découvrir le bilan de compétences", "Essayer une séance"',
+        'Découvrir le bilan de compétences'
     );
 }
 
 /**
  * Documentation pour Isabel :
  * 
- * SECTION PAGE HYPNOCOACHING :
+ * SECTION PAGE BILAN DE COMPÉTENCES :
  * 
  * Cette section vous permet de personnaliser entièrement votre page
- * d'hypnocoaching pour démystifier cette approche et convertir.
+ * de bilan de compétences pour démystifier cette approche et convertir.
  * 
- * 📍 STRUCTURE DE LA PAGE HYPNOCOACHING :
+ * 📍 STRUCTURE DE LA PAGE BILAN DE COMPÉTENCES :
  * 
  * 1. 📢 EN-TÊTE
  *    → Titre principal et sous-titre rassurant
  * 
  * 2. 📝 INTRODUCTION
- *    → Explication claire de l'hypnocoaching
+ *    → Explication claire du bilan de compétences
  *    → Approche innovante et bénéfices
  * 
  * 3. 📋 BÉNÉFICES (2+2)
@@ -441,7 +441,7 @@ Exemple : "Découvrir l\'hypnocoaching", "Essayer une séance"',
  * - Mobile : 1 colonne, tout empilé
  * 
  * 🔄 RÉSULTAT ATTENDU :
- * Une page qui démystifie l'hypnocoaching,
+ * Une page qui démystifie le bilan de compétences,
  * rassure sur votre approche éthique et
  * donne envie d'essayer cette méthode.
  */

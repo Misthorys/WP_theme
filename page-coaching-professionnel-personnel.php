@@ -11,7 +11,7 @@
       </a>
     </div>
     
-    <h1><?php echo esc_html(isabel_get_option('isabel_consultation_title', 'Consultation Découverte')); ?></h1>
+    <h1><?php echo esc_html(isabel_get_option('isabel_consultation_title', 'Coaching professionnel et personnel')); ?></h1>
     <p class="subtitle"><?php echo isabel_format_text(isabel_get_option('isabel_consultation_subtitle', 'Première rencontre gratuite pour définir ensemble votre parcours')); ?></p>
   </div>
 </section>
@@ -22,8 +22,8 @@
   <?php isabel_display_qualiopi_section('page'); ?>
 
   <div class="content-section">
-    <h2><?php echo esc_html(isabel_get_option('isabel_consultation_section1_title', 'Qu\'est-ce que la consultation découverte ?')); ?></h2>
-    <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_intro', 'La consultation découverte est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.')); ?></p>
+    <h2><?php echo esc_html(isabel_get_option('isabel_consultation_section1_title', 'Qu\'est-ce que le coaching professionnel et personnel ?')); ?></h2>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_intro', 'Le coaching professionnel et personnel est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.')); ?></p>
     
     <p><?php echo isabel_format_text(isabel_get_option('isabel_consultation_description', 'Durant cette première rencontre gratuite de 30 minutes, nous prenons le temps d\'échanger sur votre situation, vos objectifs et vos attentes.')); ?></p>
   </div>
@@ -45,7 +45,7 @@
       $box2_image = isabel_get_option('isabel_consultation_box2_image', '');
       if (!empty($box2_image)) {
         echo '<div class="image-wrapper">';
-        echo '<img src="' . esc_url($box2_image) . '" alt="Image consultation" class="full-box-image-fixed" />';
+        echo '<img src="' . esc_url($box2_image) . '" alt="Image coaching professionnel" class="full-box-image-fixed" />';
         echo '</div>';
       } else {
         echo '<div class="full-box-placeholder-fixed">';
@@ -72,7 +72,7 @@
       $box4_image = isabel_get_option('isabel_consultation_box4_image', '');
       if (!empty($box4_image)) {
         echo '<div class="image-wrapper">';
-        echo '<img src="' . esc_url($box4_image) . '" alt="Image consultation" class="full-box-image-fixed" />';
+        echo '<img src="' . esc_url($box4_image) . '" alt="Image coaching professionnel" class="full-box-image-fixed" />';
         echo '</div>';
       } else {
         echo '<div class="full-box-placeholder-fixed">';

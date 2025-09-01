@@ -230,7 +230,7 @@ Exemple : "ML", "TR", "LM"',
         'isabel_testimonials_section',
         'Témoignage d\'exemple 3 - Texte',
         'Troisième témoignage d\'exemple modifiable.',
-        'Les séances d\'hypnocoaching m\'ont aidée à surmonter mes angoisses et à retrouver un **équilibre**. Merci Isabel pour cette transformation profonde et durable.'
+        'Les séances de bilan de compétences m\'ont aidée à surmonter mes angoisses et à retrouver un **équilibre**. Merci Isabel pour cette transformation profonde et durable.'
     );
     
     isabel_add_text_control(

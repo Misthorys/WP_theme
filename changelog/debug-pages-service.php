@@ -72,7 +72,7 @@ foreach ($vae_options as $option) {
 echo "\n";
 
 // Page Coaching
-echo "📋 PAGE COACHING (page-coaching-personnel.php) :\n";
+echo "📋 PAGE FORMATIONS (page-formations-professionnelles.php) :\n";
 $coaching_options = array(
     'isabel_coaching_title',
     'isabel_coaching_subtitle',
@@ -108,7 +108,7 @@ foreach ($coaching_options as $option) {
 echo "\n";
 
 // Page Consultation
-echo "📋 PAGE CONSULTATION (page-consultation-decouverte.php) :\n";
+echo "📋 PAGE COACHING PROFESSIONNEL (page-coaching-professionnel-personnel.php) :\n";
 $consultation_options = array(
     'isabel_consultation_title',
     'isabel_consultation_subtitle',
@@ -146,7 +146,7 @@ foreach ($consultation_options as $option) {
 echo "\n";
 
 // Page Hypno
-echo "📋 PAGE HYPNO (page-hypnocoaching.php) :\n";
+echo "📋 PAGE BILAN (page-bilan-competences.php) :\n";
 $hypno_options = array(
     'isabel_hypno_title',
     'isabel_hypno_subtitle',

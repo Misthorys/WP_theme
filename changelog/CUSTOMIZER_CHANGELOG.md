@@ -21,7 +21,7 @@ Ce fichier documente l'état et les modifications de chaque fichier de customize
 9. `customizer-footer.php` - Pied de page
 10. `customizer-coaching.php` - Page coaching détaillée
 11. `customizer-vae.php` - Page VAE détaillée
-12. `customizer-hypno.php` - Page hypnocoaching détaillée
+12. `customizer-bilan-competences.php` - Page bilan de compétences détaillée
 13. `customizer-consultation.php` - Page consultation détaillée
 14. `customizer-colors.php` - Couleurs et style global
 
@@ -128,7 +128,7 @@ if (function_exists('isabel_customizer_header')) {
 - Description des services
 - Service 1 : Coaching Personnel
 - Service 2 : Accompagnement VAE
-- Service 3 : Hypnocoaching
+- Service 3 : Bilan de compétences
 - Service 4 : Consultation de découverte
 
 **Aucune modification nécessaire**
@@ -218,12 +218,12 @@ if (function_exists('isabel_customizer_header')) {
 **Statut :** ✅ **FONCTIONNEL**
 
 **Fonctionnalités :**
-- Titre de la page hypnocoaching
-- Sous-titre hypnocoaching
+- Titre de la page bilan de compétences
+- Sous-titre bilan de compétences
 - Description détaillée
-- Avantages de l'hypnocoaching
-- Processus d'hypnocoaching
-- Témoignages hypnocoaching
+- Avantages du bilan de compétences
+- Processus de bilan de compétences
+- Témoignages bilan de compétences
 - Images d'illustration
 
 **Aucune modification nécessaire**

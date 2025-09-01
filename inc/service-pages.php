@@ -29,10 +29,10 @@ function isabel_page_template_redirect() {
     }
     
     $templates = array(
-        'coaching-personnel' => '/page-coaching-personnel.php',
+        'formations-professionnelles' => '/page-formations-professionnelles.php',
         'accompagnement-vae' => '/page-accompagnement-vae.php',
-        'hypnocoaching' => '/page-hypnocoaching.php',
-        'consultation-decouverte' => '/page-consultation-decouverte.php'
+        'bilan-competences' => '/page-bilan-competences.php',
+        'coaching-professionnel-personnel' => '/page-coaching-professionnel-personnel.php'
     );
     
     if (isset($templates[$pagename])) {
@@ -56,10 +56,10 @@ add_action('template_redirect', 'isabel_page_template_redirect');
 
 // Ajouter les règles de réécriture pour les pages de services
 function isabel_add_rewrite_rules() {
-    add_rewrite_rule('^coaching-personnel/?$', 'index.php?pagename=coaching-personnel', 'top');
+    add_rewrite_rule('^formations-professionnelles/?$', 'index.php?pagename=formations-professionnelles', 'top');
     add_rewrite_rule('^accompagnement-vae/?$', 'index.php?pagename=accompagnement-vae', 'top');
-    add_rewrite_rule('^hypnocoaching/?$', 'index.php?pagename=hypnocoaching', 'top');
-    add_rewrite_rule('^consultation-decouverte/?$', 'index.php?pagename=consultation-decouverte', 'top');
+    add_rewrite_rule('^bilan-competences/?$', 'index.php?pagename=bilan-competences', 'top');
+    add_rewrite_rule('^coaching-professionnel-personnel/?$', 'index.php?pagename=coaching-professionnel-personnel', 'top');
     
     // Log pour debug
     if (defined('WP_DEBUG') && WP_DEBUG) {
@@ -88,21 +88,21 @@ add_action('after_switch_theme', 'isabel_flush_rewrite_rules');
  */
 function isabel_create_service_pages() {
     $services = array(
-        'coaching-personnel' => array(
-            'title' => 'Coaching Personnel',
-            'content' => 'Page de coaching personnel - Contenu géré par le customizer'
+        'formations-professionnelles' => array(
+            'title' => 'Formations Professionnelles',
+            'content' => 'Page de formations professionnelles - Contenu géré par le customizer'
         ),
         'accompagnement-vae' => array(
             'title' => 'Accompagnement VAE', 
             'content' => 'Page d\'accompagnement VAE - Contenu géré par le customizer'
         ),
-        'hypnocoaching' => array(
-            'title' => 'Hypnocoaching',
-            'content' => 'Page d\'hypnocoaching - Contenu géré par le customizer'
+        'bilan-competences' => array(
+            'title' => 'Bilan de compétences',
+            'content' => 'Page de bilan de compétences - Contenu géré par le customizer'
         ),
-        'consultation-decouverte' => array(
-            'title' => 'Consultation Découverte',
-            'content' => 'Page de consultation découverte - Contenu géré par le customizer'
+        'coaching-professionnel-personnel' => array(
+            'title' => 'Coaching professionnel et personnel',
+            'content' => 'Page de coaching professionnel et personnel - Contenu géré par le customizer'
         )
     );
     
@@ -156,10 +156,10 @@ function isabel_add_services_to_menu() {
         // Ajouter les items de menu - AVEC 4ème PAGE
         $services = array(
             'Accueil' => home_url('/'),
-            'Coaching Personnel' => home_url('/coaching-personnel'),
+            'Formations Professionnelles' => home_url('/formations-professionnelles'),
             'Accompagnement VAE' => home_url('/accompagnement-vae'),
-            'Hypnocoaching' => home_url('/hypnocoaching'),
-            'Consultation Découverte' => home_url('/consultation-decouverte'),
+            'Bilan de compétences' => home_url('/bilan-competences'),
+            'Coaching professionnel et personnel' => home_url('/coaching-professionnel-personnel'),
             'Contact' => home_url('/#contact')
         );
         
@@ -220,11 +220,11 @@ function isabel_get_service_url($service_slug) {
  */
 function isabel_get_all_services() {
     return array(
-        'coaching-personnel' => array(
-            'title' => isabel_get_option('isabel_service1_title', 'Coaching Personnel'),
+        'formations-professionnelles' => array(
+            'title' => isabel_get_option('isabel_service1_title', 'Formations Professionnelles'),
             'icon' => isabel_get_option('isabel_service1_icon', '🎯'),
             'description' => isabel_get_option('isabel_service1_desc', 'Révélez votre potentiel...'),
-            'url' => isabel_get_service_url('coaching-personnel')
+            'url' => isabel_get_service_url('formations-professionnelles')
         ),
         'accompagnement-vae' => array(
             'title' => isabel_get_option('isabel_service2_title', 'Accompagnement VAE'),
@@ -232,17 +232,17 @@ function isabel_get_all_services() {
             'description' => isabel_get_option('isabel_service2_desc', 'Valorisez votre expérience...'),
             'url' => isabel_get_service_url('accompagnement-vae')
         ),
-        'hypnocoaching' => array(
-            'title' => isabel_get_option('isabel_service3_title', 'Hypnocoaching'),
+        'bilan-competences' => array(
+            'title' => isabel_get_option('isabel_service3_title', 'Bilan de compétences'),
             'icon' => isabel_get_option('isabel_service3_icon', '🧘'),
             'description' => isabel_get_option('isabel_service3_desc', 'Libérez-vous de vos blocages...'),
-            'url' => isabel_get_service_url('hypnocoaching')
+            'url' => isabel_get_service_url('bilan-competences')
         ),
-        'consultation-decouverte' => array(
-            'title' => isabel_get_option('isabel_service4_title', 'Consultation Découverte'),
+        'coaching-professionnel-personnel' => array(
+            'title' => isabel_get_option('isabel_service4_title', 'Coaching professionnel et personnel'),
             'icon' => isabel_get_option('isabel_service4_icon', '💡'),
             'description' => isabel_get_option('isabel_service4_desc', 'Première rencontre pour définir vos besoins...'),
-            'url' => isabel_get_service_url('consultation-decouverte')
+            'url' => isabel_get_service_url('coaching-professionnel-personnel')
         )
     );
 }
@@ -304,10 +304,10 @@ function isabel_service_meta_description() {
     $pagename = get_query_var('pagename');
     
     $meta_descriptions = array(
-        'coaching-personnel' => 'Coaching personnel avec Isabel Goncalves. Révélez votre potentiel et transformez votre vie personnelle et professionnelle.',
+        'formations-professionnelles' => 'Formations professionnelles avec Isabel Goncalves. Révélez votre potentiel et transformez votre vie personnelle et professionnelle.',
         'accompagnement-vae' => 'Accompagnement VAE avec Isabel Goncalves. Valorisez votre expérience et obtenez une reconnaissance officielle.',
-        'hypnocoaching' => 'Hypnocoaching avec Isabel Goncalves. Libérez-vous de vos blocages grâce à l\'alliance du coaching et de l\'hypnose.',
-        'consultation-decouverte' => 'Consultation découverte avec Isabel Goncalves. Première rencontre pour définir vos objectifs et découvrir mes services.'
+        'bilan-competences' => 'Bilan de compétences avec Isabel Goncalves. Libérez-vous de vos blocages grâce à l\'alliance du coaching et de l\'hypnose.',
+        'coaching-professionnel-personnel' => 'Coaching professionnel et personnel avec Isabel Goncalves. Première rencontre pour définir vos objectifs et découvrir mes services.'
     );
     
     if (isset($meta_descriptions[$pagename])) {
@@ -338,7 +338,7 @@ add_filter('query_vars', 'isabel_add_query_vars');
  */
 function isabel_check_service_pages_status() {
     if (current_user_can('manage_options') && isset($_GET['isabel_debug'])) {
-        $services = array('coaching-personnel', 'accompagnement-vae', 'hypnocoaching', 'consultation-decouverte');
+        $services = array('formations-professionnelles', 'accompagnement-vae', 'bilan-competences', 'coaching-professionnel-personnel');
         
         echo '<div style="background: white; padding: 20px; margin: 20px; border: 1px solid #ddd; position: fixed; top: 50px; right: 20px; z-index: 99999; max-width: 400px;">';
         echo '<h3>🔍 État des pages de services Isabel</h3>';
@@ -374,7 +374,7 @@ add_action('wp_footer', 'isabel_check_service_pages_status');
  */
 function isabel_check_templates() {
     if (defined('WP_DEBUG') && WP_DEBUG) {
-        $services = array('coaching-personnel', 'accompagnement-vae', 'hypnocoaching', 'consultation-decouverte');
+        $services = array('formations-professionnelles', 'accompagnement-vae', 'bilan-competences', 'coaching-professionnel-personnel');
         
         foreach ($services as $slug) {
             $template_file = get_template_directory() . '/page-' . $slug . '.php';

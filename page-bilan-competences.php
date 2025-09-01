@@ -11,7 +11,7 @@
       </a>
     </div>
     
-    <h1><?php echo esc_html(isabel_get_option('isabel_hypno_title', 'Hypnocoaching')); ?></h1>
+    <h1><?php echo esc_html(isabel_get_option('isabel_hypno_title', 'Bilan de compétences')); ?></h1>
     <p class="subtitle"><?php echo isabel_format_text(isabel_get_option('isabel_hypno_subtitle', 'Libérez-vous de vos blocages en profondeur grâce à l\'alliance du coaching et de l\'hypnose')); ?></p>
   </div>
 </section>
@@ -22,8 +22,8 @@
   <?php isabel_display_qualiopi_section('page'); ?>
 
   <div class="content-section">
-    <h2><?php echo esc_html(isabel_get_option('isabel_hypno_section1_title', 'Qu\'est-ce que l\'hypnocoaching ?')); ?></h2>
-    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_intro', 'L\'hypnocoaching est une approche innovante qui combine les bienfaits du coaching traditionnel avec la puissance de l\'hypnose thérapeutique.')); ?></p>
+    <h2><?php echo esc_html(isabel_get_option('isabel_hypno_section1_title', 'Qu\'est-ce que le bilan de compétences ?')); ?></h2>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_intro', 'Le bilan de compétences est une approche innovante qui combine les bienfaits du coaching traditionnel avec la puissance de l\'évaluation des compétences.')); ?></p>
     
     <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_description', 'En état d\'hypnose, votre esprit devient plus réceptif aux changements positifs. Cette approche douce et respectueuse vous permet de transformer en profondeur vos croyances limitantes.')); ?></p>
   </div>
@@ -45,7 +45,7 @@
       $box2_image = isabel_get_option('isabel_hypno_box2_image', '');
       if (!empty($box2_image)) {
         echo '<div class="image-wrapper">';
-        echo '<img src="' . esc_url($box2_image) . '" alt="Image hypnocoaching" class="full-box-image-fixed" />';
+        echo '<img src="' . esc_url($box2_image) . '" alt="Image bilan de compétences" class="full-box-image-fixed" />';
         echo '</div>';
       } else {
         echo '<div class="full-box-placeholder-fixed">';
@@ -72,7 +72,7 @@
       $box4_image = isabel_get_option('isabel_hypno_box4_image', '');
       if (!empty($box4_image)) {
         echo '<div class="image-wrapper">';
-        echo '<img src="' . esc_url($box4_image) . '" alt="Image hypnocoaching" class="full-box-image-fixed" />';
+        echo '<img src="' . esc_url($box4_image) . '" alt="Image bilan de compétences" class="full-box-image-fixed" />';
         echo '</div>';
       } else {
         echo '<div class="full-box-placeholder-fixed">';
@@ -87,7 +87,7 @@
 
   <!-- Process Steps -->
   <div class="process-steps">
-    <h3><?php echo esc_html(isabel_get_option('isabel_hypno_process_title', 'Déroulement d\'une séance d\'hypnocoaching')); ?></h3>
+    <h3><?php echo esc_html(isabel_get_option('isabel_hypno_process_title', 'Déroulement d\'un bilan de compétences')); ?></h3>
     <div class="steps-list">
       <div class="step-item">
         <div class="step-number">1</div>
@@ -126,7 +126,7 @@
   <!-- Detailed Content -->
   <div class="content-section">
     <h2><?php echo esc_html(isabel_get_option('isabel_hypno_section2_title', 'Domaines d\'application')); ?></h2>
-    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_applications', 'L\'hypnocoaching est particulièrement efficace pour : gérer le stress et l\'anxiété, surmonter les phobies et les peurs, améliorer la confiance en soi, arrêter de fumer ou perdre du poids.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_applications', 'Le bilan de compétences est particulièrement efficace pour : évaluer vos compétences, identifier vos points forts, définir votre projet professionnel, améliorer votre confiance en soi.')); ?></p>
   </div>
 
   <div class="content-section">
@@ -147,8 +147,8 @@
   <!-- CTA Section -->
   <div class="cta-service">
     <h3><?php echo esc_html(isabel_get_option('isabel_hypno_cta_title', 'Prêt(e) à libérer votre potentiel ?')); ?></h3>
-    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_cta_text', 'Découvrez la puissance de l\'hypnocoaching lors d\'une consultation. Ensemble, nous explorerons comment cette approche peut vous aider.')); ?></p>
-    <button class="btn-cta" onclick="openPopup()"><?php echo esc_html(isabel_get_option('isabel_hypno_cta_button', 'Découvrir l\'hypnocoaching')); ?></button>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_hypno_cta_text', 'Découvrez la puissance du bilan de compétences lors d\'une consultation. Ensemble, nous explorerons comment cette approche peut vous aider.')); ?></p>
+    <button class="btn-cta" onclick="openPopup()"><?php echo esc_html(isabel_get_option('isabel_hypno_cta_button', 'Découvrir le bilan de compétences')); ?></button>
   </div>
 </div>
 

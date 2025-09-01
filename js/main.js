@@ -1,4 +1,15 @@
 /**
+ * Montagard Matéo - WordPress Theme JavaScript
+ * 
+ * @package Montagard_Theme
+ * @author Montagard Matéo
+ * @copyright 2024 Montagard Matéo. Tous droits réservés.
+ * @license Proprietary - Tous droits réservés
+ * @version 1.0.0
+ * 
+ * Ce code JavaScript est la propriété exclusive de Montagard Matéo.
+ * Toute reproduction, distribution ou modification sans autorisation écrite est interdite.
+ * 
  * Script principal pour le thème Isabel GONCALVES - VERSION COMPLÈTE CORRIGÉE
  * Gestion robuste avec fallbacks et vérifications
  */

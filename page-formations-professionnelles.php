@@ -11,7 +11,7 @@
       </a>
     </div>
     
-    <h1><?php echo esc_html(isabel_get_option('isabel_coaching_title', 'Coaching Personnel')); ?></h1>
+    <h1><?php echo esc_html(isabel_get_option('isabel_coaching_title', 'Formations Professionnelles')); ?></h1>
     <p class="subtitle"><?php echo isabel_format_text(isabel_get_option('isabel_coaching_subtitle', 'Révélez votre potentiel et transformez votre vie personnelle et professionnelle')); ?></p>
   </div>
 </section>
@@ -22,10 +22,10 @@
   <?php isabel_display_qualiopi_section('page'); ?>
 
   <div class="content-section">
-    <h2><?php echo esc_html(isabel_get_option('isabel_coaching_section1_title', 'Qu\'est-ce que le coaching personnel ?')); ?></h2>
-    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_intro', 'Le coaching personnel est un accompagnement sur mesure qui vous aide à clarifier vos objectifs, développer votre potentiel et créer la vie que vous désirez vraiment.')); ?></p>
+    <h2><?php echo esc_html(isabel_get_option('isabel_coaching_section1_title', 'Qu\'est-ce que les formations professionnelles ?')); ?></h2>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_intro', 'Les formations professionnelles sont un accompagnement sur mesure qui vous aide à clarifier vos objectifs, développer votre potentiel et créer la vie que vous désirez vraiment.')); ?></p>
     
-    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_description', 'Que vous souhaitiez améliorer votre confiance en vous, changer de carrière, améliorer vos relations ou simplement mieux vous connaître, le coaching personnel vous offre l\'espace et les ressources nécessaires.')); ?></p>
+    <p><?php echo isabel_format_text(isabel_get_option('isabel_coaching_description', 'Que vous souhaitiez améliorer votre confiance en vous, changer de carrière, améliorer vos relations ou simplement mieux vous connaître, les formations professionnelles vous offrent l\'espace et les ressources nécessaires.')); ?></p>
   </div>
 
   <!-- Nouvelle grille avec 2 boxes texte + 2 boxes images - TAILLES CORRIGÉES -->
@@ -45,7 +45,7 @@
       $box2_image = isabel_get_option('isabel_coaching_box2_image', '');
       if (!empty($box2_image)) {
         echo '<div class="image-wrapper">';
-        echo '<img src="' . esc_url($box2_image) . '" alt="Image coaching" class="full-box-image-fixed" />';
+        echo '<img src="' . esc_url($box2_image) . '" alt="Image formations" class="full-box-image-fixed" />';
         echo '</div>';
       } else {
         echo '<div class="full-box-placeholder-fixed">';
@@ -72,7 +72,7 @@
       $box4_image = isabel_get_option('isabel_coaching_box4_image', '');
       if (!empty($box4_image)) {
         echo '<div class="image-wrapper">';
-        echo '<img src="' . esc_url($box4_image) . '" alt="Image coaching" class="full-box-image-fixed" />';
+        echo '<img src="' . esc_url($box4_image) . '" alt="Image formations" class="full-box-image-fixed" />';
         echo '</div>';
       } else {
         echo '<div class="full-box-placeholder-fixed">';

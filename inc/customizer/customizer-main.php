@@ -128,10 +128,10 @@ function isabel_load_customizer_modules() {
         'customizer-testimonials.php',   // 💬 TÉMOIGNAGES
         'customizer-contact.php',        // 📞 CTA + FORMULAIRE
         'customizer-footer.php',         // 📄 PIED DE PAGE
-        'customizer-coaching.php',       // 📋 PAGE COACHING
+        'customizer-formations-professionnelles.php',       // 📋 PAGE FORMATIONS
         'customizer-vae.php',           // 📋 PAGE VAE
-        'customizer-hypno.php',         // 📋 PAGE HYPNO
-        'customizer-consultation.php',   // 📋 PAGE CONSULTATION
+        'customizer-bilan-competences.php',         // 📋 PAGE BILAN
+        'customizer-coaching-professionnel-personnel.php',   // 📋 PAGE COACHING PROFESSIONNEL
         'customizer-colors.php',        // 🎨 COULEURS
     );
     

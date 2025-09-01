@@ -1,4 +1,17 @@
 <?php
+/**
+ * Montagard Matéo - WordPress Theme
+ * 
+ * @package Montagard_Theme
+ * @author Montagard Matéo
+ * @copyright 2024 Montagard Matéo. Tous droits réservés.
+ * @license Proprietary - Tous droits réservés
+ * @version 1.0.0
+ * 
+ * Ce thème WordPress est la propriété exclusive de Montagard Matéo.
+ * Toute reproduction, distribution ou modification sans autorisation écrite est interdite.
+ */
+
 // Empêcher l'accès direct au fichier
 if (!defined('ABSPATH')) {
     exit;

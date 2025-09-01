@@ -1,4 +1,18 @@
-<?php get_header(); ?>
+<?php
+/**
+ * Montagard Matéo - WordPress Theme
+ * 
+ * @package Montagard_Theme
+ * @author Montagard Matéo
+ * @copyright 2024 Montagard Matéo. Tous droits réservés.
+ * @license Proprietary - Tous droits réservés
+ * @version 1.0.0
+ * 
+ * Ce thème WordPress est la propriété exclusive de Montagard Matéo.
+ * Toute reproduction, distribution ou modification sans autorisation écrite est interdite.
+ */
+
+get_header(); ?>
 
 <!-- Header épuré avec logo et boutons -->
 <header class="header">
@@ -74,7 +88,7 @@
       </div>
       
       <div class="intro-text">
-        <?php echo isabel_format_text(isabel_get_option('isabel_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching. Révélez votre plein potentiel.')); ?>
+        <?php echo isabel_format_text(isabel_get_option('isabel_intro_text', 'Je vous accompagne avec bienveillance dans votre développement personnel et professionnel grâce au coaching, à la VAE et au bilan de compétences. Révélez votre plein potentiel.')); ?>
       </div>
       
       <div class="hero-cta">
@@ -82,7 +96,6 @@
           <span>🚀</span>
           <span><?php echo esc_html(isabel_get_option('isabel_main_button_text', 'Prendre rendez-vous')); ?></span>
         </button>
-        <button class="btn-secondary">En savoir plus</button>
       </div>
     </div>
 
@@ -186,7 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
     </p>
 
     <div class="services-grid">
-      <a href="<?php echo esc_url(home_url('/coaching-personnel')); ?>" class="service-card service-link">
+                      <a href="<?php echo esc_url(home_url('/formations-professionnelles')); ?>" class="service-card service-link">
         <div class="service-icon">01</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service1_title', 'Coaching Personnel')); ?></h3>
         <p><?php echo isabel_format_text(isabel_get_option('isabel_service1_desc', 'Accompagnement personnalisé pour développer votre potentiel, clarifier vos objectifs et transformer votre vie personnelle et professionnelle.')); ?></p>
@@ -200,14 +213,14 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="service-arrow">→</div>
       </a>
 
-      <a href="<?php echo esc_url(home_url('/hypnocoaching')); ?>" class="service-card service-link">
+                      <a href="<?php echo esc_url(home_url('/bilan-competences')); ?>" class="service-card service-link">
         <div class="service-icon">03</div>
-        <h3><?php echo esc_html(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?></h3>
+        <h3><?php echo esc_html(isabel_get_option('isabel_service3_title', 'Bilan de compétences')); ?></h3>
         <p><?php echo isabel_format_text(isabel_get_option('isabel_service3_desc', 'Libérez-vous de vos blocages en profondeur en combinant les bienfaits de l\'hypnose thérapeutique et du coaching pour une transformation durable.')); ?></p>
         <div class="service-arrow">→</div>
       </a>
 
-      <a href="<?php echo esc_url(home_url('/consultation-decouverte')); ?>" class="service-card service-link">
+                      <a href="<?php echo esc_url(home_url('/coaching-professionnel-personnel')); ?>" class="service-card service-link">
         <div class="service-icon">04</div>
         <h3><?php echo esc_html(isabel_get_option('isabel_service4_title', 'Consultation Découverte')); ?></h3>
         <p><?php echo isabel_format_text(isabel_get_option('isabel_service4_desc', 'Première rencontre gratuite pour faire connaissance, comprendre vos besoins et définir ensemble le meilleur accompagnement pour vous.')); ?></p>
@@ -285,7 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         <div class="testimonial-card">
           <div class="testimonial-content">
-            "Les séances d'hypnocoaching m'ont aidée à surmonter mes angoisses et à retrouver un équilibre. Merci Isabel pour cette transformation profonde et durable."
+            "Les séances de bilan de compétences m'ont aidée à surmonter mes angoisses et à retrouver un équilibre. Merci Isabel pour cette transformation profonde et durable."
           </div>
           <div class="testimonial-author">
             <div class="author-avatar">LM</div>
@@ -361,7 +374,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <option value="">Choisissez une option</option>
           <option value="<?php echo esc_attr(isabel_get_option('isabel_service1_title', 'Coaching Personnel')); ?>"><?php echo esc_html(isabel_get_option('isabel_service1_title', 'Coaching Personnel')); ?></option>
           <option value="<?php echo esc_attr(isabel_get_option('isabel_service2_title', 'Accompagnement VAE')); ?>"><?php echo esc_html(isabel_get_option('isabel_service2_title', 'Accompagnement VAE')); ?></option>
-          <option value="<?php echo esc_attr(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?>"><?php echo esc_html(isabel_get_option('isabel_service3_title', 'Hypnocoaching')); ?></option>
+          <option value="<?php echo esc_attr(isabel_get_option('isabel_service3_title', 'Bilan de compétences')); ?>"><?php echo esc_html(isabel_get_option('isabel_service3_title', 'Bilan de compétences')); ?></option>
           <option value="<?php echo esc_attr(isabel_get_option('isabel_service4_title', 'Consultation Découverte')); ?>"><?php echo esc_html(isabel_get_option('isabel_service4_title', 'Consultation Découverte')); ?></option>
         </select>
       </div>
@@ -552,10 +565,10 @@ function showMessage(message, type) {
 function isabel_default_menu() {
     echo '<ul>';
     echo '<li><a href="' . home_url('/') . '">Accueil</a></li>';
-    echo '<li><a href="' . home_url('/coaching-personnel') . '">Coaching Personnel</a></li>';
+                echo '<li><a href="' . home_url('/formations-professionnelles') . '">Formations Professionnelles</a></li>';
     echo '<li><a href="' . home_url('/accompagnement-vae') . '">Accompagnement VAE</a></li>';
-    echo '<li><a href="' . home_url('/hypnocoaching') . '">Hypnocoaching</a></li>';
-    echo '<li><a href="' . home_url('/consultation-decouverte') . '">Consultation Découverte</a></li>';
+          echo '<li><a href="' . home_url('/bilan-competences') . '">Bilan de compétences</a></li>';
+          echo '<li><a href="' . home_url('/coaching-professionnel-personnel') . '">Coaching professionnel et personnel</a></li>';
     echo '<li><a href="#temoignages">Témoignages</a></li>';
     echo '<li><a href="#contact">Contact</a></li>';
     echo '</ul>';

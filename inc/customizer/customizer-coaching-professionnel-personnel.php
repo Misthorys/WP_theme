@@ -5,21 +5,21 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * 📋 PAGE CONSULTATION DÉCOUVERTE
- * Personnalisation complète de la page consultation découverte
+ * 📋 PAGE COACHING PROFESSIONNEL ET PERSONNEL
+ * Personnalisation complète de la page coaching professionnel et personnel
  * Quatrième page de service détaillée
  */
 
 function isabel_customizer_consultation($wp_customize) {
     
     // ==========================================
-    // SECTION : PAGE CONSULTATION DÉCOUVERTE
+    // SECTION : PAGE COACHING PROFESSIONNEL ET PERSONNEL
     // ==========================================
     isabel_add_customizer_section(
         $wp_customize,
         'isabel_consultation_section',
-        '📋 Page Consultation Découverte',
-        'Personnalisez entièrement votre page de consultation découverte',
+        '📋 Page Coaching professionnel et personnel',
+        'Personnalisez entièrement votre page de coaching professionnel et personnel',
         94 // Priorité 94 = pages détaillées
     );
     
@@ -32,10 +32,10 @@ function isabel_customizer_consultation($wp_customize) {
         'isabel_consultation_section',
         'Titre de la page',
         'Le titre principal affiché en haut de la page.
-Exemple : "Consultation Découverte", "Rendez-vous Gratuit"
+Exemple : "Coaching professionnel et personnel", "Accompagnement complet"
 
-📢 Où ça apparaît : Grand titre en haut de la page consultation.',
-        'Consultation Découverte'
+📢 Où ça apparaît : Grand titre en haut de la page coaching.',
+        'Coaching professionnel et personnel'
     );
     
     isabel_add_text_control(
@@ -59,8 +59,8 @@ Exemple : "Première rencontre gratuite pour définir ensemble votre parcours"
         'isabel_consultation_section',
         'Titre section introduction',
         'Titre de votre première section de contenu.
-Exemple : "Qu\'est-ce que la consultation découverte ?", "Comment ça se passe"',
-        'Qu\'est-ce que la consultation découverte ?'
+Exemple : "Qu\'est-ce que le coaching professionnel et personnel ?", "Comment ça se passe"',
+        'Qu\'est-ce que le coaching professionnel et personnel ?'
     );
     
     isabel_add_textarea_control(
@@ -68,12 +68,12 @@ Exemple : "Qu\'est-ce que la consultation découverte ?", "Comment ça se passe"
         'isabel_consultation_intro',
         'isabel_consultation_section',
         'Texte d\'introduction',
-        'Premier paragraphe qui explique la consultation découverte.
+        'Premier paragraphe qui explique le coaching professionnel et personnel.
 Vous pouvez utiliser **texte** pour mettre en gras et les retours à la ligne.
 
-Exemple : La consultation découverte est un moment **privilégié** pour faire connaissance
+Exemple : Le coaching professionnel et personnel est un moment **privilégié** pour faire connaissance
 et comprendre vos besoins spécifiques.',
-        'La consultation découverte est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.'
+        'Le coaching professionnel et personnel est un moment privilégié pour faire connaissance et comprendre vos besoins spécifiques.'
     );
     
     isabel_add_textarea_control(
@@ -257,7 +257,7 @@ Exemple : "Déroulement de la consultation", "Comment ça se passe"',
             "isabel_consultation_step$i",
             'isabel_consultation_section',
             "Étape $i de la consultation",
-            "Description de l\'étape $i de votre consultation découverte.
+            "Description de l\'étape $i de votre coaching professionnel et personnel.
 Vous pouvez utiliser **texte** en gras.",
             $step_defaults[$i]
         );
@@ -347,7 +347,7 @@ Exemple : "Prêt(e) à faire le premier pas ?", "Réservez maintenant"',
         'Texte de l\'appel à l\'action',
         'Message encourageant avant le bouton.
 Vous pouvez utiliser **texte** en gras.',
-        'Réservez dès maintenant votre consultation découverte gratuite et commençons ensemble votre parcours de transformation.'
+        'Réservez dès maintenant votre coaching professionnel et personnel et commençons ensemble votre parcours de transformation.'
     );
     
     isabel_add_text_control(
@@ -364,12 +364,12 @@ Exemple : "Réserver ma consultation gratuite", "Prendre rendez-vous"',
 /**
  * Documentation pour Isabel :
  * 
- * SECTION PAGE CONSULTATION DÉCOUVERTE :
+ * SECTION PAGE COACHING PROFESSIONNEL ET PERSONNEL :
  * 
  * Cette section vous permet de personnaliser entièrement votre page
- * de consultation découverte pour convertir les prospects hésitants.
+ * de coaching professionnel et personnel pour convertir les prospects hésitants.
  * 
- * 📍 STRUCTURE DE LA PAGE CONSULTATION :
+ * 📍 STRUCTURE DE LA PAGE COACHING :
  * 
  * 1. 📢 EN-TÊTE
  *    → Titre principal et sous-titre rassurant

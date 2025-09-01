@@ -80,10 +80,10 @@ Exemple : "Coach Certifiée & Hypnocoach", "Formatrice en développement personn
 Vous pouvez utiliser **texte** pour mettre en gras et appuyer sur Entrée pour les retours à la ligne.
 
 Exemple : Je vous accompagne avec **bienveillance** dans votre développement personnel
-et professionnel grâce au coaching, à la VAE et à l\'hypnocoaching.
+et professionnel grâce au coaching, à la VAE et au bilan de compétences.
 
 💬 Où ça apparaît : Paragraphe principal de votre présentation.',
-        'Bienvenue dans votre espace de transformation personnelle ! Je vous accompagne avec **bienveillance** vers l\'épanouissement de votre potentiel grâce au coaching, à la VAE et à l\'hypnocoaching.'
+        'Bienvenue dans votre espace de transformation personnelle ! Je vous accompagne avec **bienveillance** vers l\'épanouissement de votre potentiel grâce au coaching, à la VAE et au bilan de compétences.'
     );
     
     // ==========================================

@@ -262,7 +262,7 @@ function isabel_settings_page() {
                     <li>🎨 Couleurs</li>
                     <li>🎯 Page Coaching Personnel</li>
                     <li>🎓 Page Accompagnement VAE</li>
-                    <li>🧘 Page Hypnocoaching</li>
+                    <li>🧘 Page Bilan de compétences</li>
                 </ul>
                 <a href="<?php echo admin_url('customize.php'); ?>" class="button button-primary" style="margin-top: 10px;">Personnaliser maintenant</a>
             </div>
@@ -289,9 +289,9 @@ function isabel_settings_page() {
                 <a href="<?php echo admin_url('customize.php'); ?>" class="button">🎨 Personnaliser</a>
                 <a href="<?php echo admin_url('edit.php?post_type=testimonial'); ?>" class="button">💬 Témoignages</a>
                 <a href="<?php echo home_url(); ?>" class="button" target="_blank">🌐 Voir le site</a>
-                <a href="<?php echo home_url('/coaching-personnel'); ?>" class="button" target="_blank">🎯 Page Coaching</a>
+                <a href="<?php echo home_url('/formations-professionnelles'); ?>" class="button" target="_blank">🎯 Page Formations</a>
                 <a href="<?php echo home_url('/accompagnement-vae'); ?>" class="button" target="_blank">🎓 Page VAE</a>
-                <a href="<?php echo home_url('/hypnocoaching'); ?>" class="button" target="_blank">🧘 Page Hypno</a>
+                <a href="<?php echo home_url('/bilan-competences'); ?>" class="button" target="_blank">🧘 Page Bilan</a>
             </div>
         </div>
         
@@ -302,7 +302,7 @@ function isabel_settings_page() {
                 <li><strong>Modifiez tous les textes :</strong> Apparence > Personnaliser</li>
                 <li><strong>Ajoutez vos témoignages :</strong> Témoignages > Ajouter</li>
                 <li><strong>Gérez les contacts :</strong> Supprimez ceux traités</li>
-                <li><strong>Personnalisez les pages de services :</strong> Coaching, VAE, Hypnocoaching</li>
+                <li><strong>Personnalisez les pages de services :</strong> Formations, VAE, Bilan de compétences</li>
                 <li><strong>Testez le formulaire :</strong> Remplissez-le depuis votre site</li>
             </ol>
         </div>
@@ -314,7 +314,7 @@ function isabel_settings_page() {
                 <li><strong>Version du thème :</strong> 1.0.0</li>
                 <li><strong>Base de données :</strong> Table <?php echo $table_name; ?> créée</li>
                 <li><strong>Email de réception :</strong> contact@forma-coach.com</li>
-                <li><strong>Pages créées :</strong> /coaching-personnel, /accompagnement-vae, /hypnocoaching</li>
+                <li><strong>Pages créées :</strong> /formations-professionnelles, /accompagnement-vae, /bilan-competences</li>
                 <li><strong>Organisation :</strong> Fichiers séparés dans /inc/</li>
             </ul>
         </div>

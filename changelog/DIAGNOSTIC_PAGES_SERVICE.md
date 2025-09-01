@@ -3,9 +3,9 @@
 ## ❌ **PROBLÈME IDENTIFIÉ**
 Les modifications du customizer ne s'appliquent pas sur les **pages de service** :
 - `page-accompagnement-vae.php`
-- `page-coaching-personnel.php`
-- `page-consultation-decouverte.php`
-- `page-hypnocoaching.php`
+- `page-formations-professionnelles.php`
+- `page-coaching-professionnel-personnel.php`
+- `page-bilan-competences.php`
 
 ## 🔧 **ÉTAPES DE DIAGNOSTIC**
 

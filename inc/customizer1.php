@@ -329,7 +329,7 @@ function isabel_customize_register($wp_customize) {
     
     // Service 3
     $wp_customize->add_setting('isabel_service_3_title', array(
-        'default' => 'Hypnocoaching',
+                    'default' => 'Bilan de compétences',
         'sanitize_callback' => 'sanitize_text_field',
     ));
     
